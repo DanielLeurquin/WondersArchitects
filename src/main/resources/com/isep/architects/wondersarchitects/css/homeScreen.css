@@ -1,0 +1,43 @@
+.root{
+    -fx-background-image: url('../img/homeScreen.png');
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.label{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+    -fx-font-size : 24;
+}
+
+.button{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-font-size : 28;
+}
+
+.button:hover{
+    -fx-border-color: #FFFFFF;
+}
+
+.choice-box .menu-item > .label{
+    -fx-text-fill: #FFFFFF;
+}
+
+.choice-box .context-menu{
+    -fx-background-color: #3C7EBF;
+}
+
+.choice-box{
+    -fx-background-color: #3C7EBF;
+    -fx-border-color: #FFFFFF;
+}
+
+.choice-box > .label{
+    -fx-text-fill: #FFFFFF;
+}
+
+
