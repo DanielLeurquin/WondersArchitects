@@ -21,6 +21,15 @@ public class GuiParser implements InputParser{
         }
     }
 
+    @Override
+    public void chargeOverview() {
+        try {
+            getApp().changeScene("/com/isep/architects/wondersarchitects/boardOverview.fxml",this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void setGame(Game game) {
         this.game = game;

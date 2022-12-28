@@ -8,16 +8,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/playerCreation.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.PlayerCreationController">
+<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;"
+            stylesheets="@css/playerCreation.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.PlayerCreationController">
 
    <children>
-      <ImageView fx:id="imageView" fitHeight="446.0" fitWidth="487.0" layoutX="26.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView" fitHeight="446.0" fitWidth="487.0" layoutX="11.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/tablette.png" />
          </image>
       </ImageView>
-      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="153.0"
-             prefHeight="43.0" prefWidth="560.0" text="Please chose a name for player number">
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="153.0" prefHeight="43.0" prefWidth="560.0" text="Please chose a name for player number">
          <font>
             <Font size="25.0" />
          </font>

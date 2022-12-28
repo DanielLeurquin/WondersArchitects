@@ -1,0 +1,9 @@
+.label{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+
+}
+
+.stack-pane:hover{
+    -fx-border-color: #FFFFFF;
+}

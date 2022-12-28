@@ -1,9 +1,11 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.controllers.BoardOverviewController;
 import com.isep.architects.wondersarchitects.controllers.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -35,12 +37,14 @@ public class Application extends javafx.application.Application {
         parser.setGame(this.game);
 
         Controller controller = this.fxmlLoader.getController();
-        controller.init(parser);
+
         this.stage.setTitle("7 Wonders Architects");
         this.stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/isep/architects/wondersarchitects/img/GameIcon.png")));
         this.stage.setResizable(false);
         this.stage.setScene(scene);
         this.stage.show();
+
+        controller.init(parser);
     }
 
 
@@ -58,6 +62,9 @@ public class Application extends javafx.application.Application {
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 
     public static void main(String[] args) {
         launch();
