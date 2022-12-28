@@ -1,7 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
-import com.isep.architects.wondersarchitects.wonders.Wonder;
-import com.isep.architects.wondersarchitects.wonders.WonderType;
+import com.isep.architects.wondersarchitects.wonders.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,13 +24,13 @@ public class Game {
     public Game(InputParser inputParser, Application app){
         this.inputParser = inputParser;
         this.app = app;
-        availableWonders.add(new Wonder(WonderType.ALEXANDRIA));
-        availableWonders.add(new Wonder(WonderType.ARTEMIS));
-        availableWonders.add(new Wonder(WonderType.BABYLON));
-        availableWonders.add(new Wonder(WonderType.GIZEH));
-        availableWonders.add(new Wonder(WonderType.ZEUS));
-        availableWonders.add(new Wonder(WonderType.RHODES));
-        availableWonders.add(new Wonder(WonderType.HALLICARNAS));
+        availableWonders.add(new Alexandria());
+        availableWonders.add(new Artemis());
+        availableWonders.add(new Babylon());
+        availableWonders.add(new Gizeh());
+        availableWonders.add(new Zeus());
+        availableWonders.add(new Rhodes());
+        availableWonders.add(new Hallicarnas());
 
 
     }

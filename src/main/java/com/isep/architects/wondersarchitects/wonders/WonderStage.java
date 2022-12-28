@@ -12,11 +12,14 @@ public class WonderStage {
 
     private int[] neededNumBuild;
 
-    public WonderStage(int value, boolean same, int stagenum, int[] neededNumBuild){//stagePower
+    private int victoryPoints;
+
+    public WonderStage(int value, boolean same, int stagenum, int[] neededNumBuild, int victoryPoints){//stagePower
         this.value = value;
         this.same = same;
         this.stagenum = stagenum;
         this.neededNumBuild = neededNumBuild;
+        this.victoryPoints = victoryPoints;
     }
 
     public void setBuilt(boolean built) {
