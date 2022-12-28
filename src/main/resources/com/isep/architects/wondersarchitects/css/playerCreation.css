@@ -1,0 +1,30 @@
+.label{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+
+}
+
+
+.button{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-font-size : 28;
+}
+
+.button:hover{
+    -fx-border-color: #FFFFFF;
+}
+
+.text-field{
+    -fx-text-fill: #000000;
+    -fx-font-family: PossumSaltareNF;
+    -fx-font-size : 24;
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+
+
+}
+
+
