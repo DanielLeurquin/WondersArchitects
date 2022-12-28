@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/wonder.css"
+            fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
+   <children>
+      <StackPane layoutX="80.0" layoutY="87.0">
+         <children>
+            <ImageView fx:id="wonderStage1" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="wonderStage2" fitHeight="440.0" fitWidth="299.0" layoutX="80.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="wonderStage4" fitHeight="440.0" fitWidth="299.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <Button fx:id="back" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="100.0" text="Back" />
+   </children>
+</AnchorPane>

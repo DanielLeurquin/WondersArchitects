@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -38,10 +39,10 @@ public class BoardOverviewController extends Controller{
         double angle = (2*Math.PI)/nbPlayers;
         int radius = 210;
         double spacing = 10.0;
+        int compteur = 0;
 
         for(Player player : parser.getGame().getPlayerList()){
 
-            System.out.println(player.getWonder().getType());
 
             int i = player.getWonder().getType().numFromWonder();
 
@@ -75,12 +76,18 @@ public class BoardOverviewController extends Controller{
 
             anchorPane.getChildren().add(vBox);
 
-            z = Complex.exp(radius,(Math.PI/2)+angle*i);
+            z = Complex.exp(radius,(Math.PI/2)+angle*compteur);
 
             vBox.setLayoutX(z.re - vBoxW/2 + 485);
             vBox.setLayoutY(z.im - vBoxH/2 + 300);
+            compteur++;
 
-
+            sp.setOnMouseClicked(mouseEvent -> {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    //change scene to apropriate wonder
+                    parser.loadPlayerScene(player);
+                }
+            });
 
         }
 

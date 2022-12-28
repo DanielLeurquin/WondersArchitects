@@ -5,5 +5,7 @@ public interface InputParser {
 
     void chargeOverview();
 
+    void loadPlayerScene(Player player);
+
 
 }

@@ -1,0 +1,12 @@
+.button{
+    -fx-text-fill: #000000;
+    -fx-font-family: PossumSaltareNF;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-font-size : 24;
+}
+
+
+.button:hover{
+    -fx-border-color: #FFFFFF;
+}

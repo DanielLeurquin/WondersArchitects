@@ -11,7 +11,9 @@
 <?import javafx.scene.control.Button?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0" stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0"
+            stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
 
          <children>
       <VBox alignment="CENTER" layoutX="270.0" layoutY="387.0" spacing="30.0">

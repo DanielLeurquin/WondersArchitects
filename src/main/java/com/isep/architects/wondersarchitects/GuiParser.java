@@ -2,6 +2,7 @@ package com.isep.architects.wondersarchitects;
 
 import com.isep.architects.wondersarchitects.controllers.Controller;
 import com.isep.architects.wondersarchitects.controllers.PlayerCreationController;
+import com.isep.architects.wondersarchitects.controllers.WonderController;
 
 import java.io.IOException;
 
@@ -25,6 +26,17 @@ public class GuiParser implements InputParser{
     public void chargeOverview() {
         try {
             getApp().changeScene("/com/isep/architects/wondersarchitects/boardOverview.fxml",this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void loadPlayerScene(Player player) {
+        try {
+            WonderController controller = (WonderController) getApp().changeScene(
+                    "/com/isep/architects/wondersarchitects/wonder.fxml",this);
+            controller.initWonder(player);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
