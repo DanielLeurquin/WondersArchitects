@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
 import com.isep.architects.wondersarchitects.wonders.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class Game {
 
     private ArrayList<Player> playerList = new ArrayList<Player>();
 
+    private ArrayList<MilitaryToken> militaryTokens = new ArrayList<>();
+
 
     public Game(InputParser inputParser, Application app){
         this.inputParser = inputParser;
@@ -33,6 +36,25 @@ public class Game {
         availableWonders.add(new Hallicarnas());
 
 
+
+    }
+
+    public void createMilitaryToken(){
+        System.out.println(numberPlayer);
+
+        militaryTokens.add(new MilitaryToken());
+        militaryTokens.add(new MilitaryToken());
+        militaryTokens.add(new MilitaryToken());
+
+        if(numberPlayer >=4){
+            militaryTokens.add(new MilitaryToken());
+        }
+        if(numberPlayer >=5){
+            militaryTokens.add(new MilitaryToken());
+        }
+        if(numberPlayer >=6){
+            militaryTokens.add(new MilitaryToken());
+        }
     }
 
     public void createPlayer(String name){
@@ -65,5 +87,9 @@ public class Game {
 
     public ArrayList<Player> getPlayerList() {
         return playerList;
+    }
+
+    public ArrayList<MilitaryToken> getMilitaryTokens() {
+        return militaryTokens;
     }
 }

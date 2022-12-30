@@ -8,9 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/wonder.css"
-            fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
+<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
       <StackPane layoutX="80.0" layoutY="87.0">
          <children>
@@ -22,5 +20,53 @@
          </children>
       </StackPane>
       <Button fx:id="back" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="100.0" text="Back" />
+      <StackPane fx:id="sp1" layoutX="646.0" layoutY="50.0">
+         <children>
+            <ImageView fx:id="centerPile" fitHeight="150.0" fitWidth="111.0" layoutX="674.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="sp2" layoutX="473.0" layoutY="225.0">
+         <children>
+            <ImageView fx:id="leftPile" fitHeight="150.0" fitWidth="111.0" layoutX="590.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="sp3" layoutX="819.0" layoutY="225.0">
+         <children>
+            <ImageView fx:id="rightPile" fitHeight="150.0" fitWidth="111.0" layoutX="760.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <ScrollPane fx:id="scrollP" layoutX="587.0" layoutY="387.0" prefHeight="199.0" prefWidth="335.0" vbarPolicy="NEVER">
+         <content>
+            <HBox>
+               <children>
+                  <VBox VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox fx:id="hBoxRessource" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
+                        <HBox fx:id="hBoxProgress" maxHeight="66.0" minHeight="65.0" prefHeight="65.0" />
+                        <HBox fx:id="hBoxMilitary" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
+      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="250.0" prefHeight="100.0" prefWidth="238.0" spacing="4.0" />
+      <VBox fx:id="vBoxLabel" alignment="CENTER" layoutX="472.0" layoutY="387.0" prefHeight="200.0" prefWidth="115.0" spacing="35.0" styleClass="vBoxLabel">
+         <children>
+            <Label text="Ressources" />
+            <Label text="Progress" />
+            <Label text="Military" />
+         </children>
+      </VBox>
+      <ScrollPane layoutX="781.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0" vbarPolicy="NEVER">
+         <content>
+            <HBox fx:id="hBoxPoints" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="435.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0">
+         <content>
+            <HBox fx:id="hBoxPoints1" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

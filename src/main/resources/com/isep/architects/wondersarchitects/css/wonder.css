@@ -6,7 +6,48 @@
     -fx-font-size : 24;
 }
 
+.label{
+    -fx-text-fill: #000000;
+    -fx-font-family: PossumSaltareNF;
+    -fx-font-size : 18;
+
+}
+
+.stack-pane:hover{
+    -fx-border-color: #000000;
+    -fx-border-width : 3;
+}
+
 
 .button:hover{
     -fx-border-color: #FFFFFF;
 }
+
+.scroll-pane{
+    -fx-background-color: transparent;
+    -fx-border-color: #000000
+}
+
+.scroll-pane > .viewport{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .track{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb{
+    -fx-color: #fff0cb;
+}
+
+
+.vBoxLabel{
+    -fx-border-color: #000000;
+}
+
+
+

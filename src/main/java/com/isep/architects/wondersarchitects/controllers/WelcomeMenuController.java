@@ -25,9 +25,11 @@ public class WelcomeMenuController extends Controller{
         button.setOnAction(event -> {
             int num = choiceBox.getValue();
             parser.getGame().setNumberPlayer(num);
+            parser.getGame().createMilitaryToken();
             parser.askPlayerName(1);
 
         });
+
 
     }
 }
