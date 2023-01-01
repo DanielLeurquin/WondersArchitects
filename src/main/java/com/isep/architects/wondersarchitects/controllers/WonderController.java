@@ -9,12 +9,14 @@ import com.isep.architects.wondersarchitects.cards.YellowCards;
 import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -64,6 +66,17 @@ public class WonderController extends Controller{
     public void init(GuiParser parser) {
         back.setOnAction(event -> {
             parser.chargeOverview();
+        });
+
+        parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()){
+                    case ESCAPE:
+                        parser.chargeOverview();
+                        break;
+                }
+            }
         });
 
         loadPile();

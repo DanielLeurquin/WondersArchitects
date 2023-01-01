@@ -40,7 +40,7 @@ public class Game {
     }
 
     public void createMilitaryToken(){
-        System.out.println(numberPlayer);
+
 
         militaryTokens.add(new MilitaryToken());
         militaryTokens.add(new MilitaryToken());

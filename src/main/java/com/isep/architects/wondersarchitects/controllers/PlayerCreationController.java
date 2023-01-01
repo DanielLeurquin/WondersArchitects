@@ -1,12 +1,14 @@
 package com.isep.architects.wondersarchitects.controllers;
 
 import com.isep.architects.wondersarchitects.GuiParser;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 public class PlayerCreationController extends Controller{
 
@@ -33,6 +35,23 @@ public class PlayerCreationController extends Controller{
                 parser.getGame().createPlayer(name);
             }
         });
+
+        parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()){
+                    case ENTER:
+                        if(!textField.getText().equals("")){
+                            String name = textField.getText();
+                            parser.getGame().createPlayer(name);
+                        }
+                        break;
+                }
+            }
+        });
+
+
+
     }
 
     public void numberInit(int number){
