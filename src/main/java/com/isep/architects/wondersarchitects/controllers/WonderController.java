@@ -2,10 +2,9 @@ package com.isep.architects.wondersarchitects.controllers;
 
 import com.isep.architects.wondersarchitects.GuiParser;
 import com.isep.architects.wondersarchitects.Player;
-import com.isep.architects.wondersarchitects.cards.BlueCards;
-import com.isep.architects.wondersarchitects.cards.GreyCards;
-import com.isep.architects.wondersarchitects.cards.RessourceType;
-import com.isep.architects.wondersarchitects.cards.YellowCards;
+import com.isep.architects.wondersarchitects.cards.*;
+import com.isep.architects.wondersarchitects.pile.Pile;
+import com.isep.architects.wondersarchitects.pile.SidePile;
 import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
@@ -17,6 +16,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,7 +33,7 @@ public class WonderController extends Controller{
     private ImageView wonderStage1, wonderStage2, wonderStage3, wonderStage4, wonderStage5;
 
     @FXML
-    private ImageView centerPile, leftPile, rightPile;
+    private ImageView centerPileView, leftPileView, rightPileView;
 
     @FXML
     private StackPane sp1,sp2,sp3;
@@ -46,41 +47,85 @@ public class WonderController extends Controller{
     @FXML
     private VBox vBoxLabel;
 
+    private GuiParser parser;
+
+    private Player player;
+
+    private Pile centerPile,leftPile,rightPile;
+
+    //symbol Rect
     private Rectangle2D woodRect = new Rectangle2D(0,0,150,150);
     private Rectangle2D stoneRect = new Rectangle2D(150,0,150,150);
     private Rectangle2D brickRect = new Rectangle2D(300,0,150,150);
     private Rectangle2D paperRect = new Rectangle2D(450,0,150,150);
     private Rectangle2D glassRect = new Rectangle2D(600,0,150,150);
     private Rectangle2D goldRect = new Rectangle2D(750,0,150,150);
-
     private Rectangle2D peaceRect = new Rectangle2D(1350,150,150,150);
-
     private Rectangle2D warRect = new Rectangle2D(1050,150,150,150);
 
     private Rectangle2D blue2Rect = new Rectangle2D(6*150,0,150,150);
 
     private Rectangle2D blue3Rect = new Rectangle2D(7*150,0,150,150);
 
+    private Rectangle2D militaryHornRect = new Rectangle2D(0*150,1*150,150,150);
+
+    private Rectangle2D militaryRect = new Rectangle2D(1*150,1*150,150,150);
+
+    private Rectangle2D wheelRect = new Rectangle2D(4*150,1*150,150,150);
+    private Rectangle2D compassRect = new Rectangle2D(3*150,1*150,150,150);
+    private Rectangle2D tabletRect = new Rectangle2D(5*150,1*150,150,150);
+
+    //Card Rect
+
+    private Rectangle2D woodCard = new Rectangle2D(255*0,378*1,255,378);
+    private Rectangle2D stoneCard = new Rectangle2D(255*1,378*1,255,378);
+    private Rectangle2D brickCard = new Rectangle2D(255*2,378*1,255,378);
+    private Rectangle2D paperCard = new Rectangle2D(255*3,378*1,255,378);
+    private Rectangle2D glassCard = new Rectangle2D(255*4,378*1,255,378);
+    private Rectangle2D goldCard = new Rectangle2D(255*5,378*1,255,378);
+    private Rectangle2D blue2Card = new Rectangle2D(255*6,378*1,255,378);
+    private Rectangle2D blue3Card = new Rectangle2D(255*7,378*1,255,378);
+    private Rectangle2D war0Card = new Rectangle2D(255*0,378*2,255,378);
+    private Rectangle2D war1Card = new Rectangle2D(255*1,378*2,255,378);
+    private Rectangle2D war2Card = new Rectangle2D(255*2,378*2,255,378);
+    private Rectangle2D wheelCard = new Rectangle2D(255*4,378*2,255,378);
+    private Rectangle2D tabletCard = new Rectangle2D(255*5,378*2,255,378);
+    private Rectangle2D compassCard = new Rectangle2D(255*3,378*2,255,378);
+
+
+
+
 
     @Override
     public void init(GuiParser parser) {
+        this.parser = parser;
         back.setOnAction(event -> {
             parser.chargeOverview();
         });
 
+
         parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+
                 switch (keyEvent.getCode()){
+
                     case ESCAPE:
                         parser.chargeOverview();
+                        break;
+                    case LEFT:
+                        loadPrevious();
+                        break;
+                    case RIGHT:
+                        loadNext();
                         break;
                 }
             }
         });
 
-        loadPile();
+
         loadWar(parser.getGame().getMilitaryTokens());
+
 
     }
 
@@ -97,13 +142,74 @@ public class WonderController extends Controller{
         sp2.getStyleClass().add("stack-pane");
         sp3.getStyleClass().add("stack-pane");
 
-        centerPile.setImage(image);
-        leftPile.setImage(image);
-        rightPile.setImage(image);
+        this.leftPile = this.player.getWonder().getPile();
+        this.centerPile = this.parser.getGame().getCenterPile();
+        int index = this.parser.getGame().getPlayerList().indexOf(this.player);
+        if(index!=this.parser.getGame().getPlayerList().size()-1){
+            index++;
+        }else {
+            index = 0;
+        }
 
-        centerPile.setViewport(new Rectangle2D(0,0,width,height));
-        leftPile.setViewport(new Rectangle2D(0,0,width,height));
-        rightPile.setViewport(new Rectangle2D(0,0,width,height));
+        this.rightPile = this.parser.getGame().getPlayerList().get(index).getWonder().getPile();
+
+
+
+        centerPileView.setImage(image);
+
+        leftPileView.setImage(image);
+        rightPileView.setImage(image);
+
+        centerPileView.setViewport(new Rectangle2D(0,0,width,height));
+
+
+        loadCardImage(this.leftPile, leftPileView);
+        loadCardImage(this.rightPile, rightPileView);
+
+    }
+
+    public void drawCard(){
+
+        StackPane[] list = {sp1,sp2,sp3};
+        Pile[] piles = {centerPile,leftPile,rightPile};
+        ImageView[] views = {centerPileView,leftPileView,rightPileView};
+
+        for(int i = 0; i<list.length;i++){
+
+            int finalI = i;
+            list[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                        if(player.equals(parser.getGame().getPlayerturn())){
+                            Cards card = piles[finalI].getCards().get(0);
+                            if(card instanceof GreyCards){
+                                player.getRessources().add((GreyCards) card);
+                            }else if(card instanceof YellowCards){
+                                player.getGold().add((YellowCards) card);
+                            }else if(card instanceof BlueCards){
+                                player.getBlue().add((BlueCards) card);
+                            }else if(card instanceof RedCards){
+                                player.getRed().add((RedCards) card);
+                            }else if(card instanceof GreenCards){
+                                player.getGreen().add((GreenCards) card);
+                            }
+
+                            piles[finalI].getCards().remove(card);
+                            loadRessources(player);
+                            loadCardImage(piles[finalI],views[finalI]);
+
+                        }
+
+
+                    }
+                }
+            });
+
+        }
+
+
 
     }
 
@@ -135,25 +241,12 @@ public class WonderController extends Controller{
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
 
-        /*
-        //tests
+        this.player = player;
 
-        player.getRessources().add(new GreyCards(RessourceType.WOOD));
-        player.getRessources().add(new GreyCards(RessourceType.STONE));
-        player.getRessources().add(new GreyCards(RessourceType.BRICK));
-        player.getRessources().add(new GreyCards(RessourceType.PAPER));
-        player.getRessources().add(new GreyCards(RessourceType.GLASS));
-
-        player.getGold().add(new YellowCards());
-
-        player.getBlue().add(new BlueCards(true));
-        player.getBlue().add(new BlueCards(false));
-        player.getBlue().add(new BlueCards(false));
-        player.getBlue().add(new BlueCards(true));
-
-
-         */
-
+        hBoxProgress.getChildren().clear();
+        hBoxRessource.getChildren().clear();
+        hBoxPoints.getChildren().clear();
+        hBoxMilitary.getChildren().clear();
 
         for(GreyCards cards : player.getRessources()){
             ImageView imageView = new ImageView();
@@ -185,8 +278,6 @@ public class WonderController extends Controller{
             hBoxRessource.getChildren().add(imageView);
         }
 
-
-
         for(BlueCards cards : player.getBlue()){
 
             ImageView imageView = new ImageView();
@@ -202,6 +293,36 @@ public class WonderController extends Controller{
             }
             hBoxPoints.getChildren().add(imageView);
 
+        }
+
+        for(GreenCards cards :player.getGreen()){
+            ImageView imageView = new ImageView();
+            imageView.setImage(img);
+
+            imageView.setFitWidth(45);
+            imageView.setFitHeight(45);
+            if(cards.getType().equals(ScienceType.WHEEL)){
+                imageView.setViewport(wheelRect);
+            }else if(cards.getType().equals(ScienceType.TABLET)){
+                imageView.setViewport(tabletRect);
+            }else if(cards.getType().equals(ScienceType.COMPASS)){
+                imageView.setViewport(compassRect);
+            }
+            hBoxProgress.getChildren().add(imageView);
+        }
+
+        for (RedCards cards : player.getRed()){
+            ImageView imageView = new ImageView();
+            imageView.setImage(img);
+
+            imageView.setFitWidth(45);
+            imageView.setFitHeight(45);
+            if(cards.getHorns()==0){
+                imageView.setViewport(militaryRect);
+            }else {
+                imageView.setViewport(militaryHornRect);
+            }
+            hBoxMilitary.getChildren().add(imageView);
         }
 
 
@@ -273,8 +394,85 @@ public class WonderController extends Controller{
         }
 
         loadRessources(player);
+        loadPile();
+        drawCard();
 
 
+
+    }
+
+    public void loadCardImage(Pile pile, ImageView imgView){
+        if(!(pile instanceof SidePile)){
+            return;
+        }
+        if(pile.getCards().get(0) instanceof GreyCards){
+            GreyCards card = (GreyCards)pile.getCards().get(0);
+            if(card.getType().equals(RessourceType.WOOD)){
+                imgView.setViewport(woodCard);
+            }else if(card.getType().equals(RessourceType.STONE)) {
+                imgView.setViewport(stoneCard);
+            }else if(card.getType().equals(RessourceType.BRICK)) {
+                imgView.setViewport(brickCard);
+            }else if(card.getType().equals(RessourceType.PAPER)) {
+                imgView.setViewport(paperCard);
+            }else if(card.getType().equals(RessourceType.GLASS)) {
+                imgView.setViewport(glassCard);
+            }
+        }else if(pile.getCards().get(0) instanceof YellowCards){
+            imgView.setViewport(goldCard);
+
+        }else if(pile.getCards().get(0) instanceof BlueCards){
+            BlueCards card = (BlueCards) pile.getCards().get(0);
+            if(card.isTwoPoint()){
+                imgView.setViewport(blue2Card);
+            }else {
+                imgView.setViewport(blue3Card);
+            }
+
+        }else if(pile.getCards().get(0) instanceof GreenCards){
+            GreenCards card = (GreenCards) pile.getCards().get(0);
+            if(card.getType().equals(ScienceType.WHEEL)){
+                imgView.setViewport(wheelCard);
+            }else if(card.getType().equals(ScienceType.TABLET)) {
+                imgView.setViewport(tabletCard);
+
+            }else if(card.getType().equals(ScienceType.COMPASS)){
+                imgView.setViewport(compassCard);
+            }
+
+        }else if(pile.getCards().get(0) instanceof RedCards){
+            RedCards card = (RedCards) pile.getCards().get(0);
+            if(card.getHorns() == 0){
+                imgView.setViewport(war0Card);
+            }else if(card.getHorns() == 1){
+                imgView.setViewport(war1Card);
+            }else {
+                imgView.setViewport(war2Card);
+            }
+        }
+    }
+
+    public void loadNext(){
+        ArrayList<Player> list = this.parser.getGame().getPlayerList();
+        int index = list.indexOf(this.player);
+        if(index!=list.size()-1){
+            index++;
+        }else {
+            index = 0;
+        }
+        parser.loadPlayerScene(list.get(index));
+
+    }
+
+    public void loadPrevious(){
+        ArrayList<Player> list = this.parser.getGame().getPlayerList();
+        int index = list.indexOf(this.player);
+        if(index!=0){
+            index--;
+        }else {
+            index = list.size()-1;
+        }
+        parser.loadPlayerScene(list.get(index));
 
     }
 

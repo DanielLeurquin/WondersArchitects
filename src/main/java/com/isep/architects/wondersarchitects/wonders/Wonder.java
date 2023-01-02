@@ -1,5 +1,8 @@
 package com.isep.architects.wondersarchitects.wonders;
 
+import com.isep.architects.wondersarchitects.pile.Pile;
+import com.isep.architects.wondersarchitects.pile.SidePile;
+
 import java.util.ArrayList;
 
 public abstract class Wonder {
@@ -7,6 +10,8 @@ public abstract class Wonder {
     protected ArrayList<WonderStage> stages = new ArrayList<WonderStage>();
 
     protected WonderType type;
+
+    protected Pile pile = new SidePile();
 
     public abstract void buildStage();
 
@@ -27,5 +32,9 @@ public abstract class Wonder {
 
     public WonderType getType() {
         return type;
+    }
+
+    public Pile getPile() {
+        return pile;
     }
 }

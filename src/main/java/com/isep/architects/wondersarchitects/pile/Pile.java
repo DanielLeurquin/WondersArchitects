@@ -4,11 +4,11 @@ import com.isep.architects.wondersarchitects.cards.Cards;
 
 import java.util.ArrayList;
 
-public abstract class Pile {
+public class Pile {
 
     protected ArrayList<Cards> cards = new ArrayList<Cards>();
 
-
-
-
+    public ArrayList<Cards> getCards() {
+        return cards;
+    }
 }

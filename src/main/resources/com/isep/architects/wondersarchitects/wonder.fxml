@@ -22,17 +22,17 @@
       <Button fx:id="back" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="100.0" text="Back" />
       <StackPane fx:id="sp1" layoutX="646.0" layoutY="50.0">
          <children>
-            <ImageView fx:id="centerPile" fitHeight="150.0" fitWidth="111.0" layoutX="674.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="centerPileView" fitHeight="150.0" fitWidth="111.0" layoutX="674.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
       <StackPane fx:id="sp2" layoutX="473.0" layoutY="225.0">
          <children>
-            <ImageView fx:id="leftPile" fitHeight="150.0" fitWidth="111.0" layoutX="590.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="leftPileView" fitHeight="150.0" fitWidth="111.0" layoutX="590.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
       <StackPane fx:id="sp3" layoutX="819.0" layoutY="225.0">
          <children>
-            <ImageView fx:id="rightPile" fitHeight="150.0" fitWidth="111.0" layoutX="760.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="rightPileView" fitHeight="150.0" fitWidth="111.0" layoutX="760.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
       <ScrollPane fx:id="scrollP" layoutX="587.0" layoutY="387.0" prefHeight="199.0" prefWidth="335.0" vbarPolicy="NEVER">
@@ -42,8 +42,8 @@
                   <VBox VBox.vgrow="ALWAYS">
                      <children>
                         <HBox fx:id="hBoxRessource" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
-                        <HBox fx:id="hBoxProgress" maxHeight="66.0" minHeight="65.0" prefHeight="65.0" />
-                        <HBox fx:id="hBoxMilitary" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" />
+                        <HBox fx:id="hBoxProgress" maxHeight="66.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS"/>
+                        <HBox fx:id="hBoxMilitary" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS"/>
                      </children>
                   </VBox>
                </children>

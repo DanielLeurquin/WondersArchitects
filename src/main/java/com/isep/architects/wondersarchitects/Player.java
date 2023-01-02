@@ -1,9 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
-import com.isep.architects.wondersarchitects.cards.BlueCards;
-import com.isep.architects.wondersarchitects.cards.GreyCards;
-import com.isep.architects.wondersarchitects.cards.RessourceType;
-import com.isep.architects.wondersarchitects.cards.YellowCards;
+import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 
@@ -20,6 +17,10 @@ public class Player {
     private ArrayList<YellowCards> gold = new ArrayList<YellowCards>();
 
     private ArrayList<BlueCards> blue = new ArrayList<>();
+
+    private ArrayList<RedCards> red = new ArrayList<>();
+
+    private ArrayList<GreenCards> green = new ArrayList<>();
 
     public Player(String name){
         this.name = name;
@@ -145,5 +146,13 @@ public class Player {
 
     public ArrayList<BlueCards> getBlue() {
         return blue;
+    }
+
+    public ArrayList<GreenCards> getGreen() {
+        return green;
+    }
+
+    public ArrayList<RedCards> getRed() {
+        return red;
     }
 }

@@ -1,10 +1,11 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.cards.*;
+import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
 import com.isep.architects.wondersarchitects.wonders.*;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
 
@@ -18,10 +19,13 @@ public class Game {
 
     private ArrayList<Wonder> availableWonders = new ArrayList<Wonder>();
 
-
     private ArrayList<Player> playerList = new ArrayList<Player>();
 
     private ArrayList<MilitaryToken> militaryTokens = new ArrayList<>();
+
+    private Pile centerPile = new Pile();
+
+    private Player playerturn;
 
 
     public Game(InputParser inputParser, Application app){
@@ -34,6 +38,8 @@ public class Game {
         availableWonders.add(new Zeus());
         availableWonders.add(new Rhodes());
         availableWonders.add(new Hallicarnas());
+        fillCenterPile();
+        Collections.shuffle(centerPile.getCards());
 
 
 
@@ -69,8 +75,30 @@ public class Game {
             this.inputParser.askPlayerName(playerList.size()+1);
         }else {
             //next node
+            this.playerturn = playerList.get(0);
             this.inputParser.chargeOverview();
         }
+    }
+
+    public void fillCenterPile(){
+        for(int i = 0; i<3;i++){
+            centerPile.getCards().add(new GreyCards(RessourceType.WOOD));
+            centerPile.getCards().add(new GreyCards(RessourceType.STONE));
+            centerPile.getCards().add(new GreyCards(RessourceType.BRICK));
+            centerPile.getCards().add(new GreyCards(RessourceType.PAPER));
+            centerPile.getCards().add(new GreyCards(RessourceType.GLASS));
+            centerPile.getCards().add(new YellowCards());
+            centerPile.getCards().add(new BlueCards(true));
+            centerPile.getCards().add(new BlueCards(false));
+            centerPile.getCards().add(new GreenCards(ScienceType.WHEEL));
+            centerPile.getCards().add(new GreenCards(ScienceType.TABLET));
+            centerPile.getCards().add(new GreenCards(ScienceType.COMPASS));
+            centerPile.getCards().add(new RedCards(0));
+            centerPile.getCards().add(new RedCards(1));
+            centerPile.getCards().add(new RedCards(2));
+
+        }
+
     }
 
     public void setNumberPlayer(int numberPlayer) {
@@ -91,5 +119,13 @@ public class Game {
 
     public ArrayList<MilitaryToken> getMilitaryTokens() {
         return militaryTokens;
+    }
+
+    public Pile getCenterPile() {
+        return centerPile;
+    }
+
+    public Player getPlayerturn() {
+        return playerturn;
     }
 }
