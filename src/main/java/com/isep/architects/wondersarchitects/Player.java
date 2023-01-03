@@ -28,17 +28,20 @@ public class Player {
 
     public void buildStage(){
         for(WonderStage stage : wonder.getStages()){
-            if(stage.getNeededNumBuild()[0] != 0){
-                boolean value = true;
-                for(int i = 0; i<stage.getNeededNumBuild().length;i++){
-                    value = value && wonder.getStageFromNum(stage.getNeededNumBuild()[i]).isBuilt();
-                }
-                if(value){
+            if(!stage.isBuilt()){
+                if(stage.getNeededNumBuild()[0] != 0){
+                    boolean value = true;
+                    for(int i = 0; i<stage.getNeededNumBuild().length;i++){
+                        value = value && wonder.getStageFromNum(stage.getNeededNumBuild()[i]).isBuilt();
+                    }
+                    if(value){
+                        checkCondition(stage);
+                    }
+                }else {
                     checkCondition(stage);
                 }
-            }else {
-                checkCondition(stage);
             }
+
 
         }
 
@@ -51,12 +54,16 @@ public class Player {
             }
         }else {
             if(differentRessource(stage.getValue())){
+
                 stage.setBuilt(true);
             }
         }
     }
 
     public boolean sameRessource(int value){
+
+        value = value-gold.size();
+
         ArrayList<GreyCards> wood = new ArrayList<>();
         ArrayList<GreyCards> stone = new ArrayList<>();
         ArrayList<GreyCards> brick = new ArrayList<>();
@@ -93,7 +100,9 @@ public class Player {
         if(list.size()>0){
             for(GreyCards card : list){
                 this.ressources.remove(card);
+
             }
+            this.gold.clear();
             return true;
         }else {
             return false;
@@ -104,6 +113,7 @@ public class Player {
     }
 
     public boolean differentRessource(int value){
+        value = value-gold.size();
         ArrayList<GreyCards> list = new ArrayList<GreyCards>();
         ArrayList<RessourceType> listType = new ArrayList<RessourceType>();
         for(GreyCards card : this.ressources){
@@ -116,6 +126,7 @@ public class Player {
             for(GreyCards cards : list){
                 this.ressources.remove(cards);
             }
+            this.gold.clear();
             return true;
         }else {
             return false;

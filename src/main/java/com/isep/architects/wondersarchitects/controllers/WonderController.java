@@ -93,8 +93,18 @@ public class WonderController extends Controller{
     private Rectangle2D compassCard = new Rectangle2D(255*3,378*2,255,378);
 
 
+    public void loadAll(){
+        loadRessources(player);
+        loadWar(parser.getGame().getMilitaryTokens());
+        loadWonder(player);
+        loadPile();
+        Pile[] piles = {centerPile,leftPile,rightPile};
+        ImageView[] views = {centerPileView,leftPileView,rightPileView};
+        for(int i = 0; i<piles.length;i++){
+            loadCardImage(piles[i],views[i]);
+        }
 
-
+    }
 
     @Override
     public void init(GuiParser parser) {
@@ -124,7 +134,7 @@ public class WonderController extends Controller{
         });
 
 
-        loadWar(parser.getGame().getMilitaryTokens());
+
 
 
     }
@@ -183,25 +193,18 @@ public class WonderController extends Controller{
 
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                         if(player.equals(parser.getGame().getPlayerturn())){
-                            Cards card = piles[finalI].getCards().get(0);
-                            if(card instanceof GreyCards){
-                                player.getRessources().add((GreyCards) card);
-                            }else if(card instanceof YellowCards){
-                                player.getGold().add((YellowCards) card);
-                            }else if(card instanceof BlueCards){
-                                player.getBlue().add((BlueCards) card);
-                            }else if(card instanceof RedCards){
-                                player.getRed().add((RedCards) card);
-                            }else if(card instanceof GreenCards){
-                                player.getGreen().add((GreenCards) card);
+                            Cards card = piles[finalI].drawCard(player);
+                            if(card instanceof RedCards && ((RedCards) card).getHorns()>0){
+                                parser.getGame().evaluateWar((RedCards) card);
+                                loadWar(parser.getGame().getMilitaryTokens());
                             }
-
-                            piles[finalI].getCards().remove(card);
+                            parser.getGame().endTurn();
                             loadRessources(player);
-                            loadCardImage(piles[finalI],views[finalI]);
+                            loadPile();
+                            loadWonder(player);
+
 
                         }
-
 
                     }
                 }
@@ -216,6 +219,8 @@ public class WonderController extends Controller{
     public void loadWar(ArrayList<MilitaryToken> warTokens){
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
+
+        hBoxWar.getChildren().clear();
 
         for (MilitaryToken token : warTokens){
             ImageView imageView = new ImageView();
@@ -241,7 +246,7 @@ public class WonderController extends Controller{
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
 
-        this.player = player;
+
 
         hBoxProgress.getChildren().clear();
         hBoxRessource.getChildren().clear();
@@ -252,8 +257,8 @@ public class WonderController extends Controller{
             ImageView imageView = new ImageView();
             imageView.setImage(img);
 
-            imageView.setFitWidth(65);
-            imageView.setFitHeight(65);
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
             if(cards.getType().equals(RessourceType.WOOD)){
                 imageView.setViewport(woodRect);
             }else if(cards.getType().equals(RessourceType.STONE)){
@@ -273,8 +278,8 @@ public class WonderController extends Controller{
             ImageView imageView = new ImageView();
             imageView.setImage(img);
             imageView.setViewport(goldRect);
-            imageView.setFitWidth(65);
-            imageView.setFitHeight(65);
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
             hBoxRessource.getChildren().add(imageView);
         }
 
@@ -299,8 +304,8 @@ public class WonderController extends Controller{
             ImageView imageView = new ImageView();
             imageView.setImage(img);
 
-            imageView.setFitWidth(45);
-            imageView.setFitHeight(45);
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
             if(cards.getType().equals(ScienceType.WHEEL)){
                 imageView.setViewport(wheelRect);
             }else if(cards.getType().equals(ScienceType.TABLET)){
@@ -315,8 +320,8 @@ public class WonderController extends Controller{
             ImageView imageView = new ImageView();
             imageView.setImage(img);
 
-            imageView.setFitWidth(45);
-            imageView.setFitHeight(45);
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
             if(cards.getHorns()==0){
                 imageView.setViewport(militaryRect);
             }else {
@@ -331,6 +336,13 @@ public class WonderController extends Controller{
     }
 
     public void initWonder(Player player){
+        this.player = player;
+        loadAll();
+        drawCard();
+
+    }
+
+    public void loadWonder(Player player){
         Image image = null;
         double width = 0;
         double height = 0;
@@ -392,13 +404,6 @@ public class WonderController extends Controller{
                 list[i-1].setViewport(new Rectangle2D(width*i,0,width,height));
             }
         }
-
-        loadRessources(player);
-        loadPile();
-        drawCard();
-
-
-
     }
 
     public void loadCardImage(Pile pile, ImageView imgView){

@@ -63,6 +63,32 @@ public class Game {
         }
     }
 
+    public void evaluateWar(RedCards card){
+        int horns = card.getHorns();
+        int compteur = 0;
+        for(MilitaryToken token : militaryTokens){
+            if(compteur<horns && !token.isSideWar()){
+                token.setSideWar(true);
+                compteur++;
+            }
+        }
+        if(allWar()){
+            executeWar();
+        }
+    }
+
+    public void executeWar(){
+        System.out.println("WAR");
+    }
+
+    public boolean allWar(){
+        boolean value = true;
+        for(MilitaryToken token : militaryTokens){
+            value = value && token.isSideWar();
+        }
+        return value;
+    }
+
     public void createPlayer(String name){
         Player player = new Player(name);
         playerList.add(player);
@@ -98,6 +124,21 @@ public class Game {
             centerPile.getCards().add(new RedCards(2));
 
         }
+
+    }
+
+    public void startTurn(){
+
+    }
+
+    public void endTurn(){
+        for(int i = 1; i<playerList.size();i++){
+            playerList.set(i-1,playerList.get(i));
+        }
+        playerturn.buildStage();
+        playerList.set(playerList.size()-1,playerturn);
+        playerturn = playerList.get(0);
+
 
     }
 

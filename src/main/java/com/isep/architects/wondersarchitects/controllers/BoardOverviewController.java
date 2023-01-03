@@ -43,7 +43,6 @@ public class BoardOverviewController extends Controller{
 
         for(Player player : parser.getGame().getPlayerList()){
 
-
             int i = player.getWonder().getType().numFromWonder();
 
             VBox vBox = new VBox();
@@ -76,7 +75,7 @@ public class BoardOverviewController extends Controller{
 
             anchorPane.getChildren().add(vBox);
 
-            z = Complex.exp(radius,(Math.PI/2)+angle*compteur);
+            z = Complex.exp(radius,(Math.PI/2)-angle*compteur);
 
             vBox.setLayoutX(z.re - vBoxW/2 + 485);
             vBox.setLayoutY(z.im - vBoxH/2 + 300);
