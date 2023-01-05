@@ -43,6 +43,7 @@ public class BoardOverviewController extends Controller{
 
         for(Player player : parser.getGame().getPlayerList()){
 
+
             int i = player.getWonder().getType().numFromWonder();
 
             VBox vBox = new VBox();

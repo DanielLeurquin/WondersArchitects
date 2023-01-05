@@ -26,7 +26,8 @@ public class Player {
         this.name = name;
     }
 
-    public void buildStage(){
+    public ArrayList<WonderStage> buildStage(){
+        ArrayList<WonderStage> stageToBuild = new ArrayList<>();
         for(WonderStage stage : wonder.getStages()){
             if(!stage.isBuilt()){
                 if(stage.getNeededNumBuild()[0] != 0){
@@ -35,29 +36,34 @@ public class Player {
                         value = value && wonder.getStageFromNum(stage.getNeededNumBuild()[i]).isBuilt();
                     }
                     if(value){
-                        checkCondition(stage);
+                        if(checkCondition(stage)){
+                            stageToBuild.add(stage);
+                        };
                     }
                 }else {
-                    checkCondition(stage);
+                    if(checkCondition(stage)){
+                        stageToBuild.add(stage);
+                    };
                 }
             }
 
 
         }
-
+        return stageToBuild;
     }
 
-    public void checkCondition(WonderStage stage){
+    public boolean checkCondition(WonderStage stage){
         if(stage.isSame()){
             if(sameRessource(stage.getValue())){
-                stage.setBuilt(true);
+                return true;
             }
         }else {
             if(differentRessource(stage.getValue())){
 
-                stage.setBuilt(true);
+                return true;
             }
         }
+        return false;
     }
 
     public boolean sameRessource(int value){
@@ -104,6 +110,9 @@ public class Player {
             }
             this.gold.clear();
             return true;
+        }else if (value == 0){
+            this.gold.clear();
+            return true;
         }else {
             return false;
         }
@@ -112,20 +121,23 @@ public class Player {
 
     }
 
-    public boolean differentRessource(int value){
-        value = value-gold.size();
+    public boolean differentRessource(int value) {
+        value = value - gold.size();
         ArrayList<GreyCards> list = new ArrayList<GreyCards>();
         ArrayList<RessourceType> listType = new ArrayList<RessourceType>();
-        for(GreyCards card : this.ressources){
-            if(!listType.contains(card.getType())){
+        for (GreyCards card : this.ressources) {
+            if (!listType.contains(card.getType())) {
                 listType.add(card.getType());
                 list.add(card);
             }
         }
-        if(list.size()>=value){
-            for(GreyCards cards : list){
+        if (list.size() >= value) {
+            for (GreyCards cards : list) {
                 this.ressources.remove(cards);
             }
+            this.gold.clear();
+            return true;
+        }else if(value == 0){
             this.gold.clear();
             return true;
         }else {

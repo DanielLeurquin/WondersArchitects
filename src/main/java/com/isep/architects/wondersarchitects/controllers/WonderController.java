@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects.controllers;
 
+import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.GuiParser;
 import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.cards.*;
@@ -7,6 +8,7 @@ import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.pile.SidePile;
 import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
+import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -47,11 +50,16 @@ public class WonderController extends Controller{
     @FXML
     private VBox vBoxLabel;
 
+    @FXML
+    private AnchorPane ap;
+
     private GuiParser parser;
 
     private Player player;
 
     private Pile centerPile,leftPile,rightPile;
+
+    private double multiplier;
 
     //symbol Rect
     private Rectangle2D woodRect = new Rectangle2D(0,0,150,150);
@@ -92,6 +100,8 @@ public class WonderController extends Controller{
     private Rectangle2D tabletCard = new Rectangle2D(255*5,378*2,255,378);
     private Rectangle2D compassCard = new Rectangle2D(255*3,378*2,255,378);
 
+    private WonderStageAnimation anim;
+
 
     public void loadAll(){
         loadRessources(player);
@@ -109,6 +119,7 @@ public class WonderController extends Controller{
     @Override
     public void init(GuiParser parser) {
         this.parser = parser;
+        this.multiplier = parser.getGame().getMultiplier();
         back.setOnAction(event -> {
             parser.chargeOverview();
         });
@@ -144,7 +155,6 @@ public class WonderController extends Controller{
         double width = 255;
         double height = 378;
 
-
         Image image = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/cards.png"));
 
@@ -163,10 +173,7 @@ public class WonderController extends Controller{
 
         this.rightPile = this.parser.getGame().getPlayerList().get(index).getWonder().getPile();
 
-
-
         centerPileView.setImage(image);
-
         leftPileView.setImage(image);
         rightPileView.setImage(image);
 
@@ -201,7 +208,7 @@ public class WonderController extends Controller{
                             parser.getGame().endTurn();
                             loadRessources(player);
                             loadPile();
-                            loadWonder(player);
+                            //loadWonder(player);
 
 
                         }
@@ -347,7 +354,7 @@ public class WonderController extends Controller{
         double width = 0;
         double height = 0;
 
-        double multiplier = 0.75;
+
 
         ImageView[] list = {wonderStage1,wonderStage2,wonderStage3,wonderStage4,wonderStage5};
 
@@ -396,8 +403,9 @@ public class WonderController extends Controller{
 
         for(int i = 1; i<6;i++){
             list[i-1].setImage(image);
-            list[i-1].setFitWidth(width*multiplier);
+            list[i-1].setFitWidth(width*this.multiplier);
             list[i-1].setFitHeight(height*multiplier);
+
             if(wonder.getStageFromNum(i).isBuilt()){
                 list[i-1].setViewport(new Rectangle2D(width*i,height,width,height));
             }else{
@@ -478,6 +486,21 @@ public class WonderController extends Controller{
             index = list.size()-1;
         }
         parser.loadPlayerScene(list.get(index));
+
+    }
+
+    public void startAnimation(WonderStage stage){
+
+        ImageView[] list = {wonderStage1, wonderStage2, wonderStage3, wonderStage4, wonderStage5};
+        int i = stage.getStagenum()-1;
+
+        double width = list[i].getFitWidth()/multiplier;
+
+        double height = list[i].getFitHeight()/multiplier;
+
+        Rectangle2D rect = new Rectangle2D(width*(i+1),height,width,height);
+        anim = new WonderStageAnimation(list[i],rect,stage,multiplier);
+        anim.play();
 
     }
 

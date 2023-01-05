@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
@@ -8,6 +9,8 @@ import com.isep.architects.wondersarchitects.wonders.*;
 import java.util.*;
 
 public class Game {
+
+
 
     private InputParser inputParser;
 
@@ -26,6 +29,8 @@ public class Game {
     private Pile centerPile = new Pile();
 
     private Player playerturn;
+
+    private double multiplier = 0.75;
 
 
     public Game(InputParser inputParser, Application app){
@@ -107,39 +112,29 @@ public class Game {
     }
 
     public void fillCenterPile(){
-        for(int i = 0; i<3;i++){
-            centerPile.getCards().add(new GreyCards(RessourceType.WOOD));
-            centerPile.getCards().add(new GreyCards(RessourceType.STONE));
-            centerPile.getCards().add(new GreyCards(RessourceType.BRICK));
-            centerPile.getCards().add(new GreyCards(RessourceType.PAPER));
-            centerPile.getCards().add(new GreyCards(RessourceType.GLASS));
+        for(int i = 0; i<200;i++){
+
             centerPile.getCards().add(new YellowCards());
-            centerPile.getCards().add(new BlueCards(true));
-            centerPile.getCards().add(new BlueCards(false));
-            centerPile.getCards().add(new GreenCards(ScienceType.WHEEL));
-            centerPile.getCards().add(new GreenCards(ScienceType.TABLET));
-            centerPile.getCards().add(new GreenCards(ScienceType.COMPASS));
-            centerPile.getCards().add(new RedCards(0));
-            centerPile.getCards().add(new RedCards(1));
-            centerPile.getCards().add(new RedCards(2));
+
 
         }
 
     }
 
     public void startTurn(){
-
-    }
+     }
 
     public void endTurn(){
         for(int i = 1; i<playerList.size();i++){
             playerList.set(i-1,playerList.get(i));
         }
-        playerturn.buildStage();
+        ArrayList<WonderStage> stageToBuild = playerturn.buildStage();
+        for(WonderStage stage : stageToBuild){
+            inputParser.animationStage(stage);
+            stage.setBuilt(true);
+        }
         playerList.set(playerList.size()-1,playerturn);
         playerturn = playerList.get(0);
-
-
     }
 
     public void setNumberPlayer(int numberPlayer) {
@@ -168,5 +163,9 @@ public class Game {
 
     public Player getPlayerturn() {
         return playerturn;
+    }
+
+    public double getMultiplier() {
+        return multiplier;
     }
 }
