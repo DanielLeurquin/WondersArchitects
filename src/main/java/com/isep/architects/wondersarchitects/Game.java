@@ -122,6 +122,7 @@ public class Game {
     }
 
     public void startTurn(){
+        int value = 0;
     }
 
     public void endTurn(){
