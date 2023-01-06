@@ -122,9 +122,7 @@ public class Game {
     }
 
     public void startTurn(){
-        int value = 0;
-        System.out.println(value);
-     }
+    }
 
     public void endTurn(){
         for(int i = 1; i<playerList.size();i++){
