@@ -22,6 +22,11 @@ public class Artemis extends Wonder{
 
     }
 
+    @Override
+    public void specialEffect() {
+
+    }
+
     public void fillPile(){
         for(int i = 0; i<3;i++){
             pile.getCards().add(new GreyCards(RessourceType.WOOD));

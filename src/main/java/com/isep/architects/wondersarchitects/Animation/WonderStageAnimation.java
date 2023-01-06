@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects.Animation;
 
+import com.isep.architects.wondersarchitects.cards.RessourceType;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
@@ -13,6 +14,8 @@ public class WonderStageAnimation extends Transition {
     private Rectangle2D newImage;
 
     private double width;
+
+
 
     private WonderStage stage;
 

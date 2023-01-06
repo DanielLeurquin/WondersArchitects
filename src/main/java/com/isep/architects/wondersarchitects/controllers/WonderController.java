@@ -392,7 +392,7 @@ public class WonderController extends Controller{
             image = new Image(getClass().getResourceAsStream(
                     "/com/isep/architects/wondersarchitects/img/wonder_rhodes.png"));
             width = 466;
-            height = 515;
+            height = 518;
         }
         else if(wonder.getType().equals(WonderType.ZEUS)){
             image = new Image(getClass().getResourceAsStream(

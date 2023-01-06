@@ -21,6 +21,12 @@ public class Zeus extends Wonder{
         this.stages.add(new WonderStage(4,false,5, new int[]{4},7,this,233));
 
     }
+
+    @Override
+    public void specialEffect() {
+
+    }
+
     public void fillPile(){
         for(int i = 0; i<3;i++){
             pile.getCards().add(new GreyCards(RessourceType.WOOD));

@@ -20,6 +20,12 @@ public class Hallicarnas extends Wonder{
         this.stages.add(new WonderStage(3,true,4, new int[]{2},5,this,355));
         this.stages.add(new WonderStage(4,false,5, new int[]{3,4},7,this,233));
     }
+
+    @Override
+    public void specialEffect() {
+
+    }
+
     public void fillPile(){
         for(int i = 0; i<3;i++){
             pile.getCards().add(new GreyCards(RessourceType.WOOD));
