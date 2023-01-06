@@ -122,6 +122,8 @@ public class Game {
     }
 
     public void startTurn(){
+        int value = 0;
+        System.out.println(value);
      }
 
     public void endTurn(){
