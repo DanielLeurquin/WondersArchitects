@@ -1,6 +1,6 @@
 package com.isep.architects.wondersarchitects.Animation;
 
-import com.isep.architects.wondersarchitects.cards.RessourceType;
+
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;

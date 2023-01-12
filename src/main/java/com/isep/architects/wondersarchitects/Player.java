@@ -5,6 +5,9 @@ import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Player {
 
@@ -12,15 +15,7 @@ public class Player {
 
     private Wonder wonder;
 
-    private ArrayList<GreyCards> ressources = new ArrayList<GreyCards>();
-
-    private ArrayList<YellowCards> gold = new ArrayList<YellowCards>();
-
-    private ArrayList<BlueCards> blue = new ArrayList<>();
-
-    private ArrayList<RedCards> red = new ArrayList<>();
-
-    private ArrayList<GreenCards> green = new ArrayList<>();
+    private ArrayList<CardsTypes> cards = new ArrayList<>();
 
     public Player(String name){
         this.name = name;
@@ -54,91 +49,75 @@ public class Player {
 
     public boolean checkCondition(WonderStage stage){
         if(stage.isSame()){
-            if(sameRessource(stage.getValue())){
-                return true;
-            }
+            return sameRessource(stage.getValue());
         }else {
-            if(differentRessource(stage.getValue())){
-
-                return true;
-            }
+            return differentRessource(stage.getValue());
         }
-        return false;
     }
 
     public boolean sameRessource(int value){
 
-        value = value-gold.size();
-
-        ArrayList<GreyCards> wood = new ArrayList<>();
-        ArrayList<GreyCards> stone = new ArrayList<>();
-        ArrayList<GreyCards> brick = new ArrayList<>();
-        ArrayList<GreyCards> paper = new ArrayList<>();
-        ArrayList<GreyCards> glass = new ArrayList<>();
-        ArrayList<GreyCards> list = new ArrayList<>();
-
-        for(GreyCards card : this.ressources){
-            if(card.getType().equals(RessourceType.WOOD)){
-                wood.add(card);
-            }else if(card.getType().equals(RessourceType.STONE)){
-                stone.add(card);
-            }else if(card.getType().equals(RessourceType.BRICK)){
-                brick.add(card);
-            }else if(card.getType().equals(RessourceType.PAPER)){
-                paper.add(card);
-            }else if(card.getType().equals(RessourceType.GLASS)){
-                glass.add(card);
-            }
-        }
-        if(wood.size()>=value){
-            list = wood;
-        }else if(stone.size()>= value){
-            list = stone;
-        }else if(brick.size()>= value){
-            list = brick;
-        }else if(paper.size()>= value){
-            list = paper;
-        }else if(glass.size()>= value){
-            list = glass;
-        }
+        value = value-countGold();
 
 
-        if(list.size()>0){
-            for(GreyCards card : list){
-                this.ressources.remove(card);
+        CardsTypes type;
 
-            }
-            this.gold.clear();
-            return true;
-        }else if (value == 0){
-            this.gold.clear();
-            return true;
+        if(Collections.frequency(cards,CardsTypes.WOOD)>=value){
+            type = CardsTypes.WOOD;
+        }else if(Collections.frequency(cards,CardsTypes.STONE)>=value){
+            type = CardsTypes.STONE;
+        }else if(Collections.frequency(cards,CardsTypes.BRICK)>=value){
+            type = CardsTypes.BRICK;
+        }else if(Collections.frequency(cards,CardsTypes.PAPER)>=value){
+            type = CardsTypes.PAPER;
+        }else if(Collections.frequency(cards,CardsTypes.GLASS)>=value){
+            type = CardsTypes.GLASS;
         }else {
-            return false;
+            if(value!=0){
+                return false;
+            }else {
+
+                removeGold();
+                return true;
+            }
+
         }
 
+        for(int i = 0; i<value;i++){
+            cards.remove(type);
 
+        }
+
+        removeGold();
+        return true;
 
     }
 
     public boolean differentRessource(int value) {
-        value = value - gold.size();
-        ArrayList<GreyCards> list = new ArrayList<GreyCards>();
-        ArrayList<RessourceType> listType = new ArrayList<RessourceType>();
-        for (GreyCards card : this.ressources) {
-            if (!listType.contains(card.getType())) {
-                listType.add(card.getType());
-                list.add(card);
+        value = value - countGold();
+
+
+        List<CardsTypes> allowed = Arrays.asList(CardsTypes.WOOD, CardsTypes.STONE,
+               CardsTypes.BRICK,CardsTypes.PAPER,CardsTypes.GLASS);
+
+        ArrayList<CardsTypes> possessed = new ArrayList<CardsTypes>();
+        for (CardsTypes card : cards) {
+            if(allowed.contains(card) && !possessed.contains(card)){
+                possessed.add(card);
             }
         }
-        if (list.size() >= value) {
-            for (GreyCards cards : list) {
-                this.ressources.remove(cards);
-            }
-            this.gold.clear();
+
+        if(value == 0) {
+            removeGold();
             return true;
-        }else if(value == 0){
-            this.gold.clear();
+        }
+
+        if (possessed.size() >= value) {
+
+            for (CardsTypes cards : possessed) {
+                this.cards.remove(cards);
+            }
+            removeGold();
             return true;
         }else {
             return false;
@@ -159,23 +138,20 @@ public class Player {
         return wonder;
     }
 
-    public ArrayList<GreyCards> getRessources() {
-        return ressources;
+
+    public ArrayList<CardsTypes> getCards() {
+        return cards;
     }
 
-    public ArrayList<YellowCards> getGold() {
-        return gold;
+    public int countGold(){
+        return Collections.frequency(cards,CardsTypes.GOLD);
     }
 
-    public ArrayList<BlueCards> getBlue() {
-        return blue;
+    public void removeGold(){
+        int lim = countGold();
+        for(int i = 0;i<lim;i++){
+            cards.remove(CardsTypes.GOLD);
+        }
     }
 
-    public ArrayList<GreenCards> getGreen() {
-        return green;
-    }
-
-    public ArrayList<RedCards> getRed() {
-        return red;
-    }
 }

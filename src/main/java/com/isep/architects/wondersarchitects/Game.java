@@ -68,8 +68,11 @@ public class Game {
         }
     }
 
-    public void evaluateWar(RedCards card){
-        int horns = card.getHorns();
+    public void evaluateWar(CardsTypes card){
+        int horns = 1;
+        if(card.equals(CardsTypes.RED2)){
+            horns = 2;
+        }
         int compteur = 0;
         for(MilitaryToken token : militaryTokens){
             if(compteur<horns && !token.isSideWar()){
@@ -114,7 +117,7 @@ public class Game {
     public void fillCenterPile(){
         for(int i = 0; i<200;i++){
 
-            centerPile.getCards().add(new YellowCards());
+            centerPile.getCards().add(CardsTypes.GOLD);
 
 
         }

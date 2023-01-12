@@ -104,7 +104,7 @@ public class WonderController extends Controller{
 
 
     public void loadAll(){
-        loadRessources(player);
+        loadRessources2(player);
         loadWar(parser.getGame().getMilitaryTokens());
         loadWonder(player);
         loadPile();
@@ -200,13 +200,13 @@ public class WonderController extends Controller{
 
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                         if(player.equals(parser.getGame().getPlayerturn())){
-                            Cards card = piles[finalI].drawCard(player);
-                            if(card instanceof RedCards && ((RedCards) card).getHorns()>0){
-                                parser.getGame().evaluateWar((RedCards) card);
+                            CardsTypes card = piles[finalI].drawCard(player);
+                            if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
+                                parser.getGame().evaluateWar(card);
                                 loadWar(parser.getGame().getMilitaryTokens());
                             }
                             parser.getGame().endTurn();
-                            loadRessources(player);
+                            loadRessources2(player);
                             loadPile();
                             //loadWonder(player);
 
@@ -250,6 +250,7 @@ public class WonderController extends Controller{
     }
 
     public void loadRessources(Player player){
+        /*
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
 
@@ -340,6 +341,43 @@ public class WonderController extends Controller{
 
         scrollP.getStyleClass().add("scroll-pane");
 
+         */
+
+    }
+
+    public void loadRessources2(Player player){
+        Image img = new Image(getClass().getResourceAsStream(
+                "/com/isep/architects/wondersarchitects/img/icons.png"));
+
+
+
+        hBoxProgress.getChildren().clear();
+        hBoxRessource.getChildren().clear();
+        hBoxPoints.getChildren().clear();
+        hBoxMilitary.getChildren().clear();
+        Rectangle2D[] listRect = {woodRect,stoneRect,brickRect,paperRect,glassRect,goldRect,militaryRect,militaryHornRect,
+        militaryHornRect,blue2Rect,blue3Rect,wheelRect,tabletRect,compassRect};
+
+        for(CardsTypes card : player.getCards()){
+            ImageView imageView = new ImageView();
+            imageView.setImage(img);
+
+            imageView.setFitWidth(50);
+            imageView.setFitHeight(50);
+            imageView.setViewport(listRect[card.indice()]);
+            if(card.indice()<6){
+                hBoxRessource.getChildren().add(imageView);
+            }else if(card.indice()<9){
+                hBoxMilitary.getChildren().add(imageView);
+            }else if(card.indice()<11){
+                hBoxPoints.getChildren().add(imageView);
+            }else {
+                hBoxProgress.getChildren().add(imageView);
+            }
+
+        }
+
+        scrollP.getStyleClass().add("scroll-pane");
     }
 
     public void initWonder(Player player){
@@ -418,51 +456,11 @@ public class WonderController extends Controller{
         if(!(pile instanceof SidePile)){
             return;
         }
-        if(pile.getCards().get(0) instanceof GreyCards){
-            GreyCards card = (GreyCards)pile.getCards().get(0);
-            if(card.getType().equals(RessourceType.WOOD)){
-                imgView.setViewport(woodCard);
-            }else if(card.getType().equals(RessourceType.STONE)) {
-                imgView.setViewport(stoneCard);
-            }else if(card.getType().equals(RessourceType.BRICK)) {
-                imgView.setViewport(brickCard);
-            }else if(card.getType().equals(RessourceType.PAPER)) {
-                imgView.setViewport(paperCard);
-            }else if(card.getType().equals(RessourceType.GLASS)) {
-                imgView.setViewport(glassCard);
-            }
-        }else if(pile.getCards().get(0) instanceof YellowCards){
-            imgView.setViewport(goldCard);
+        Rectangle2D listRect[] = {woodCard,stoneCard,brickCard,paperCard,glassCard,goldCard,war0Card,war1Card,war2Card,
+        blue2Card,blue3Card,wheelCard,tabletCard,compassCard};
 
-        }else if(pile.getCards().get(0) instanceof BlueCards){
-            BlueCards card = (BlueCards) pile.getCards().get(0);
-            if(card.isTwoPoint()){
-                imgView.setViewport(blue2Card);
-            }else {
-                imgView.setViewport(blue3Card);
-            }
+        imgView.setViewport(listRect[pile.getCards().get(0).indice()]);
 
-        }else if(pile.getCards().get(0) instanceof GreenCards){
-            GreenCards card = (GreenCards) pile.getCards().get(0);
-            if(card.getType().equals(ScienceType.WHEEL)){
-                imgView.setViewport(wheelCard);
-            }else if(card.getType().equals(ScienceType.TABLET)) {
-                imgView.setViewport(tabletCard);
-
-            }else if(card.getType().equals(ScienceType.COMPASS)){
-                imgView.setViewport(compassCard);
-            }
-
-        }else if(pile.getCards().get(0) instanceof RedCards){
-            RedCards card = (RedCards) pile.getCards().get(0);
-            if(card.getHorns() == 0){
-                imgView.setViewport(war0Card);
-            }else if(card.getHorns() == 1){
-                imgView.setViewport(war1Card);
-            }else {
-                imgView.setViewport(war2Card);
-            }
-        }
     }
 
     public void loadNext(){
