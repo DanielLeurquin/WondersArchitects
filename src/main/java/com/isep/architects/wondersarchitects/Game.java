@@ -3,7 +3,7 @@ package com.isep.architects.wondersarchitects;
 import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
-import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
+import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.*;
 
 import java.util.*;
@@ -24,7 +24,7 @@ public class Game {
 
     private ArrayList<Player> playerList = new ArrayList<Player>();
 
-    private ArrayList<MilitaryToken> militaryTokens = new ArrayList<>();
+    private ArrayList<TokenTypes> militaryTokens = new ArrayList<>();
 
     private Pile centerPile = new Pile();
 
@@ -53,18 +53,18 @@ public class Game {
     public void createMilitaryToken(){
 
 
-        militaryTokens.add(new MilitaryToken());
-        militaryTokens.add(new MilitaryToken());
-        militaryTokens.add(new MilitaryToken());
+        militaryTokens.add(TokenTypes.PEACE);
+        militaryTokens.add(TokenTypes.PEACE);
+        militaryTokens.add(TokenTypes.PEACE);
 
         if(numberPlayer >=4){
-            militaryTokens.add(new MilitaryToken());
+            militaryTokens.add(TokenTypes.PEACE);
         }
         if(numberPlayer >=5){
-            militaryTokens.add(new MilitaryToken());
+            militaryTokens.add(TokenTypes.PEACE);
         }
         if(numberPlayer >=6){
-            militaryTokens.add(new MilitaryToken());
+            militaryTokens.add(TokenTypes.PEACE);
         }
     }
 
@@ -74,9 +74,9 @@ public class Game {
             horns = 2;
         }
         int compteur = 0;
-        for(MilitaryToken token : militaryTokens){
-            if(compteur<horns && !token.isSideWar()){
-                token.setSideWar(true);
+        for(TokenTypes token : militaryTokens){
+            if(compteur<horns && token.equals(TokenTypes.PEACE)){
+                militaryTokens.set(militaryTokens.indexOf(token), TokenTypes.MILITARY);
                 compteur++;
             }
         }
@@ -91,8 +91,8 @@ public class Game {
 
     public boolean allWar(){
         boolean value = true;
-        for(MilitaryToken token : militaryTokens){
-            value = value && token.isSideWar();
+        for(TokenTypes token : militaryTokens){
+            value = value && token.equals(TokenTypes.MILITARY);
         }
         return value;
     }
@@ -156,7 +156,7 @@ public class Game {
         return playerList;
     }
 
-    public ArrayList<MilitaryToken> getMilitaryTokens() {
+    public ArrayList<TokenTypes> getMilitaryTokens() {
         return militaryTokens;
     }
 

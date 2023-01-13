@@ -6,7 +6,7 @@ import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.pile.SidePile;
-import com.isep.architects.wondersarchitects.tokens.MilitaryToken;
+import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
@@ -223,20 +223,20 @@ public class WonderController extends Controller{
 
     }
 
-    public void loadWar(ArrayList<MilitaryToken> warTokens){
+    public void loadWar(ArrayList<TokenTypes> warTokens){
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
 
         hBoxWar.getChildren().clear();
 
-        for (MilitaryToken token : warTokens){
+        for (TokenTypes token : warTokens){
             ImageView imageView = new ImageView();
             imageView.setImage(img);
 
             imageView.setFitWidth(35);
             imageView.setFitHeight(35);
 
-            if(token.isSideWar()){
+            if(token.equals(TokenTypes.MILITARY)){
                 imageView.setViewport(warRect);
             }else {
                 imageView.setViewport(peaceRect);
