@@ -7,27 +7,17 @@ import java.util.ArrayList;
 
 public class Pile {
 
-    protected ArrayList<Cards> cards = new ArrayList<Cards>();
+    protected ArrayList<CardsTypes> cards = new ArrayList<CardsTypes>();
 
-    public Cards drawCard(Player player){
-        Cards card = cards.get(0);
-        if(card instanceof GreyCards){
-            player.getRessources().add((GreyCards) card);
-        }else if(card instanceof YellowCards){
-            player.getGold().add((YellowCards) card);
-        }else if(card instanceof BlueCards){
-            player.getBlue().add((BlueCards) card);
-        }else if(card instanceof RedCards){
-            player.getRed().add((RedCards) card);
-        }else if(card instanceof GreenCards){
-            player.getGreen().add((GreenCards) card);
-        }
+    public CardsTypes drawCard(Player player){
 
+        CardsTypes card = cards.get(0);
+        player.getCards().add(card);
         cards.remove(card);
         return card;
     }
 
-    public ArrayList<Cards> getCards() {
+    public ArrayList<CardsTypes> getCards() {
         return cards;
     }
 }

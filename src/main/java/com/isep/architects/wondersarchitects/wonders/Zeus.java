@@ -29,20 +29,20 @@ public class Zeus extends Wonder{
 
     public void fillPile(){
         for(int i = 0; i<3;i++){
-            pile.getCards().add(new GreyCards(RessourceType.WOOD));
-            pile.getCards().add(new GreyCards(RessourceType.STONE));
-            pile.getCards().add(new GreyCards(RessourceType.BRICK));
-            pile.getCards().add(new GreyCards(RessourceType.PAPER));
-            pile.getCards().add(new GreyCards(RessourceType.GLASS));
-            pile.getCards().add(new YellowCards());
-            pile.getCards().add(new BlueCards(true));
-            pile.getCards().add(new BlueCards(false));
-            pile.getCards().add(new GreenCards(ScienceType.WHEEL));
-            pile.getCards().add(new GreenCards(ScienceType.TABLET));
-            pile.getCards().add(new GreenCards(ScienceType.COMPASS));
-            pile.getCards().add(new RedCards(0));
-            pile.getCards().add(new RedCards(1));
-            pile.getCards().add(new RedCards(2));
+            pile.getCards().add(CardsTypes.WOOD);
+            pile.getCards().add(CardsTypes.STONE);
+            pile.getCards().add(CardsTypes.BLUE2);
+            pile.getCards().add(CardsTypes.PAPER);
+            pile.getCards().add(CardsTypes.GLASS);
+            pile.getCards().add(CardsTypes.GOLD);
+            pile.getCards().add(CardsTypes.BLUE2);
+            pile.getCards().add(CardsTypes.BLUE3);
+            pile.getCards().add(CardsTypes.WHEEL);
+            pile.getCards().add(CardsTypes.TABLET);
+            pile.getCards().add(CardsTypes.COMPASS);
+            pile.getCards().add(CardsTypes.RED0);
+            pile.getCards().add(CardsTypes.RED1);
+            pile.getCards().add(CardsTypes.RED2);
 
         }
         Collections.shuffle(pile.getCards());
