@@ -10,8 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
-      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0"
-                  prefHeight="467.0" prefWidth="300.0">
+      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0" prefHeight="467.0" prefWidth="300.0">
          <children>
             <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
@@ -69,5 +68,10 @@
             <HBox fx:id="hBoxPoints1" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
          </content>
       </ScrollPane>
+      <AnchorPane fx:id="overlayAp" disable="true" layoutX="110.0" layoutY="110.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" visible="false">
+         <children>
+            <Button fx:id="closeButton" layoutX="629.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Close" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
