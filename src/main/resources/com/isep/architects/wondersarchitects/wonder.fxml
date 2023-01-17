@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -10,8 +11,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
-      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0"
-                  prefHeight="467.0" prefWidth="300.0">
+      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0" prefHeight="467.0" prefWidth="300.0">
          <children>
             <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
@@ -51,7 +51,7 @@
             </HBox>
          </content>
       </ScrollPane>
-      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="250.0" prefHeight="100.0" prefWidth="238.0" spacing="4.0" />
+      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="220.0" prefHeight="57.0" prefWidth="238.0" spacing="4.0" />
       <VBox fx:id="vBoxLabel" alignment="CENTER" layoutX="472.0" layoutY="387.0" prefHeight="200.0" prefWidth="115.0" spacing="35.0" styleClass="vBoxLabel">
          <children>
             <Label text="Ressources" />
@@ -69,5 +69,14 @@
             <HBox fx:id="hBoxPoints1" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
          </content>
       </ScrollPane>
+      <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="661.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/icons.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="150.0" minX="900.0" minY="150.0" width="150.0" />
+         </viewport>
+      </ImageView>
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="689.0" layoutY="359.0" text="0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

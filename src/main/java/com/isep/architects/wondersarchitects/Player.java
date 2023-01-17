@@ -1,6 +1,7 @@
 package com.isep.architects.wondersarchitects;
 
 import com.isep.architects.wondersarchitects.cards.*;
+import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 
@@ -16,6 +17,8 @@ public class Player {
     private Wonder wonder;
 
     private ArrayList<CardsTypes> cards = new ArrayList<>();
+
+    private ArrayList<TokenTypes> conflict = new ArrayList<>();
 
     public Player(String name){
         this.name = name;
@@ -58,7 +61,6 @@ public class Player {
     public boolean sameRessource(int value){
 
         value = value-countGold();
-
 
         CardsTypes type;
 
@@ -145,6 +147,40 @@ public class Player {
 
     public int countGold(){
         return Collections.frequency(cards,CardsTypes.GOLD);
+    }
+
+    public int countRed(){
+        int compteur = 0;
+        for(CardsTypes card : cards){
+            if(card.equals(CardsTypes.RED0) || card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
+                compteur++;
+            }
+        }
+        return compteur;
+    }
+
+    public void removeHornRed(){
+        int horn1 = 0;
+        int horn2 = 0;
+        for(CardsTypes card : cards){
+            if(card.equals(CardsTypes.RED1)){
+                horn1++;
+            }else if(card.equals(CardsTypes.RED2)){
+                horn2++;
+            }
+        }
+        for(int i = 0; i<horn1;i++){
+            cards.remove(CardsTypes.RED1);
+        }
+        for(int i = 0; i<horn2;i++){
+            cards.remove(CardsTypes.RED2);
+        }
+
+
+    }
+
+    public ArrayList<TokenTypes> getConflict() {
+        return conflict;
     }
 
     public void removeGold(){

@@ -52,6 +52,7 @@ public class Game {
 
     public void createMilitaryToken(){
 
+        militaryTokens.clear();
 
         militaryTokens.add(TokenTypes.PEACE);
         militaryTokens.add(TokenTypes.PEACE);
@@ -86,7 +87,48 @@ public class Game {
     }
 
     public void executeWar(){
-        System.out.println("WAR");
+
+        for(Player player : playerList){
+            int index = playerList.indexOf(player);
+            Player previous;
+            Player next;
+            if(index+1==playerList.size()){
+                next = playerList.get(0);
+            }else {
+                next = playerList.get(index+1);;
+            }
+            if(index-1==-1){
+                previous = playerList.get(playerList.size()-1);
+            }else {
+                previous = playerList.get(index-1);;
+            }
+            if(numberPlayer>2){
+                if(player.countRed()> previous.countRed()){
+                    player.getConflict().add(TokenTypes.CONFLICT);
+                }
+                if(player.countRed()> next.countRed()){
+                    player.getConflict().add(TokenTypes.CONFLICT);
+                }
+            }else {
+                if(player.countRed()>previous.countRed()){
+                    player.getConflict().add(TokenTypes.CONFLICT);
+                }
+                if(player.countRed()>=2*previous.countRed()){
+                    player.getConflict().add(TokenTypes.CONFLICT);
+                }
+            }
+
+        }
+
+        for (Player player : playerList){
+            player.removeHornRed();
+        }
+
+        createMilitaryToken();
+
+
+
+
     }
 
     public boolean allWar(){

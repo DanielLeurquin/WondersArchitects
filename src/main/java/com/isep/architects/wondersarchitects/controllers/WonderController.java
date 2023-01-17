@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,6 +38,9 @@ public class WonderController extends Controller{
 
     @FXML
     private ImageView centerPileView, leftPileView, rightPileView;
+
+    @FXML
+    private Label label;
 
     @FXML
     private StackPane sp1,sp2,sp3;
@@ -83,6 +87,7 @@ public class WonderController extends Controller{
     private Rectangle2D compassRect = new Rectangle2D(3*150,1*150,150,150);
     private Rectangle2D tabletRect = new Rectangle2D(5*150,1*150,150,150);
 
+
     //Card Rect
 
     private Rectangle2D woodCard = new Rectangle2D(255*0,378*1,255,378);
@@ -104,10 +109,11 @@ public class WonderController extends Controller{
 
 
     public void loadAll(){
-        loadRessources2(player);
+        loadRessources(player);
         loadWar(parser.getGame().getMilitaryTokens());
         loadWonder(player);
         loadPile();
+        loadConflict();
         Pile[] piles = {centerPile,leftPile,rightPile};
         ImageView[] views = {centerPileView,leftPileView,rightPileView};
         for(int i = 0; i<piles.length;i++){
@@ -123,6 +129,7 @@ public class WonderController extends Controller{
         back.setOnAction(event -> {
             parser.chargeOverview();
         });
+
 
 
         parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -206,9 +213,9 @@ public class WonderController extends Controller{
                                 loadWar(parser.getGame().getMilitaryTokens());
                             }
                             parser.getGame().endTurn();
-                            loadRessources2(player);
+                            loadRessources(player);
                             loadPile();
-                            //loadWonder(player);
+                            loadConflict();
 
 
                         }
@@ -249,107 +256,10 @@ public class WonderController extends Controller{
 
     }
 
+
     public void loadRessources(Player player){
-        /*
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/icons.png"));
-
-
-
-        hBoxProgress.getChildren().clear();
-        hBoxRessource.getChildren().clear();
-        hBoxPoints.getChildren().clear();
-        hBoxMilitary.getChildren().clear();
-
-        for(GreyCards cards : player.getRessources()){
-            ImageView imageView = new ImageView();
-            imageView.setImage(img);
-
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            if(cards.getType().equals(RessourceType.WOOD)){
-                imageView.setViewport(woodRect);
-            }else if(cards.getType().equals(RessourceType.STONE)){
-                imageView.setViewport(stoneRect);
-            }else if(cards.getType().equals(RessourceType.BRICK)){
-                imageView.setViewport(brickRect);
-            }else if(cards.getType().equals(RessourceType.PAPER)){
-                imageView.setViewport(paperRect);
-            }else if(cards.getType().equals(RessourceType.GLASS)){
-                imageView.setViewport(glassRect);
-            }
-            hBoxRessource.getChildren().add(imageView);
-        }
-
-
-        for(YellowCards cards : player.getGold()){
-            ImageView imageView = new ImageView();
-            imageView.setImage(img);
-            imageView.setViewport(goldRect);
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            hBoxRessource.getChildren().add(imageView);
-        }
-
-        for(BlueCards cards : player.getBlue()){
-
-            ImageView imageView = new ImageView();
-            imageView.setImage(img);
-
-            imageView.setFitWidth(45);
-            imageView.setFitHeight(45);
-
-            if(cards.isTwoPoint()){
-                imageView.setViewport(blue2Rect);
-            }else {
-                imageView.setViewport(blue3Rect);
-            }
-            hBoxPoints.getChildren().add(imageView);
-
-        }
-
-        for(GreenCards cards :player.getGreen()){
-            ImageView imageView = new ImageView();
-            imageView.setImage(img);
-
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            if(cards.getType().equals(ScienceType.WHEEL)){
-                imageView.setViewport(wheelRect);
-            }else if(cards.getType().equals(ScienceType.TABLET)){
-                imageView.setViewport(tabletRect);
-            }else if(cards.getType().equals(ScienceType.COMPASS)){
-                imageView.setViewport(compassRect);
-            }
-            hBoxProgress.getChildren().add(imageView);
-        }
-
-        for (RedCards cards : player.getRed()){
-            ImageView imageView = new ImageView();
-            imageView.setImage(img);
-
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            if(cards.getHorns()==0){
-                imageView.setViewport(militaryRect);
-            }else {
-                imageView.setViewport(militaryHornRect);
-            }
-            hBoxMilitary.getChildren().add(imageView);
-        }
-
-
-        scrollP.getStyleClass().add("scroll-pane");
-
-         */
-
-    }
-
-    public void loadRessources2(Player player){
-        Image img = new Image(getClass().getResourceAsStream(
-                "/com/isep/architects/wondersarchitects/img/icons.png"));
-
-
 
         hBoxProgress.getChildren().clear();
         hBoxRessource.getChildren().clear();
@@ -380,10 +290,17 @@ public class WonderController extends Controller{
         scrollP.getStyleClass().add("scroll-pane");
     }
 
+    public void loadConflict(){
+        label.setText(String.valueOf(player.getConflict().size()));
+        label.getStyleClass().add("num-lab");
+    }
+
+
     public void initWonder(Player player){
         this.player = player;
         loadAll();
         drawCard();
+
 
     }
 

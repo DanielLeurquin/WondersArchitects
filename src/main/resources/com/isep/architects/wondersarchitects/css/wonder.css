@@ -13,6 +13,12 @@
 
 }
 
+.num-lab{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: PossumSaltareNF;
+    -fx-font-size : 22;
+}
+
 .stack-pane:hover{
     -fx-border-color: #000000;
     -fx-border-width : 3;
