@@ -16,6 +16,12 @@ public class Pile {
         cards.remove(card);
         return card;
     }
+    public void addMultiple(CardsTypes card, int times){
+        for(int i = 0; i<times;i++){
+            cards.add(card);
+        }
+    }
+
 
     public ArrayList<CardsTypes> getCards() {
         return cards;

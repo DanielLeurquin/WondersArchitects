@@ -5,6 +5,7 @@ import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.*;
+import javafx.scene.control.Tab;
 
 import java.util.*;
 
@@ -26,6 +27,8 @@ public class Game {
 
     private ArrayList<TokenTypes> militaryTokens = new ArrayList<>();
 
+    private ArrayList<TokenTypes> progress = new ArrayList<>();
+
     private Pile centerPile = new Pile();
 
     private Player playerturn;
@@ -46,7 +49,10 @@ public class Game {
         fillCenterPile();
         Collections.shuffle(centerPile.getCards());
 
-
+        for(int i =0; i<14;i++){
+            progress.add(TokenTypes.values()[i]);
+        }
+        Collections.shuffle(progress);
 
     }
 
@@ -157,12 +163,22 @@ public class Game {
     }
 
     public void fillCenterPile(){
-        for(int i = 0; i<200;i++){
+        centerPile.addMultiple(CardsTypes.GOLD,6);
+        centerPile.addMultiple(CardsTypes.STONE,4);
+        centerPile.addMultiple(CardsTypes.BRICK,4);
+        centerPile.addMultiple(CardsTypes.WOOD,4);
+        centerPile.addMultiple(CardsTypes.GLASS,4);
+        centerPile.addMultiple(CardsTypes.PAPER,4);
+        centerPile.addMultiple(CardsTypes.WHEEL,4);
+        centerPile.addMultiple(CardsTypes.COMPASS,4);
+        centerPile.addMultiple(CardsTypes.TABLET,4);
+        centerPile.addMultiple(CardsTypes.BLUE3,4);
+        centerPile.addMultiple(CardsTypes.BLUE2,8);
+        centerPile.addMultiple(CardsTypes.RED0,4);
+        centerPile.addMultiple(CardsTypes.RED2,2);
+        centerPile.addMultiple(CardsTypes.RED1,4);
 
-            centerPile.getCards().add(CardsTypes.GOLD);
-
-
-        }
+        Collections.shuffle(centerPile.getCards());
 
     }
 
@@ -213,5 +229,9 @@ public class Game {
 
     public double getMultiplier() {
         return multiplier;
+    }
+
+    public ArrayList<TokenTypes> getProgress() {
+        return progress;
     }
 }

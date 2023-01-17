@@ -29,22 +29,22 @@ public class Babylon extends Wonder{
     }
 
     public void fillPile(){
-        for(int i = 0; i<3;i++){
-            pile.getCards().add(CardsTypes.WOOD);
-            pile.getCards().add(CardsTypes.STONE);
-            pile.getCards().add(CardsTypes.BLUE2);
-            pile.getCards().add(CardsTypes.PAPER);
-            pile.getCards().add(CardsTypes.GLASS);
-            pile.getCards().add(CardsTypes.GOLD);
-            pile.getCards().add(CardsTypes.BLUE2);
-            pile.getCards().add(CardsTypes.BLUE3);
-            pile.getCards().add(CardsTypes.WHEEL);
-            pile.getCards().add(CardsTypes.TABLET);
-            pile.getCards().add(CardsTypes.COMPASS);
-            pile.getCards().add(CardsTypes.RED0);
-            pile.getCards().add(CardsTypes.RED1);
-            pile.getCards().add(CardsTypes.RED2);
-        }
+        pile.addMultiple(CardsTypes.GOLD,3);
+        pile.addMultiple(CardsTypes.STONE,1);
+        pile.addMultiple(CardsTypes.BRICK,2);
+        pile.addMultiple(CardsTypes.WOOD,2);
+        pile.addMultiple(CardsTypes.GLASS,2);
+        pile.addMultiple(CardsTypes.PAPER,2);
+        pile.addMultiple(CardsTypes.WHEEL,2);
+        pile.addMultiple(CardsTypes.COMPASS,2);
+        pile.addMultiple(CardsTypes.TABLET,1);
+        pile.addMultiple(CardsTypes.BLUE3,2);
+        pile.addMultiple(CardsTypes.BLUE2,2);
+        pile.addMultiple(CardsTypes.RED0,2);
+        pile.addMultiple(CardsTypes.RED2,1);
+        pile.addMultiple(CardsTypes.RED1,1);
+
+
         Collections.shuffle(pile.getCards());
     }
 }

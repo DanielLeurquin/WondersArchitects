@@ -27,43 +27,38 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WonderController extends Controller{
 
     @FXML
     private Button back, closeButton;
-
     @FXML
     private ImageView wonderStage1, wonderStage2, wonderStage3, wonderStage4, wonderStage5;
-
     @FXML
     private ImageView centerPileView, leftPileView, rightPileView;
-
     @FXML
     private Label label;
-
     @FXML
     private StackPane sp1,sp2,sp3;
-
     @FXML
     private HBox hBoxRessource, hBoxProgress, hBoxMilitary, hBoxWar , hBoxPoints;
-
     @FXML
     private ScrollPane scrollP;
+    @FXML
+    private VBox vBoxLabel, progressOverlay;
 
     @FXML
-    private VBox vBoxLabel;
+    private ImageView pt1,pt2,pt3,pt4;
 
     @FXML
     private AnchorPane ap, overlayAp;
-
     private GuiParser parser;
-
     private Player player;
-
     private Pile centerPile,leftPile,rightPile;
-
     private double multiplier;
+
+
 
     //symbol Rect
     private Rectangle2D woodRect = new Rectangle2D(0,0,150,150);
@@ -74,15 +69,10 @@ public class WonderController extends Controller{
     private Rectangle2D goldRect = new Rectangle2D(750,0,150,150);
     private Rectangle2D peaceRect = new Rectangle2D(1350,150,150,150);
     private Rectangle2D warRect = new Rectangle2D(1050,150,150,150);
-
     private Rectangle2D blue2Rect = new Rectangle2D(6*150,0,150,150);
-
     private Rectangle2D blue3Rect = new Rectangle2D(7*150,0,150,150);
-
     private Rectangle2D militaryHornRect = new Rectangle2D(0*150,1*150,150,150);
-
     private Rectangle2D militaryRect = new Rectangle2D(1*150,1*150,150,150);
-
     private Rectangle2D wheelRect = new Rectangle2D(4*150,1*150,150,150);
     private Rectangle2D compassRect = new Rectangle2D(3*150,1*150,150,150);
     private Rectangle2D tabletRect = new Rectangle2D(5*150,1*150,150,150);
@@ -114,6 +104,7 @@ public class WonderController extends Controller{
         loadWonder(player);
         loadPile();
         loadConflict();
+        loadProgressToken();
         Pile[] piles = {centerPile,leftPile,rightPile};
         ImageView[] views = {centerPileView,leftPileView,rightPileView};
         for(int i = 0; i<piles.length;i++){
@@ -131,11 +122,12 @@ public class WonderController extends Controller{
         });
 
         closeButton.setOnAction(event -> {
+            ap.setDisable(false);
             overlayAp.setVisible(false);
             overlayAp.setDisable(true);
+            progressOverlay.setVisible(false);
+            progressOverlay.setDisable(true);
         });
-
-
 
         parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -155,10 +147,6 @@ public class WonderController extends Controller{
                 }
             }
         });
-
-
-
-
 
     }
 
@@ -261,6 +249,41 @@ public class WonderController extends Controller{
 
     }
 
+    public void loadProgressToken(){
+        HashMap<TokenTypes,int[]> coord = new HashMap<>();
+        coord.put(TokenTypes.SCIENCE, new int[]{0, 1});
+        coord.put(TokenTypes.POLITICS, new int[]{0, 2});
+        coord.put(TokenTypes.URBANISM, new int[]{0, 3});
+        coord.put(TokenTypes.JEWELLERY, new int[]{1, 0});
+        coord.put(TokenTypes.ECONOMY, new int[]{1, 1});
+        coord.put(TokenTypes.DECOR, new int[]{1, 2});
+        coord.put(TokenTypes.ARCHITECTURE, new int[]{1, 3});
+        coord.put(TokenTypes.STRATEGY, new int[]{2, 0});
+        coord.put(TokenTypes.TACTICS, new int[]{2, 1});
+        coord.put(TokenTypes.PROPAGANDA, new int[]{2, 2});
+        coord.put(TokenTypes.EDUCATION, new int[]{3, 0});
+        coord.put(TokenTypes.CULTURE, new int[]{3, 1});
+        coord.put(TokenTypes.ENGINEERING, new int[]{3, 2});
+        coord.put(TokenTypes.CRAFTS, new int[]{3, 3});
+
+        Image image = new Image(getClass().getResourceAsStream(
+                "/com/isep/architects/wondersarchitects/img/progress.png"));
+        ArrayList<TokenTypes> progress = parser.getGame().getProgress();
+
+        pt1.setImage(image);
+        pt2.setImage(image);
+        pt3.setImage(image);
+        pt4.setImage(image);
+
+        pt1.setViewport(new Rectangle2D(208*coord.get(progress.get(0))[0],
+                213*coord.get(progress.get(0))[1],208,213));
+        pt2.setViewport(new Rectangle2D(208*coord.get(progress.get(1))[0],
+                213*coord.get(progress.get(1))[1],208,213));
+        pt3.setViewport(new Rectangle2D(208*coord.get(progress.get(2))[0],
+                213*coord.get(progress.get(2))[1],208,213));
+
+        pt4.setViewport(new Rectangle2D(0,0,208,213));
+    }
 
     public void loadRessources(Player player){
         Image img = new Image(getClass().getResourceAsStream(
@@ -299,7 +322,6 @@ public class WonderController extends Controller{
         label.setText(String.valueOf(player.getConflict().size()));
         label.getStyleClass().add("num-lab");
     }
-
 
     public void initWonder(Player player){
         this.player = player;
