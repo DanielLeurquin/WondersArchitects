@@ -11,7 +11,8 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
-      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0" prefHeight="467.0" prefWidth="300.0">
+      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="87.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0"
+                  prefHeight="467.0" prefWidth="300.0">
          <children>
             <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
@@ -51,7 +52,7 @@
             </HBox>
          </content>
       </ScrollPane>
-      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="220.0" prefHeight="57.0" prefWidth="238.0" spacing="4.0" />
+      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="250.0" prefHeight="100.0" prefWidth="238.0" spacing="4.0" />
       <VBox fx:id="vBoxLabel" alignment="CENTER" layoutX="472.0" layoutY="387.0" prefHeight="200.0" prefWidth="115.0" spacing="35.0" styleClass="vBoxLabel">
          <children>
             <Label text="Ressources" />
@@ -78,5 +79,10 @@
          </viewport>
       </ImageView>
       <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="689.0" layoutY="359.0" text="0" textAlignment="CENTER" />
+      <AnchorPane fx:id="overlayAp" disable="true" layoutX="110.0" layoutY="110.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" visible="false">
+         <children>
+            <Button fx:id="closeButton" layoutX="629.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Close" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

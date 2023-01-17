@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class WonderController extends Controller{
 
     @FXML
-    private Button back;
+    private Button back, closeButton;
 
     @FXML
     private ImageView wonderStage1, wonderStage2, wonderStage3, wonderStage4, wonderStage5;
@@ -55,7 +55,7 @@ public class WonderController extends Controller{
     private VBox vBoxLabel;
 
     @FXML
-    private AnchorPane ap;
+    private AnchorPane ap, overlayAp;
 
     private GuiParser parser;
 
@@ -128,6 +128,11 @@ public class WonderController extends Controller{
         this.multiplier = parser.getGame().getMultiplier();
         back.setOnAction(event -> {
             parser.chargeOverview();
+        });
+
+        closeButton.setOnAction(event -> {
+            overlayAp.setVisible(false);
+            overlayAp.setDisable(true);
         });
 
 
