@@ -182,6 +182,17 @@ public class Game {
 
     }
 
+    public void catMove(Player player){
+        for(Player p : playerList){
+            if(p.equals(player)){
+                p.setCat(true);
+            }else {
+                p.setCat(false);
+            }
+        }
+
+    }
+
     public void startTurn(){
         int value = 0;
     }

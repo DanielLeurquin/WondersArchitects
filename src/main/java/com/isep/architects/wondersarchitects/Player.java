@@ -14,11 +14,15 @@ public class Player {
 
     private String name;
 
+    private boolean cat = false;
+
     private Wonder wonder;
 
     private ArrayList<CardsTypes> cards = new ArrayList<>();
 
     private ArrayList<TokenTypes> conflict = new ArrayList<>();
+
+    private ArrayList<TokenTypes> progress = new ArrayList<>();
 
     public Player(String name){
         this.name = name;
@@ -127,6 +131,38 @@ public class Player {
 
     }
 
+    public boolean sameGreen(){
+        CardsTypes type = null;
+        if(Collections.frequency(cards,CardsTypes.WHEEL)>=2){
+            type = CardsTypes.WHEEL;
+        }else if(Collections.frequency(cards,CardsTypes.TABLET)>=2){
+            type = CardsTypes.TABLET;
+        }else if(Collections.frequency(cards,CardsTypes.COMPASS)>=2){
+            type = CardsTypes.COMPASS;
+        }
+        if(type!=null){
+            for(int i = 0; i<2;i++){
+                cards.remove(type);
+            }
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    public boolean differentGreen(){
+        if(cards.contains(CardsTypes.WHEEL) &&
+                cards.contains(CardsTypes.TABLET) && cards.contains(CardsTypes.COMPASS)){
+            cards.remove(CardsTypes.WHEEL);
+            cards.remove(CardsTypes.TABLET);
+            cards.remove(CardsTypes.COMPASS);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
     public String getName() {
         return name;
@@ -178,11 +214,6 @@ public class Player {
 
 
     }
-
-    public ArrayList<TokenTypes> getConflict() {
-        return conflict;
-    }
-
     public void removeGold(){
         int lim = countGold();
         for(int i = 0;i<lim;i++){
@@ -190,4 +221,19 @@ public class Player {
         }
     }
 
+    public ArrayList<TokenTypes> getConflict() {
+        return conflict;
+    }
+
+    public ArrayList<TokenTypes> getProgress() {
+        return progress;
+    }
+
+    public boolean isCat() {
+        return cat;
+    }
+
+    public void setCat(boolean cat) {
+        this.cat = cat;
+    }
 }

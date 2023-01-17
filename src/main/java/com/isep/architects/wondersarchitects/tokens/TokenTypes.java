@@ -23,5 +23,14 @@ public enum TokenTypes {
     PEACE;
 
 
+    public int getIndex(){
+        for(int i = 0; i<TokenTypes.values().length;i++){
+            if(TokenTypes.values()[i].equals(this)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
 
 }

@@ -9,99 +9,127 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
+<AnchorPane styleClass="css\wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
-      <AnchorPane fx:id="ap" layoutX="80.0" layoutY="97.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0" prefHeight="467.0" prefWidth="300.0">
+      <AnchorPane fx:id="ap" layoutX="-1.0" layoutY="-1.0" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css">
          <children>
-            <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="wonderStage4" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="wonderStage1" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="wonderStage2" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
-      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="115.0" text="Back" />
-      <StackPane fx:id="sp1" layoutX="646.0" layoutY="50.0">
-         <children>
-            <ImageView fx:id="centerPileView" fitHeight="150.0" fitWidth="111.0" layoutX="674.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </StackPane>
-      <StackPane fx:id="sp2" layoutX="473.0" layoutY="225.0">
-         <children>
-            <ImageView fx:id="leftPileView" fitHeight="150.0" fitWidth="111.0" layoutX="590.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </StackPane>
-      <StackPane fx:id="sp3" layoutX="819.0" layoutY="225.0">
-         <children>
-            <ImageView fx:id="rightPileView" fitHeight="150.0" fitWidth="111.0" layoutX="760.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </StackPane>
-      <ScrollPane fx:id="scrollP" layoutX="587.0" layoutY="387.0" prefHeight="199.0" prefWidth="335.0" vbarPolicy="NEVER">
-         <content>
-            <HBox>
+            <AnchorPane layoutX="80.0" layoutY="97.0" maxHeight="467.0" maxWidth="300.0" minHeight="467.0" minWidth="300.0" prefHeight="467.0" prefWidth="300.0">
                <children>
-                  <VBox VBox.vgrow="ALWAYS">
+                  <ImageView fx:id="wonderStage5" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="wonderStage3" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="wonderStage4" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="wonderStage1" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="wonderStage2" fitHeight="440.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="115.0" text="Back" />
+            <StackPane fx:id="sp1" layoutX="646.0" layoutY="50.0">
+               <children>
+                  <ImageView fx:id="centerPileView" fitHeight="150.0" fitWidth="111.0" layoutX="674.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="sp2" layoutX="473.0" layoutY="225.0">
+               <children>
+                  <ImageView fx:id="leftPileView" fitHeight="150.0" fitWidth="111.0" layoutX="590.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="sp3" layoutX="819.0" layoutY="225.0">
+               <children>
+                  <ImageView fx:id="rightPileView" fitHeight="150.0" fitWidth="111.0" layoutX="760.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <ScrollPane fx:id="scrollP" layoutX="587.0" layoutY="387.0" prefHeight="199.0" prefWidth="335.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox>
                      <children>
-                        <HBox fx:id="hBoxRessource" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
-                        <HBox fx:id="hBoxProgress" maxHeight="66.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
-                        <HBox fx:id="hBoxMilitary" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <HBox fx:id="hBoxRessource" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
+                              <HBox fx:id="hBoxProgress" maxHeight="66.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
+                              <HBox fx:id="hBoxMilitary" maxHeight="65.0" minHeight="65.0" prefHeight="65.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
+               </content>
+            </ScrollPane>
+            <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="220.0" prefHeight="57.0" prefWidth="238.0" spacing="4.0" />
+            <VBox fx:id="vBoxLabel" alignment="CENTER" layoutX="472.0" layoutY="387.0" prefHeight="200.0" prefWidth="115.0" spacing="35.0" styleClass="vBoxLabel">
+               <children>
+                  <Label text="Ressources" />
+                  <Label text="Progress" />
+                  <Label text="Military" />
+               </children>
+            </VBox>
+            <ScrollPane layoutX="781.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="hBoxPoints" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
+               </content>
+            </ScrollPane>
+            <ScrollPane layoutX="435.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0">
+               <content>
+                  <HBox fx:id="hBoxToken" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
+               </content>
+            </ScrollPane>
+            <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="661.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icons.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D height="150.0" minX="900.0" minY="150.0" width="150.0" />
+               </viewport>
+            </ImageView>
+            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="689.0" layoutY="359.0" text="0" textAlignment="CENTER" />
+            <HBox alignment="CENTER" layoutX="141.0" layoutY="26.0" prefHeight="65.0" prefWidth="277.0">
+               <children>
+                  <ImageView fx:id="pt1" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="pt2" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="pt3" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="pt4" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-         </content>
-      </ScrollPane>
-      <HBox fx:id="hBoxWar" alignment="CENTER" layoutX="578.0" layoutY="220.0" prefHeight="57.0" prefWidth="238.0" spacing="4.0" />
-      <VBox fx:id="vBoxLabel" alignment="CENTER" layoutX="472.0" layoutY="387.0" prefHeight="200.0" prefWidth="115.0" spacing="35.0" styleClass="vBoxLabel">
-         <children>
-            <Label text="Ressources" />
-            <Label text="Progress" />
-            <Label text="Military" />
+            <StackPane fx:id="eyeSp" disable="true" layoutX="685.0" layoutY="18.0" styleClass="eye-pane" visible="false">
+               <children>
+                  <ImageView fx:id="eye" fitHeight="27.0" fitWidth="45.0" layoutX="688.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/eye.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <ImageView fx:id="catView" fitHeight="116.0" fitWidth="102.0" layoutX="824.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/progress.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D height="213.0" minX="624.0" minY="426.0" width="208.0" />
+               </viewport>
+            </ImageView>
          </children>
-      </VBox>
-      <ScrollPane layoutX="781.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0" vbarPolicy="NEVER">
-         <content>
-            <HBox fx:id="hBoxPoints" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="435.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0">
-         <content>
-            <HBox fx:id="hBoxPoints1" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
-         </content>
-      </ScrollPane>
-      <ImageView fitHeight="65.0" fitWidth="69.0" layoutX="661.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/icons.png" />
-         </image>
-         <viewport>
-            <Rectangle2D height="150.0" minX="900.0" minY="150.0" width="150.0" />
-         </viewport>
-      </ImageView>
-      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="689.0" layoutY="359.0" text="0" textAlignment="CENTER" />
-      <AnchorPane fx:id="overlayAp" disable="true" layoutX="110.0" layoutY="110.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" visible="false">
+      </AnchorPane>
+      <AnchorPane fx:id="overlayAp" layoutX="114.0" layoutY="100.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" stylesheets="@css/wonder.css">
          <children>
-            <Button fx:id="closeButton" layoutX="629.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Close" />
-            <VBox fx:id="progressOverlay" alignment="CENTER" layoutX="107.0" layoutY="59.0" prefHeight="292.0" prefWidth="529.0">
+            <VBox fx:id="progressOverlay" alignment="CENTER" disable="true" layoutX="107.0" layoutY="59.0" prefHeight="292.0" prefWidth="529.0" visible="false">
                <children>
                   <Label text="Please chose a progress Token" />
                   <HBox alignment="CENTER" fillHeight="false" layoutX="107.0" layoutY="78.0" prefHeight="246.0" prefWidth="529.0" spacing="20.0" VBox.vgrow="NEVER">
                      <children>
-                        <StackPane styleClass="stack-pane">
+                        <StackPane fx:id="ptSp1" styleClass="stack-pane">
                            <children>
                               <ImageView fx:id="progress1Img" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane styleClass="stack-pane">
+                        <StackPane fx:id="ptSp2" styleClass="stack-pane">
                            <children>
                               <ImageView fx:id="progress2Img" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane styleClass="stack-pane">
+                        <StackPane fx:id="ptSp3" styleClass="stack-pane">
                            <children>
                               <ImageView fx:id="progress3Img" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane styleClass="stack-pane">
+                        <StackPane fx:id="ptSp4" styleClass="stack-pane">
                            <children>
                               <ImageView fx:id="progress4Img" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -110,15 +138,32 @@
                   </HBox>
                </children>
             </VBox>
+            <VBox fx:id="overlayPile" alignment="CENTER" layoutX="68.0" layoutY="35.0" prefHeight="316.0" prefWidth="607.0">
+               <children>
+                  <Label fx:id="titleLab" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="275.0" text="Title" textAlignment="CENTER" />
+                  <Label fx:id="titleLab1" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="20.0" prefHeight="27.0" prefWidth="275.0" text="Please draw another card" textAlignment="CENTER" />
+                  <HBox alignment="CENTER" fillHeight="false" layoutX="107.0" layoutY="78.0" prefHeight="238.0" prefWidth="563.0" spacing="20.0" VBox.vgrow="NEVER">
+                     <children>
+                        <StackPane fx:id="overlaySpl" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="overlayPilel" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="overlaySpc" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="overlayPilec" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="overlaySpr" layoutX="115.0" layoutY="29.0" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="overlayPiler" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
-      <HBox alignment="CENTER" layoutX="141.0" layoutY="26.0" prefHeight="65.0" prefWidth="277.0">
-         <children>
-            <ImageView fx:id="pt1" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="pt2" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="pt3" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="pt4" fitHeight="65.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </HBox>
    </children>
 </AnchorPane>
