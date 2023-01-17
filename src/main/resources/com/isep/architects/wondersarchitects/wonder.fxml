@@ -107,7 +107,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="overlayAp" layoutX="114.0" layoutY="100.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" stylesheets="@css/wonder.css">
+      <AnchorPane fx:id="overlayAp" disable="true" layoutX="114.0" layoutY="100.0" prefHeight="401.0" prefWidth="742.0" style="-fx-background-color: dec6b1; -fx-border-color: #000000;" stylesheets="@css/wonder.css" visible="false">
          <children>
             <VBox fx:id="progressOverlay" alignment="CENTER" disable="true" layoutX="107.0" layoutY="59.0" prefHeight="292.0" prefWidth="529.0" visible="false">
                <children>
@@ -138,25 +138,34 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="overlayPile" alignment="CENTER" layoutX="68.0" layoutY="35.0" prefHeight="316.0" prefWidth="607.0">
+            <VBox fx:id="overlayPile" alignment="CENTER" disable="true" layoutX="68.0" layoutY="35.0" prefHeight="316.0" prefWidth="607.0" visible="false">
                <children>
                   <Label fx:id="titleLab" alignment="CENTER" contentDisplay="CENTER" prefHeight="49.0" prefWidth="275.0" text="Title" textAlignment="CENTER" />
-                  <Label fx:id="titleLab1" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="20.0" prefHeight="27.0" prefWidth="275.0" text="Please draw another card" textAlignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="20.0" prefHeight="27.0" prefWidth="275.0" text="Please draw another card" textAlignment="CENTER" />
                   <HBox alignment="CENTER" fillHeight="false" layoutX="107.0" layoutY="78.0" prefHeight="238.0" prefWidth="563.0" spacing="20.0" VBox.vgrow="NEVER">
                      <children>
                         <StackPane fx:id="overlaySpl" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
                            <children>
-                              <ImageView fx:id="overlayPilel" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="overlayPilel" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/cards.png" />
+                                 </image></ImageView>
                            </children>
                         </StackPane>
                         <StackPane fx:id="overlaySpc" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
                            <children>
-                              <ImageView fx:id="overlayPilec" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="overlayPilec" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/cards.png" />
+                                 </image></ImageView>
                            </children>
                         </StackPane>
                         <StackPane fx:id="overlaySpr" layoutX="115.0" layoutY="29.0" prefHeight="200.0" prefWidth="117.0" styleClass="stack-pane">
                            <children>
-                              <ImageView fx:id="overlayPiler" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="overlayPiler" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/cards.png" />
+                                 </image></ImageView>
                            </children>
                         </StackPane>
                      </children>

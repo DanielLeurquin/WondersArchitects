@@ -1,5 +1,7 @@
 package com.isep.architects.wondersarchitects.tokens;
 
+import com.isep.architects.wondersarchitects.cards.CardsTypes;
+
 public enum TokenTypes {
     //progress
     URBANISM,
@@ -31,6 +33,26 @@ public enum TokenTypes {
         }
         return 0;
     }
+
+    public boolean pileEffect(CardsTypes card){
+        if(this.getIndex()==0){
+            return card.equals(CardsTypes.WOOD) || card.equals(CardsTypes.BRICK);
+        }else if(this.getIndex()==1){
+            return card.equals(CardsTypes.PAPER) || card.equals(CardsTypes.GLASS);
+        }else if(this.getIndex()==2){
+            return card.equals(CardsTypes.STONE) || card.equals(CardsTypes.GOLD);
+        }else if(this.getIndex()==3){
+            return card.equals(CardsTypes.WHEEL) || card.equals(CardsTypes.TABLET) ||
+                    card.equals(CardsTypes.COMPASS);
+        }else if(this.getIndex()==4){
+            return card.equals(CardsTypes.RED0) || card.equals(CardsTypes.RED1) ||
+                    card.equals(CardsTypes.RED2);
+        }else {
+            return false;
+        }
+    }
+
+
 
 
 }

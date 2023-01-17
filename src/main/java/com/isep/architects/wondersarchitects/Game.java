@@ -197,14 +197,18 @@ public class Game {
         int value = 0;
     }
 
-    public void endTurn(){
-        for(int i = 1; i<playerList.size();i++){
-            playerList.set(i-1,playerList.get(i));
-        }
+    public int buildStage(){
         ArrayList<WonderStage> stageToBuild = playerturn.buildStage();
         for(WonderStage stage : stageToBuild){
             inputParser.animationStage(stage);
             stage.setBuilt(true);
+        }
+        return stageToBuild.size();
+    }
+
+    public void endTurn(){
+        for(int i = 1; i<playerList.size();i++){
+            playerList.set(i-1,playerList.get(i));
         }
         playerList.set(playerList.size()-1,playerturn);
         playerturn = playerList.get(0);

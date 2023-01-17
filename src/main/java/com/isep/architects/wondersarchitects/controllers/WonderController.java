@@ -27,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class WonderController extends Controller{
@@ -38,18 +39,19 @@ public class WonderController extends Controller{
     @FXML
     private ImageView centerPileView, leftPileView, rightPileView;
     @FXML
-    private Label label;
+    private Label label,titleLab;
     @FXML
-    private StackPane sp1,sp2,sp3, ptSp1,ptSp2,ptSp3,ptSp4, eyeSp;
+    private StackPane sp1,sp2,sp3, ptSp1,ptSp2,ptSp3,ptSp4, eyeSp,overlaySpl,overlaySpc,overlaySpr;
     @FXML
     private HBox hBoxRessource, hBoxProgress, hBoxMilitary, hBoxWar , hBoxPoints, hBoxToken;
     @FXML
     private ScrollPane scrollP;
     @FXML
-    private VBox progressOverlay;
+    private VBox progressOverlay, overlayPile;
 
     @FXML
-    private ImageView pt1,pt2,pt3,pt4, progress1Img,progress2Img,progress3Img,progress4Img, catView;
+    private ImageView pt1,pt2,pt3,pt4, progress1Img,progress2Img,progress3Img,progress4Img,
+            catView, overlayPilel,overlayPilec,overlayPiler;
 
     @FXML
     private AnchorPane ap, overlayAp;
@@ -98,6 +100,10 @@ public class WonderController extends Controller{
     private WonderStageAnimation anim;
 
     private HashMap<TokenTypes,int[]> coordToken = new HashMap<>();
+
+    private CardsTypes drawn = null;
+
+    int archiCount = 0;
 
     public void loadAll(){
         loadRessources(player);
@@ -152,17 +158,54 @@ public class WonderController extends Controller{
             }
         });
 
-        StackPane[] listSp = {ptSp1,ptSp2,ptSp3,ptSp4};
+        StackPane[] listSpPile = {overlaySpl,overlaySpc,overlaySpr};
+
+        for(int j = 0;j<listSpPile.length;j++){
+            int finalJ = j;
+            listSpPile[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Pile[] listPile = {leftPile,centerPile,rightPile};
+                    CardsTypes card = listPile[finalJ].drawCard(parser.getGame().getPlayerturn());
+
+
+                    if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
+                        parser.getGame().evaluateWar(card);
+                        loadWar(parser.getGame().getMilitaryTokens());
+                    }else if(card.equals(CardsTypes.BLUE2)){
+                        catView.setVisible(true);
+                        parser.getGame().catMove(player);
+                    }
+                    disableOverlay();
+                    drawn = null;
+                    checkFinish(drawn);
+                }
+            });
+        }
+
+
+        //draw progress token
+        StackPane[] listSpPt = {ptSp1,ptSp2,ptSp3,ptSp4};
         for(int i = 0; i<4;i++){
             int finalI = i;
-            listSp[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            listSpPt[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                         player.getProgress().add(parser.getGame().getProgress().get(finalI));
                         parser.getGame().getProgress().remove(finalI);
                         disableOverlay();
-                        checkFinish();
+                        TokenTypes lastprogress = player.getProgress().get(player.getProgress().size()-1);
+                        if(lastprogress.equals(TokenTypes.TACTICS)){
+                            player.getCards().add(CardsTypes.RED0);
+                            player.getCards().add(CardsTypes.RED0);
+                        }
+                        if (lastprogress.equals(TokenTypes.SCIENCE)) {
+                            checkFinish(null);
+                        }else {
+                            checkFinish(drawn);
+                        }
+
                     }
 
                 }
@@ -232,7 +275,6 @@ public class WonderController extends Controller{
 
         StackPane[] list = {sp1,sp2,sp3};
         Pile[] piles = {centerPile,leftPile,rightPile};
-        ImageView[] views = {centerPileView,leftPileView,rightPileView};
 
         for(int i = 0; i<list.length;i++){
 
@@ -244,6 +286,12 @@ public class WonderController extends Controller{
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                         if(player.equals(parser.getGame().getPlayerturn())){
                             CardsTypes card = piles[finalI].drawCard(player);
+                            if(card.equals(CardsTypes.GOLD) &&
+                                    player.getProgress().contains(TokenTypes.ECONOMY)){
+                                player.getCards().add(CardsTypes.GOLD);
+                            }
+
+                            drawn = card;
                             if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
                                 parser.getGame().evaluateWar(card);
                                 loadWar(parser.getGame().getMilitaryTokens());
@@ -251,7 +299,8 @@ public class WonderController extends Controller{
                                 catView.setVisible(true);
                                 parser.getGame().catMove(player);
                             }
-                            checkFinish();
+
+                            checkFinish(card);
 
 
 
@@ -475,10 +524,33 @@ public class WonderController extends Controller{
 
     }
 
-    public void checkFinish(){
-
+    public void checkFinish(CardsTypes card){
+        boolean pileOver = false;
 
         Player playerturn = parser.getGame().getPlayerturn();
+
+
+        if(playerturn.getProgress().contains(TokenTypes.ARCHITECTURE)){
+            archiCount+= parser.getGame().buildStage();
+            if(archiCount>0){
+                pileOver = true;
+                titleLab.setText("ARCHITECTURE");
+                archiCount--;
+            }
+        }
+
+
+        if(card!=null){
+            for(TokenTypes token : playerturn.getProgress()){
+                if(token.pileEffect(card)){
+                    pileOver = true;
+                    titleLab.setText(token.toString());
+                    break;
+                }
+            }
+        }
+
+
         if(playerturn.sameGreen() || playerturn.differentGreen()){
             ap.setDisable(true);
             overlayAp.setDisable(false);
@@ -490,7 +562,24 @@ public class WonderController extends Controller{
 
 
 
+        }else if(pileOver){
+            ap.setDisable(true);
+            overlayAp.setDisable(false);
+            overlayAp.setVisible(true);
+            overlayPile.setDisable(false);
+            overlayPile.setVisible(true);
+
+            loadCardImage(leftPile,overlayPilel);
+            loadCardImage(rightPile,overlayPiler);
+            if(playerturn.isCat()){
+                loadCardImage(centerPile,overlayPilec);
+            }else {
+                overlayPilec.setViewport(new Rectangle2D(0,0,255,378));
+            }
+
+
         }else {
+            parser.getGame().buildStage();
             parser.getGame().endTurn();
             loadRessources(player);
             loadPile();
@@ -498,6 +587,7 @@ public class WonderController extends Controller{
             loadProgressToken(new ImageView[]{pt1,pt2,pt3,pt4});
             eyeSp.setDisable(true);
             eyeSp.setVisible(false);
+
         }
 
 
@@ -510,6 +600,8 @@ public class WonderController extends Controller{
         overlayAp.setDisable(true);
         progressOverlay.setVisible(false);
         progressOverlay.setDisable(true);
+        overlayPile.setVisible(false);
+        overlayPile.setDisable(true);
     }
 
     public void startAnimation(WonderStage stage){

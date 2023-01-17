@@ -26,6 +26,7 @@ public class Player {
 
     public Player(String name){
         this.name = name;
+
     }
 
     public ArrayList<WonderStage> buildStage(){
@@ -35,7 +36,9 @@ public class Player {
                 if(stage.getNeededNumBuild()[0] != 0){
                     boolean value = true;
                     for(int i = 0; i<stage.getNeededNumBuild().length;i++){
-                        value = value && wonder.getStageFromNum(stage.getNeededNumBuild()[i]).isBuilt();
+                        value = value &&
+                                (wonder.getStageFromNum(stage.getNeededNumBuild()[i]).isBuilt() ||
+                                        stageToBuild.contains(wonder.getStageFromNum(stage.getNeededNumBuild()[i])));
                     }
                     if(value){
                         if(checkCondition(stage)){
@@ -55,7 +58,22 @@ public class Player {
     }
 
     public boolean checkCondition(WonderStage stage){
-        if(stage.isSame()){
+        if(progress.contains(TokenTypes.ENGINEERING)){
+            ArrayList<CardsTypes> ressources = new ArrayList<>();
+            for(CardsTypes c : cards){
+                if(c.equals(CardsTypes.WOOD) || c.equals(CardsTypes.STONE) || c.equals(CardsTypes.BRICK) ||
+                        c.equals(CardsTypes.PAPER) || c.equals(CardsTypes.GLASS) || c.equals(CardsTypes.GOLD)){
+                    ressources.add(c);
+                }
+            }
+
+            if(ressources.size()>= stage.getValue()){
+                cards.removeAll(ressources);
+                return true;
+            }else {
+                return false;
+            }
+        } else if(stage.isSame()){
             return sameRessource(stage.getValue());
         }else {
             return differentRessource(stage.getValue());
