@@ -52,6 +52,7 @@ public class Game {
         for(int i =0; i<14;i++){
             progress.add(TokenTypes.values()[i]);
         }
+        progress.add(TokenTypes.CULTURE);
         Collections.shuffle(progress);
 
     }
@@ -217,6 +218,10 @@ public class Game {
                     inputParser.checkFinish(playerList.get(1).getWonder().getPile().drawCard(playerturn));
                     endTurn();
 
+                }else if(stage.getWonder().getType().equals(WonderType.ALEXANDRIA)){
+
+                    inputParser.chargeAlexOverlay();
+                    endTurn();
                 }
             }
         }

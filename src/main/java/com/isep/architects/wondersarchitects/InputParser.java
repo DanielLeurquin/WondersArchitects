@@ -16,4 +16,6 @@ public interface InputParser {
     void chooseProgress();
 
     void checkFinish(CardsTypes drawCard);
+
+    void chargeAlexOverlay();
 }

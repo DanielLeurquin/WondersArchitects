@@ -5,13 +5,13 @@ import com.isep.architects.wondersarchitects.GuiParser;
 import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
-import com.isep.architects.wondersarchitects.pile.SidePile;
 import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,7 +27,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class WonderController extends Controller{
@@ -47,7 +46,7 @@ public class WonderController extends Controller{
     @FXML
     private ScrollPane scrollP;
     @FXML
-    private VBox progressOverlay, overlayPile;
+    private VBox progressOverlay, overlayPile, alexOverlay;
 
     @FXML
     private ImageView pt1,pt2,pt3,pt4, progress1Img,progress2Img,progress3Img,progress4Img,
@@ -59,6 +58,12 @@ public class WonderController extends Controller{
     private Player player;
     private Pile centerPile,leftPile,rightPile;
     private double multiplier;
+
+    private Image imageCard = new Image(getClass().getResourceAsStream(
+            "/com/isep/architects/wondersarchitects/img/cards.png"));
+
+    private Image imageIcons = new Image(getClass().getResourceAsStream(
+            "/com/isep/architects/wondersarchitects/img/icons.png"));
 
 
 
@@ -108,6 +113,8 @@ public class WonderController extends Controller{
     private boolean progressPower = false;
 
     private ArrayList<TokenTypes> executedProgress = new ArrayList<>();
+
+    private HashMap<Pile,ImageView> alexMap = new HashMap<>();
 
     public void loadAll(){
         loadRessources(player);
@@ -246,8 +253,7 @@ public class WonderController extends Controller{
         double width = 255;
         double height = 378;
 
-        Image image = new Image(getClass().getResourceAsStream(
-                "/com/isep/architects/wondersarchitects/img/cards.png"));
+        Image image = imageCard;
 
         sp1.getStyleClass().add("stack-pane");
         sp2.getStyleClass().add("stack-pane");
@@ -322,8 +328,7 @@ public class WonderController extends Controller{
     }
 
     public void loadWar(ArrayList<TokenTypes> warTokens){
-        Image img = new Image(getClass().getResourceAsStream(
-                "/com/isep/architects/wondersarchitects/img/icons.png"));
+        Image img = imageIcons;
 
         hBoxWar.getChildren().clear();
 
@@ -371,8 +376,7 @@ public class WonderController extends Controller{
             }
         }
 
-        Image img = new Image(getClass().getResourceAsStream(
-                "/com/isep/architects/wondersarchitects/img/icons.png"));
+        Image img = imageIcons;
 
         hBoxProgress.getChildren().clear();
         hBoxRessource.getChildren().clear();
@@ -428,7 +432,7 @@ public class WonderController extends Controller{
         loadAll();
         drawCard();
         catView.setVisible(player.isCat());
-
+        buildAlexandriaOverlay();
 
     }
 
@@ -539,18 +543,34 @@ public class WonderController extends Controller{
         loadProgressToken(new ImageView[]{progress1Img,progress2Img,progress3Img,progress4Img});
     }
 
+    public void chargeAlexOverlay(){
+        ap.setDisable(true);
+        overlayAp.setVisible(true);
+        overlayAp.setDisable(false);
+        alexOverlay.setVisible(true);
+        alexOverlay.setDisable(false);
+        int compteur = 0;
+        for(Pile pile : alexMap.keySet()){
+            ImageView img = alexMap.get(pile);
 
+            if(compteur==(alexMap.size()-1) && !parser.getGame().getPlayerturn().isCat()){
+                img.setViewport(new Rectangle2D(0,0,255,378));
+            }else {
+                loadCardImage(pile,img);
+            }
+            compteur++;
+        }
+    }
 
     public void checkFinish(CardsTypes card){
         boolean pileOver = false;
 
         Player playerturn = parser.getGame().getPlayerturn();
 
-
         if(playerturn.getProgress().contains(TokenTypes.ARCHITECTURE) &&
                 !executedProgress.contains(TokenTypes.ARCHITECTURE)){
             archiCount+= parser.getGame().buildStage();
-            if(archiCount>0){
+            if(archiCount>0 && alexOverlay.isDisable()){
                 pileOver = true;
                 titleLab.setText("ARCHITECTURE");
                 archiCount--;
@@ -617,7 +637,11 @@ public class WonderController extends Controller{
         progressOverlay.setDisable(true);
         overlayPile.setVisible(false);
         overlayPile.setDisable(true);
+        alexOverlay.setVisible(false);
+        alexOverlay.setDisable(true);
     }
+
+
 
     public void startAnimation(WonderStage stage){
 
@@ -636,6 +660,73 @@ public class WonderController extends Controller{
 
     public void setProgressPower(boolean progressPower){
         this.progressPower = progressPower;
+    }
+
+    public void buildAlexandriaOverlay(){
+        int numberPlayer = parser.getGame().getNumberPlayer();
+
+        HBox box = new HBox();
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(15);
+
+        ArrayList<String> nomList = new ArrayList<>();
+        ArrayList<Pile> pileList = new ArrayList<>();
+        for(Player p : parser.getGame().getPlayerList()){
+            nomList.add(p.getWonder().getType().toString());
+            pileList.add(p.getWonder().getPile());
+        }
+
+        nomList.add("CENTER");
+        pileList.add(parser.getGame().getCenterPile());
+
+        for(int j = 0; j<(numberPlayer+1);j++){
+            if(j==4){
+                alexOverlay.getChildren().add(box);
+                box = new HBox();
+                box.setAlignment(Pos.CENTER);
+                box.setSpacing(15);
+            }
+            VBox vbox = new VBox();
+            vbox.setAlignment(Pos.CENTER);
+            Label label = new Label(nomList.get(j));
+            StackPane sp = new StackPane();
+            sp.getStyleClass().add("stack-pane");
+            sp.setPrefWidth(100);
+            sp.setMinHeight(148);
+            int finalJ = j;
+            sp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    CardsTypes card = pileList.get(finalJ).drawCard(parser.getGame().getPlayerturn());
+
+
+                    if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
+                        parser.getGame().evaluateWar(card);
+                        loadWar(parser.getGame().getMilitaryTokens());
+                    }else if(card.equals(CardsTypes.BLUE2)){
+                        catView.setVisible(true);
+                        parser.getGame().catMove(player);
+                    }
+                    disableOverlay();
+                    drawn = card;
+                    checkFinish(card);
+                }
+            });
+            ImageView img = new ImageView();
+            img.setImage(imageCard);
+            img.setFitWidth(100);
+            img.setFitHeight(142);
+            alexMap.put(pileList.get(j),img);
+
+            sp.getChildren().add(img);
+            vbox.getChildren().add(label);
+            vbox.getChildren().add(sp);
+            box.getChildren().add(vbox);
+
+        }
+        alexOverlay.getChildren().add(box);
+
     }
 
 

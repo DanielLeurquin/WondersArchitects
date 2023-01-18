@@ -172,6 +172,11 @@
                   </HBox>
                </children>
             </VBox>
+            <VBox fx:id="alexOverlay" alignment="CENTER" disable="true" layoutX="34.0" layoutY="35.0" prefHeight="322.0" prefWidth="668.0" spacing="15.0" visible="false">
+               <children>
+                  <Label text="Please draw a card" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

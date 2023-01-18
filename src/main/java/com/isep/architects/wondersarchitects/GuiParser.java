@@ -66,6 +66,12 @@ public class GuiParser implements InputParser{
         cont.checkFinish(drawCard);
     }
 
+    @Override
+    public void chargeAlexOverlay() {
+        WonderController cont = (WonderController) this.controller;
+        cont.chargeAlexOverlay();
+    }
+
 
     public void setGame(Game game) {
         this.game = game;
