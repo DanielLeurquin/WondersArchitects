@@ -18,7 +18,10 @@ public class WonderStage {
 
     private double axis;
 
-    public WonderStage(int value, boolean same, int stagenum, int[] neededNumBuild, int victoryPoints,Wonder wonder, double axis){
+    private boolean power;
+
+    public WonderStage(int value, boolean same, int stagenum, int[] neededNumBuild,
+                       int victoryPoints,Wonder wonder, double axis, boolean power){
         this.value = value;
         this.same = same;
         this.stagenum = stagenum;
@@ -26,6 +29,7 @@ public class WonderStage {
         this.victoryPoints = victoryPoints;
         this.wonder = wonder;
         this.axis = axis;
+        this.power = power;
     }
 
     public void setBuilt(boolean built) {
@@ -58,6 +62,10 @@ public class WonderStage {
 
     public double getAxis() {
         return axis;
+    }
+
+    public boolean isPower() {
+        return power;
     }
 
     public int getVictoryPoints() {

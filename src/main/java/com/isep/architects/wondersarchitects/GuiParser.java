@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.cards.CardsTypes;
 import com.isep.architects.wondersarchitects.controllers.Controller;
 import com.isep.architects.wondersarchitects.controllers.PlayerCreationController;
 import com.isep.architects.wondersarchitects.controllers.WonderController;
@@ -49,6 +50,20 @@ public class GuiParser implements InputParser{
         WonderController cont = (WonderController) this.controller;
         cont.startAnimation(stage);
 
+    }
+
+    @Override
+    public void chooseProgress() {
+        WonderController cont = (WonderController) this.controller;
+        cont.setProgressPower(true);
+        cont.checkFinish(null);
+        game.endTurn();
+    }
+
+    @Override
+    public void checkFinish(CardsTypes drawCard) {
+        WonderController cont = (WonderController) this.controller;
+        cont.checkFinish(drawCard);
     }
 
 

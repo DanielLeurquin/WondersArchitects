@@ -14,11 +14,11 @@ public class Hallicarnas extends Wonder{
 
     @Override
     public void buildStage() {
-        this.stages.add(new WonderStage(2,false,1, new int[]{0},3,this,233));
-        this.stages.add(new WonderStage(2,true,2, new int[]{1},3,this,233));
-        this.stages.add(new WonderStage(3,false,3, new int[]{2},6,this,124));
-        this.stages.add(new WonderStage(3,true,4, new int[]{2},5,this,355));
-        this.stages.add(new WonderStage(4,false,5, new int[]{3,4},7,this,233));
+        this.stages.add(new WonderStage(2,false,1, new int[]{0},3,this,233,false));
+        this.stages.add(new WonderStage(2,true,2, new int[]{1},3,this,233,true));
+        this.stages.add(new WonderStage(3,false,3, new int[]{2},6,this,124,false));
+        this.stages.add(new WonderStage(3,true,4, new int[]{2},5,this,355,true));
+        this.stages.add(new WonderStage(4,false,5, new int[]{3,4},7,this,233,false));
     }
 
     @Override

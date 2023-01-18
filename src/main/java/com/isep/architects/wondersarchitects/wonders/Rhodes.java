@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects.wonders;
 
+import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.cards.*;
 
 import java.util.Collections;
@@ -14,17 +15,17 @@ public class Rhodes extends Wonder{
 
     @Override
     public void buildStage() {
-        this.stages.add(new WonderStage(2,false,1, new int[]{0},4,this,147));
-        this.stages.add(new WonderStage(2,true,2, new int[]{0},4,this,320));
-        this.stages.add(new WonderStage(3,false,3, new int[]{1,2},5,this,233));
-        this.stages.add(new WonderStage(3,true,4, new int[]{3},6,this,233));
-        this.stages.add(new WonderStage(4,false,5, new int[]{4},7,this,233));
+        this.stages.add(new WonderStage(2,false,1, new int[]{0},4,this,147,false));
+        this.stages.add(new WonderStage(2,true,2, new int[]{0},4,this,320,true));
+        this.stages.add(new WonderStage(3,false,3, new int[]{1,2},5,this,233,false));
+        this.stages.add(new WonderStage(3,true,4, new int[]{3},6,this,233,true));
+        this.stages.add(new WonderStage(4,false,5, new int[]{4},7,this,233,false));
 
     }
 
     @Override
     public void specialEffect() {
-
+        player.getCards().add(CardsTypes.RED0);
     }
 
     public void fillPile(){

@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.cards.CardsTypes;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 
 public interface InputParser {
@@ -12,4 +13,7 @@ public interface InputParser {
     void animationStage(WonderStage stage);
 
 
+    void chooseProgress();
+
+    void checkFinish(CardsTypes drawCard);
 }

@@ -14,11 +14,11 @@ public class Zeus extends Wonder{
 
     @Override
     public void buildStage() {
-        this.stages.add(new WonderStage(2,false,1, new int[]{0},3,this,233));
-        this.stages.add(new WonderStage(2,true,2, new int[]{1},2,this,127));
-        this.stages.add(new WonderStage(3,false,3, new int[]{1},5,this,324));
-        this.stages.add(new WonderStage(3,true,4, new int[]{2,3},5,this,233));
-        this.stages.add(new WonderStage(4,false,5, new int[]{4},7,this,233));
+        this.stages.add(new WonderStage(2,false,1, new int[]{0},3,this,233,false));
+        this.stages.add(new WonderStage(2,true,2, new int[]{1},2,this,127,true));
+        this.stages.add(new WonderStage(3,false,3, new int[]{1},5,this,324,false));
+        this.stages.add(new WonderStage(3,true,4, new int[]{2,3},5,this,233,true));
+        this.stages.add(new WonderStage(4,false,5, new int[]{4},7,this,233,false));
 
     }
 

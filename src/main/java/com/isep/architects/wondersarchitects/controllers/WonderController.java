@@ -105,6 +105,10 @@ public class WonderController extends Controller{
 
     int archiCount = 0;
 
+    private boolean progressPower = false;
+
+    private ArrayList<TokenTypes> executedProgress = new ArrayList<>();
+
     public void loadAll(){
         loadRessources(player);
         loadWar(parser.getGame().getMilitaryTokens());
@@ -142,6 +146,7 @@ public class WonderController extends Controller{
         coordToken.put(TokenTypes.ENGINEERING, new int[]{2, 3});
         coordToken.put(TokenTypes.CRAFTS, new int[]{3, 3});
 
+        //eye click
         eyeSp.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -159,7 +164,7 @@ public class WonderController extends Controller{
         });
 
         StackPane[] listSpPile = {overlaySpl,overlaySpc,overlaySpr};
-
+        //pile overlay click
         for(int j = 0;j<listSpPile.length;j++){
             int finalJ = j;
             listSpPile[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -177,14 +182,14 @@ public class WonderController extends Controller{
                         parser.getGame().catMove(player);
                     }
                     disableOverlay();
-                    drawn = null;
-                    checkFinish(drawn);
+                    drawn = card;
+                    checkFinish(card);
                 }
             });
         }
 
 
-        //draw progress token
+        //draw progress token click
         StackPane[] listSpPt = {ptSp1,ptSp2,ptSp3,ptSp4};
         for(int i = 0; i<4;i++){
             int finalI = i;
@@ -212,7 +217,7 @@ public class WonderController extends Controller{
             });
         }
 
-
+        //key strokes
         parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -524,42 +529,52 @@ public class WonderController extends Controller{
 
     }
 
+    public void chooseProgress(){
+        ap.setDisable(true);
+        overlayAp.setDisable(false);
+        overlayAp.setVisible(true);
+        progressOverlay.setDisable(false);
+        progressOverlay.setVisible(true);
+
+        loadProgressToken(new ImageView[]{progress1Img,progress2Img,progress3Img,progress4Img});
+    }
+
+
+
     public void checkFinish(CardsTypes card){
         boolean pileOver = false;
 
         Player playerturn = parser.getGame().getPlayerturn();
 
 
-        if(playerturn.getProgress().contains(TokenTypes.ARCHITECTURE)){
+        if(playerturn.getProgress().contains(TokenTypes.ARCHITECTURE) &&
+                !executedProgress.contains(TokenTypes.ARCHITECTURE)){
             archiCount+= parser.getGame().buildStage();
             if(archiCount>0){
                 pileOver = true;
                 titleLab.setText("ARCHITECTURE");
                 archiCount--;
+                executedProgress.add(TokenTypes.ARCHITECTURE);
             }
         }
 
-
         if(card!=null){
             for(TokenTypes token : playerturn.getProgress()){
-                if(token.pileEffect(card)){
+                if(token.pileEffect(card) && !executedProgress.contains(token)){
                     pileOver = true;
                     titleLab.setText(token.toString());
+                    executedProgress.add(token);
                     break;
                 }
             }
         }
 
 
-        if(playerturn.sameGreen() || playerturn.differentGreen()){
-            ap.setDisable(true);
-            overlayAp.setDisable(false);
-            overlayAp.setVisible(true);
-            progressOverlay.setDisable(false);
-            progressOverlay.setVisible(true);
-
-            loadProgressToken(new ImageView[]{progress1Img,progress2Img,progress3Img,progress4Img});
-
+        if(playerturn.sameGreen() || playerturn.differentGreen()|| progressPower){
+            chooseProgress();
+            if(progressPower){
+                progressPower = false;
+            }
 
 
         }else if(pileOver){
@@ -618,5 +633,11 @@ public class WonderController extends Controller{
         anim.play();
 
     }
+
+    public void setProgressPower(boolean progressPower){
+        this.progressPower = progressPower;
+    }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects.wonders;
 
+import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.pile.SidePile;
 
@@ -12,6 +13,8 @@ public abstract class Wonder {
     protected WonderType type;
 
     protected Pile pile = new SidePile();
+
+    protected Player player;
 
     public abstract void buildStage();
 
@@ -38,5 +41,9 @@ public abstract class Wonder {
 
     public Pile getPile() {
         return pile;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

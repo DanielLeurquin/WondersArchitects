@@ -151,6 +151,7 @@ public class Game {
         int index = random.nextInt(availableWonders.size());
         Wonder wonder = availableWonders.get(index);
         player.setWonder(wonder);
+        wonder.setPlayer(player);
         availableWonders.remove(wonder);
 
         if(playerList.size()<numberPlayer){
@@ -202,6 +203,22 @@ public class Game {
         for(WonderStage stage : stageToBuild){
             inputParser.animationStage(stage);
             stage.setBuilt(true);
+            if(stage.isPower()){
+                if(stage.getWonder().getType().equals(WonderType.BABYLON)){
+                    inputParser.chooseProgress();
+                }else if(stage.getWonder().getType().equals(WonderType.RHODES)){
+                    playerturn.getCards().add(CardsTypes.RED0);
+                }else if(stage.getWonder().getType().equals(WonderType.ARTEMIS)){
+                    inputParser.checkFinish(centerPile.drawCard(playerturn));
+                    endTurn();
+                }else if(stage.getWonder().getType().equals(WonderType.ZEUS)){
+                    inputParser.checkFinish(playerturn.getWonder().getPile().drawCard(playerturn));
+                    endTurn();
+                    inputParser.checkFinish(playerList.get(1).getWonder().getPile().drawCard(playerturn));
+                    endTurn();
+
+                }
+            }
         }
         return stageToBuild.size();
     }
