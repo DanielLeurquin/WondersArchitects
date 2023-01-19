@@ -205,30 +205,41 @@ public class Game {
             inputParser.animationStage(stage);
             stage.setBuilt(true);
             if(stage.isPower()){
+
                 if(stage.getWonder().getType().equals(WonderType.BABYLON)){
+                    inputParser.setWonderPower(true);
                     inputParser.chooseProgress();
                 }else if(stage.getWonder().getType().equals(WonderType.RHODES)){
                     playerturn.getCards().add(CardsTypes.RED0);
                 }else if(stage.getWonder().getType().equals(WonderType.ARTEMIS)){
                     inputParser.checkFinish(centerPile.drawCard(playerturn));
-                    endTurn();
                 }else if(stage.getWonder().getType().equals(WonderType.ZEUS)){
+                    inputParser.setWonderPower(true);
                     inputParser.checkFinish(playerturn.getWonder().getPile().drawCard(playerturn));
-                    endTurn();
+                    inputParser.setWonderPower(true);
                     inputParser.checkFinish(playerList.get(1).getWonder().getPile().drawCard(playerturn));
-                    endTurn();
+                    inputParser.setWonderPower(true);
 
                 }else if(stage.getWonder().getType().equals(WonderType.ALEXANDRIA)){
-
+                    inputParser.setWonderPower(true);
                     inputParser.chargeAlexOverlay();
-                    endTurn();
+                }else if(stage.getWonder().getType().equals(WonderType.HALLICARNAS)){
+                    inputParser.setWonderPower(true);
+                    inputParser.enableHaliOverlay();
                 }
             }
         }
+        if(!inputParser.isWonderPower()){
+            endTurn();
+        }
+
         return stageToBuild.size();
     }
 
+
+
     public void endTurn(){
+        System.out.println("end turn");
         for(int i = 1; i<playerList.size();i++){
             playerList.set(i-1,playerList.get(i));
         }

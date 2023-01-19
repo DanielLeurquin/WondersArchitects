@@ -57,7 +57,7 @@ public class GuiParser implements InputParser{
         WonderController cont = (WonderController) this.controller;
         cont.setProgressPower(true);
         cont.checkFinish(null);
-        game.endTurn();
+
     }
 
     @Override
@@ -70,6 +70,24 @@ public class GuiParser implements InputParser{
     public void chargeAlexOverlay() {
         WonderController cont = (WonderController) this.controller;
         cont.chargeAlexOverlay();
+    }
+
+    @Override
+    public void setWonderPower(boolean value) {
+        WonderController cont = (WonderController) this.controller;
+        cont.setWonderPower(value);
+    }
+
+    @Override
+    public boolean isWonderPower() {
+        WonderController cont = (WonderController) this.controller;
+        return cont.isWonderPower();
+    }
+
+    @Override
+    public void enableHaliOverlay() {
+        WonderController cont = (WonderController) this.controller;
+        cont.loadHaliOverlay();
     }
 
 

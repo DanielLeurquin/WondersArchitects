@@ -177,6 +177,44 @@
                   <Label text="Please draw a card" />
                </children>
             </VBox>
+            <VBox fx:id="haliOverlay" alignment="CENTER" disable="true" layoutX="57.0" layoutY="43.0" prefHeight="316.0" prefWidth="631.0" visible="false">
+               <children>
+                  <Label text="Choose a pile and draw a card" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Button fx:id="leftPileButton" mnemonicParsing="false" text="Left Pile" />
+                        <Button fx:id="rightPileButton" mnemonicParsing="false" text="Right Pile" />
+                     </children></HBox>
+                  <HBox fx:id="hBoxHaliPile" alignment="CENTER" disable="true" fillHeight="false" prefHeight="172.0" prefWidth="631.0" spacing="10.0">
+                     <children>
+                        <StackPane fx:id="haliOverSp1" prefHeight="150.0" prefWidth="118.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="haliImg1" fitHeight="150.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="haliOverSp2" prefHeight="150.0" prefWidth="118.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="haliImg2" fitHeight="150.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="haliOverSp3" prefHeight="150.0" prefWidth="118.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="haliImg3" fitHeight="150.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="haliOverSp4" prefHeight="150.0" prefWidth="118.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="haliImg4" fitHeight="150.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="haliOverSp5" prefHeight="150.0" prefWidth="118.0" styleClass="stack-pane">
+                           <children>
+                              <ImageView fx:id="haliImg5" fitHeight="150.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children></HBox>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

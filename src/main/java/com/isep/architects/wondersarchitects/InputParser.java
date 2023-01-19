@@ -18,4 +18,10 @@ public interface InputParser {
     void checkFinish(CardsTypes drawCard);
 
     void chargeAlexOverlay();
+
+    void setWonderPower(boolean value);
+
+    boolean isWonderPower();
+
+    void enableHaliOverlay();
 }

@@ -16,6 +16,15 @@ public class Pile {
         cards.remove(card);
         return card;
     }
+
+    //overload with index
+    public CardsTypes drawCard(Player player, int index){
+        CardsTypes card = cards.get(index);
+        player.getCards().add(card);
+        cards.remove(card);
+        return card;
+    }
+
     public void addMultiple(CardsTypes card, int times){
         for(int i = 0; i<times;i++){
             cards.add(card);
