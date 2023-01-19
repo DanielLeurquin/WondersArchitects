@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.cards.CardsTypes;
 import com.isep.architects.wondersarchitects.controllers.Controller;
 import com.isep.architects.wondersarchitects.controllers.PlayerCreationController;
@@ -46,9 +47,10 @@ public class GuiParser implements InputParser{
     }
 
     @Override
-    public void animationStage(WonderStage stage) {
+    public WonderStageAnimation animationStage(WonderStage stage) {
         WonderController cont = (WonderController) this.controller;
-        cont.startAnimation(stage);
+        return cont.startAnimation(stage);
+
 
     }
 
@@ -61,9 +63,9 @@ public class GuiParser implements InputParser{
     }
 
     @Override
-    public void checkFinish(CardsTypes drawCard) {
+    public void drawCard(CardsTypes drawCard) {
         WonderController cont = (WonderController) this.controller;
-        cont.checkFinish(drawCard);
+        cont.drawCard(drawCard);
     }
 
     @Override
@@ -88,6 +90,18 @@ public class GuiParser implements InputParser{
     public void enableHaliOverlay() {
         WonderController cont = (WonderController) this.controller;
         cont.loadHaliOverlay();
+    }
+
+    @Override
+    public void setAnimation(boolean b) {
+        WonderController cont = (WonderController) this.controller;
+        cont.setAnimation(b);
+    }
+
+    @Override
+    public void checkFinish(CardsTypes card) {
+        WonderController cont = (WonderController) this.controller;
+        cont.checkFinish(card);
     }
 
 

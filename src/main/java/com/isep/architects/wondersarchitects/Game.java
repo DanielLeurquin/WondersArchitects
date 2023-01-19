@@ -5,7 +5,6 @@ import com.isep.architects.wondersarchitects.cards.*;
 import com.isep.architects.wondersarchitects.pile.Pile;
 import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.*;
-import javafx.scene.control.Tab;
 
 import java.util.*;
 
@@ -32,6 +31,8 @@ public class Game {
     private Pile centerPile = new Pile();
 
     private Player playerturn;
+
+    private ArrayList<WonderStage> stageToBuild = new ArrayList<>();
 
     private double multiplier = 0.75;
 
@@ -199,47 +200,55 @@ public class Game {
         int value = 0;
     }
 
-    public int buildStage(){
-        ArrayList<WonderStage> stageToBuild = playerturn.buildStage();
-        for(WonderStage stage : stageToBuild){
-            inputParser.animationStage(stage);
+
+    public void buildStage(){
+        ArrayList<WonderStage> stages = playerturn.buildStage();
+        stageToBuild.addAll(stages);
+
+        if(stageToBuild.size()>0){
+            WonderStage stage = stageToBuild.get(0);
             stage.setBuilt(true);
-            if(stage.isPower()){
+            WonderStageAnimation anim = inputParser.animationStage(stage);
 
-                if(stage.getWonder().getType().equals(WonderType.BABYLON)){
-                    inputParser.setWonderPower(true);
-                    inputParser.chooseProgress();
-                }else if(stage.getWonder().getType().equals(WonderType.RHODES)){
-                    playerturn.getCards().add(CardsTypes.RED0);
-                }else if(stage.getWonder().getType().equals(WonderType.ARTEMIS)){
-                    inputParser.checkFinish(centerPile.drawCard(playerturn));
-                }else if(stage.getWonder().getType().equals(WonderType.ZEUS)){
-                    inputParser.setWonderPower(true);
-                    inputParser.checkFinish(playerturn.getWonder().getPile().drawCard(playerturn));
-                    inputParser.setWonderPower(true);
-                    inputParser.checkFinish(playerList.get(1).getWonder().getPile().drawCard(playerturn));
-                    inputParser.setWonderPower(true);
+            anim.setOnFinished(event -> {
+                stageToBuild.remove(stage);
+                inputParser.setAnimation(false);
+                if(stage.isPower()){
+                    if(stage.getWonder().getType().equals(WonderType.BABYLON)){
+                        inputParser.chooseProgress();
+                    }else if(stage.getWonder().getType().equals(WonderType.RHODES)){
 
-                }else if(stage.getWonder().getType().equals(WonderType.ALEXANDRIA)){
-                    inputParser.setWonderPower(true);
-                    inputParser.chargeAlexOverlay();
-                }else if(stage.getWonder().getType().equals(WonderType.HALLICARNAS)){
-                    inputParser.setWonderPower(true);
-                    inputParser.enableHaliOverlay();
+                        playerturn.getCards().add(CardsTypes.RED0);
+                        inputParser.checkFinish(null);
+                    }else if(stage.getWonder().getType().equals(WonderType.ARTEMIS)){
+                        inputParser.drawCard(centerPile.drawCard(playerturn));
+                    }else if(stage.getWonder().getType().equals(WonderType.ZEUS)){
+                        inputParser.drawCard(playerturn.getWonder().getPile().drawCard(playerturn));
+                        inputParser.drawCard(playerList.get(1).getWonder().getPile().drawCard(playerturn));
+
+                    }else if(stage.getWonder().getType().equals(WonderType.ALEXANDRIA)){
+                        inputParser.chargeAlexOverlay();
+                    }else if(stage.getWonder().getType().equals(WonderType.HALLICARNAS)){
+                        inputParser.enableHaliOverlay();
+                    }
+                }else {
+                    inputParser.checkFinish(null);
                 }
-            }
-        }
-        if(!inputParser.isWonderPower()){
-            endTurn();
+            });
+            inputParser.setAnimation(true);
+            anim.play();
+
+
+
         }
 
-        return stageToBuild.size();
+
     }
 
 
 
     public void endTurn(){
-        System.out.println("end turn");
+        System.out.println("end turn\n.\n.");
         for(int i = 1; i<playerList.size();i++){
             playerList.set(i-1,playerList.get(i));
         }
@@ -265,6 +274,10 @@ public class Game {
 
     public ArrayList<TokenTypes> getMilitaryTokens() {
         return militaryTokens;
+    }
+
+    public ArrayList<WonderStage> getStageToBuild() {
+        return stageToBuild;
     }
 
     public Pile getCenterPile() {

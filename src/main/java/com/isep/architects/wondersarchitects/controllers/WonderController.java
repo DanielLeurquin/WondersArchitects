@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects.controllers;
 
+import com.isep.architects.wondersarchitects.Animation.SpritePulseAnimation;
 import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.GuiParser;
 import com.isep.architects.wondersarchitects.Player;
@@ -68,6 +69,8 @@ public class WonderController extends Controller{
     private Image imageIcons = new Image(getClass().getResourceAsStream(
             "/com/isep/architects/wondersarchitects/img/icons.png"));
 
+    private boolean animation = false;
+
 
 
     //symbol Rect
@@ -119,6 +122,8 @@ public class WonderController extends Controller{
 
     private ArrayList<TokenTypes> executedProgress = new ArrayList<>();
 
+    private ArrayList<TokenTypes> pendingProgress = new ArrayList<>();
+
     private HashMap<Pile,ImageView> alexMap = new HashMap<>();
 
     public void loadAll(){
@@ -137,7 +142,7 @@ public class WonderController extends Controller{
         this.parser = parser;
         this.multiplier = parser.getGame().getMultiplier();
         back.setOnAction(event -> {
-            if(!ap.isDisable()){
+            if(!ap.isDisable() && !animation){
                 parser.chargeOverview();
             }
 
@@ -186,17 +191,10 @@ public class WonderController extends Controller{
                     CardsTypes card = listPile[finalJ].drawCard(parser.getGame().getPlayerturn());
 
 
-                    if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
-                        parser.getGame().evaluateWar(card);
-                        loadWar(parser.getGame().getMilitaryTokens());
-                    }else if(card.equals(CardsTypes.BLUE2)){
-                        catView.setVisible(true);
-                        parser.getGame().catMove(player);
-                    }
-                    disableOverlay();
-                    drawn = card;
                     wonderPower = false;
-                    checkFinish(card);
+                    disableOverlay();
+                    drawCard(card);
+
                 }
             });
         }
@@ -254,7 +252,7 @@ public class WonderController extends Controller{
         parser.getApp().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if(!ap.isDisable()){
+                if(!ap.isDisable() && !animation){
                     switch (keyEvent.getCode()){
 
                         case ESCAPE:
@@ -290,19 +288,11 @@ public class WonderController extends Controller{
                     Player player = parser.getGame().getPlayerturn();
                     CardsTypes card = pile.drawCard(player,finalI);
 
-                    if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
-                        parser.getGame().evaluateWar(card);
-                        loadWar(parser.getGame().getMilitaryTokens());
-                    }else if(card.equals(CardsTypes.BLUE2)){
-                        catView.setVisible(true);
-                        parser.getGame().catMove(player);
-                    }
                     disableOverlay();
-                    drawn = card;
                     wonderPower = false;
                     hBoxHaliPile.setDisable(true);
                     Collections.shuffle(pile.getCards());
-                    checkFinish(card);
+                    drawCard(card);
 
 
                 }
@@ -349,7 +339,7 @@ public class WonderController extends Controller{
     }
 
     //init Stack pane pile commands
-    public void drawCard(){
+    public void initPileStackPane(){
 
         StackPane[] list = {sp1,sp2,sp3};
         Pile[] piles = {centerPile,leftPile,rightPile};
@@ -365,27 +355,7 @@ public class WonderController extends Controller{
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                         if(player.equals(parser.getGame().getPlayerturn())){
                             CardsTypes card = piles[finalI].drawCard(player);
-                            if(card.equals(CardsTypes.GOLD) &&
-                                    player.getProgress().contains(TokenTypes.ECONOMY)){
-                                //handle economy token
-                                player.getCards().add(CardsTypes.GOLD);
-                            }
-
-                            drawn = card;
-
-                            if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
-                                //handle war
-                                parser.getGame().evaluateWar(card);
-                                loadWar(parser.getGame().getMilitaryTokens());
-                            }else if(card.equals(CardsTypes.BLUE2)){
-                                //handle cat
-                                catView.setVisible(true);
-                                parser.getGame().catMove(player);
-                            }
-
-                            checkFinish(card);
-
-
+                            drawCard(card);
 
                         }
 
@@ -396,6 +366,38 @@ public class WonderController extends Controller{
         }
 
 
+
+    }
+
+
+    public void drawCard(CardsTypes card){
+        ImageView img = loadRessources(player);
+        loadPile();
+        SpritePulseAnimation anim = new SpritePulseAnimation(img,1.3);
+
+
+        anim.setOnFinished(event -> {
+
+            if(card.equals(CardsTypes.GOLD) &&
+                    player.getProgress().contains(TokenTypes.ECONOMY)){
+                //handle economy token
+                drawCard(CardsTypes.GOLD);
+            }
+            if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
+                //handle war
+                parser.getGame().evaluateWar(card);
+                loadWar(parser.getGame().getMilitaryTokens());
+            }else if(card.equals(CardsTypes.BLUE2)){
+                //handle cat
+                catView.setVisible(true);
+                parser.getGame().catMove(player);
+            }
+            animation = false;
+            drawn = card;
+            checkFinish(card);
+        });
+        animation = true;
+        anim.play();
 
     }
 
@@ -442,8 +444,9 @@ public class WonderController extends Controller{
     }
 
     //load all the cards and progress token owned by a player
-    public void loadRessources(Player player){
+    public ImageView loadRessources(Player player){
         //enable the eye if the player has the cat
+        ImageView lastRessource = null;
         if(parser.getGame().getPlayerturn().equals(player)){
             if(player.isCat()){
                 eyeSp.setVisible(true);
@@ -478,6 +481,7 @@ public class WonderController extends Controller{
             }else {
                 hBoxProgress.getChildren().add(imageView);
             }
+            lastRessource = imageView;
 
         }
 
@@ -497,6 +501,7 @@ public class WonderController extends Controller{
 
 
         scrollP.getStyleClass().add("scroll-pane");
+        return lastRessource;
     }
 
     //load number of conflict victory
@@ -509,7 +514,7 @@ public class WonderController extends Controller{
     public void initWonder(Player player){
         this.player = player;
         loadAll();
-        drawCard();
+        initPileStackPane();
         catView.setVisible(player.isCat());
         buildAlexandriaOverlay();
 
@@ -671,44 +676,33 @@ public class WonderController extends Controller{
         }
     }
 
+
     //check if all the progress actions and wonders power has been executed before finishing turn
     public void checkFinish(CardsTypes card){
-        boolean pileOver = false;
+        Player player = parser.getGame().getPlayerturn();
+        parser.getGame().buildStage();
+        //add architecture to the pending list and execute the wonder effect
+        if(parser.getGame().getStageToBuild().size()>0 &&
+                !executedProgress.contains(TokenTypes.ARCHITECTURE)
+                && player.getProgress().contains(TokenTypes.ARCHITECTURE)){
+            pendingProgress.add(TokenTypes.ARCHITECTURE);
+        }
 
-        Player playerturn = parser.getGame().getPlayerturn();
-        if(!wonderPower){
-            if(playerturn.getProgress().contains(TokenTypes.ARCHITECTURE) &&
-                    !executedProgress.contains(TokenTypes.ARCHITECTURE)){
-                wonderPower = true;
-                archiCount+= parser.getGame().buildStage();
-                if(archiCount>0 && alexOverlay.isDisable() && progressOverlay.isDisable() &&
-                    haliOverlay.isDisable()){
-                    pileOver = true;
-                    titleLab.setText("ARCHITECTURE");
-                    archiCount--;
-                    executedProgress.add(TokenTypes.ARCHITECTURE);
-                }else {
-                    wonderPower = !alexOverlay.isDisable() || !progressOverlay.isDisable() ||
-                            !haliOverlay.isDisable();
-                }
+        //if progress has to be executed and has not already been, add it to queue
+        if(card==null) {
+            card = drawn;
+        }
+        for(TokenTypes token : player.getProgress()){
+            if(token.pileEffect(card) && !executedProgress.contains(token) &&
+                    !pendingProgress.contains(token)){
+                pendingProgress.add(token);
             }
         }
 
 
-        if(card!=null){
-            for(TokenTypes token : playerturn.getProgress()){
-                if(token.pileEffect(card) && !executedProgress.contains(token)){
-                    pileOver = true;
-                    titleLab.setText(token.toString());
-                    executedProgress.add(token);
-                    break;
-                }
-            }
-        }
 
 
-        if(playerturn.sameGreen() || playerturn.differentGreen()|| progressPower){
-            wonderPower = true;
+        if(player.sameGreen() || player.differentGreen()|| progressPower){
             chooseProgress();
 
             if(progressPower){
@@ -716,7 +710,15 @@ public class WonderController extends Controller{
             }
 
 
-        }else if(pileOver){
+        }else if(pendingProgress.size()>0 && !ap.isDisable()){
+            if(parser.getGame().getStageToBuild().size()!=0){
+                return;
+            }
+            TokenTypes progress = pendingProgress.get(0);
+            pendingProgress.remove(progress);
+            executedProgress.add(progress);
+            titleLab.setText(progress.toString());
+
             ap.setDisable(true);
             overlayAp.setDisable(false);
             overlayAp.setVisible(true);
@@ -725,33 +727,28 @@ public class WonderController extends Controller{
 
             loadCardImage(leftPile,overlayPilel);
             loadCardImage(rightPile,overlayPiler);
-            if(playerturn.isCat()){
+            if(player.isCat()){
                 loadCardImage(centerPile,overlayPilec);
             }else {
                 overlayPilec.setViewport(new Rectangle2D(0,0,255,378));
             }
 
-
-
-        }else {
-            if(!wonderPower){
-
-                parser.getGame().buildStage();
-
-                loadRessources(player);
-                loadPile();
-                loadConflict();
-                loadProgressToken(new ImageView[]{pt1,pt2,pt3,pt4});
-                eyeSp.setDisable(true);
-                eyeSp.setVisible(false);
-            }
-
+        }else if(!ap.isDisable() && parser.getGame().getStageToBuild().size()==0){
+            loadRessources(player);
+            loadPile();
+            loadConflict();
+            loadProgressToken(new ImageView[]{pt1,pt2,pt3,pt4});
+            eyeSp.setDisable(true);
+            eyeSp.setVisible(false);
+            parser.getGame().endTurn();
 
         }
 
 
 
+
     }
+
 
     //disable all overlays
     public void disableOverlay(){
@@ -771,7 +768,7 @@ public class WonderController extends Controller{
 
 
     //start the wonder turning animation
-    public void startAnimation(WonderStage stage){
+    public WonderStageAnimation startAnimation(WonderStage stage){
 
         ImageView[] list = {wonderStage1, wonderStage2, wonderStage3, wonderStage4, wonderStage5};
         int i = stage.getStagenum()-1;
@@ -782,7 +779,8 @@ public class WonderController extends Controller{
 
         Rectangle2D rect = new Rectangle2D(width*(i+1),height,width,height);
         anim = new WonderStageAnimation(list[i],rect,stage,multiplier);
-        anim.play();
+        //anim.play();
+        return anim;
 
     }
 
@@ -837,19 +835,10 @@ public class WonderController extends Controller{
                 public void handle(MouseEvent mouseEvent) {
 
                     CardsTypes card = pileList.get(finalJ).drawCard(parser.getGame().getPlayerturn());
-
-
-                    if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
-                        parser.getGame().evaluateWar(card);
-                        loadWar(parser.getGame().getMilitaryTokens());
-                    }else if(card.equals(CardsTypes.BLUE2)){
-                        catView.setVisible(true);
-                        parser.getGame().catMove(player);
-                    }
                     disableOverlay();
-                    drawn = card;
                     wonderPower = false;
-                    checkFinish(card);
+                    drawCard(card);
+
                 }
             });
             ImageView img = new ImageView();
@@ -866,6 +855,10 @@ public class WonderController extends Controller{
         }
         alexOverlay.getChildren().add(box);
 
+    }
+
+    public void setAnimation(boolean animation){
+        this.animation = animation;
     }
 
 

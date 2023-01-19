@@ -1,5 +1,6 @@
 package com.isep.architects.wondersarchitects;
 
+import com.isep.architects.wondersarchitects.Animation.WonderStageAnimation;
 import com.isep.architects.wondersarchitects.cards.CardsTypes;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 
@@ -10,12 +11,12 @@ public interface InputParser {
 
     void loadPlayerScene(Player player);
 
-    void animationStage(WonderStage stage);
+    WonderStageAnimation animationStage(WonderStage stage);
 
 
     void chooseProgress();
 
-    void checkFinish(CardsTypes drawCard);
+    void drawCard(CardsTypes drawCard);
 
     void chargeAlexOverlay();
 
@@ -24,4 +25,8 @@ public interface InputParser {
     boolean isWonderPower();
 
     void enableHaliOverlay();
+
+    void setAnimation(boolean b);
+
+    void checkFinish(CardsTypes card);
 }
