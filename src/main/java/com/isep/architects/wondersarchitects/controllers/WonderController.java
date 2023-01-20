@@ -193,7 +193,7 @@ public class WonderController extends Controller{
                     CardsTypes card = listPile[finalJ].drawCard(parser.getGame().getPlayerturn());
 
 
-                    wonderPower = false;
+
                     disableOverlay();
                     drawCard(card);
 
@@ -218,7 +218,7 @@ public class WonderController extends Controller{
                             player.getCards().add(CardsTypes.RED0);
                             player.getCards().add(CardsTypes.RED0);
                         }
-                        wonderPower = false;
+
 
                         executedProgress.add(lastprogress);
                         checkFinish(drawn);
@@ -289,7 +289,7 @@ public class WonderController extends Controller{
                     CardsTypes card = pile.drawCard(player,finalI);
 
                     disableOverlay();
-                    wonderPower = false;
+
                     hBoxHaliPile.setDisable(true);
                     Collections.shuffle(pile.getCards());
                     drawCard(card);
@@ -408,7 +408,10 @@ public class WonderController extends Controller{
             }
             animation = false;
             drawn = card;
+
             checkFinish(card);
+
+
         });
         animation = true;
         anim.play();
@@ -714,8 +717,6 @@ public class WonderController extends Controller{
         }
 
 
-
-
         if(player.sameGreen() || player.differentGreen()|| progressPower){
             chooseProgress();
 
@@ -748,23 +749,24 @@ public class WonderController extends Controller{
             }
 
         }else if(!ap.isDisable() && parser.getGame().getStageToBuild().size()==0){
-            loadRessources(player);
-            loadPile();
-            loadConflict();
-            loadProgressToken(new ImageView[]{pt1,pt2,pt3,pt4});
-            eyeSp.setDisable(true);
-            eyeSp.setVisible(false);
-            parser.getGame().endTurn();
-            Timeline tl = new Timeline(new KeyFrame(Duration.millis(400),event -> {
-                parser.loadPlayerScene(parser.getGame().getPlayerturn());
-            }));
+            if(!wonderPower){
+                loadRessources(player);
+                loadPile();
+                loadConflict();
+                loadProgressToken(new ImageView[]{pt1,pt2,pt3,pt4});
+                eyeSp.setDisable(true);
+                eyeSp.setVisible(false);
+                parser.getGame().endTurn();
+                Timeline tl = new Timeline(new KeyFrame(Duration.millis(400),event -> {
+                    parser.loadPlayerScene(parser.getGame().getPlayerturn());
+                }));
 
-            tl.play();
+                tl.play();
+            }else {
+                wonderPower = false;
+            }
 
         }
-
-
-
 
     }
 
@@ -855,7 +857,7 @@ public class WonderController extends Controller{
 
                     CardsTypes card = pileList.get(finalJ).drawCard(parser.getGame().getPlayerturn());
                     disableOverlay();
-                    wonderPower = false;
+
                     drawCard(card);
 
                 }

@@ -20,8 +20,6 @@ public enum TokenTypes {
     STRATEGY,
     EDUCATION,
     CULTURE,
-
-    CAT,
     CONFLICT,
     MILITARY,
     PEACE;
@@ -53,10 +51,6 @@ public enum TokenTypes {
             return false;
         }
     }
-
-
-
-
 
 
 

@@ -223,6 +223,7 @@ public class Game {
                     }else if(stage.getWonder().getType().equals(WonderType.ARTEMIS)){
                         inputParser.drawCard(centerPile.drawCard(playerturn));
                     }else if(stage.getWonder().getType().equals(WonderType.ZEUS)){
+                        inputParser.setWonderPower(true);
                         inputParser.drawCard(playerturn.getWonder().getPile().drawCard(playerturn));
                         inputParser.drawCard(playerList.get(1).getWonder().getPile().drawCard(playerturn));
 
