@@ -51,7 +51,7 @@ public class Application extends javafx.application.Application {
 
 
         scWidth = Screen.getPrimary().getBounds().getWidth();
-        scHeight = Screen.getPrimary().getBounds().getWidth();
+        scHeight = Screen.getPrimary().getBounds().getHeight();
         ratio = 1;
         if(scWidth/970 < scHeight/600){
             ratio = scWidth/970;
@@ -61,8 +61,8 @@ public class Application extends javafx.application.Application {
         System.out.println(ratio);
 
         scale = new Scale(ratio,ratio);
-        scale.setPivotX(0);
-        scale.setPivotY(0);
+        scale.setPivotX((scWidth-970*ratio)/2);
+        scale.setPivotY((scHeight-600*ratio)/2);
 
         this.scene = new Scene(this.fxmlLoader.load(),scWidth,scHeight);
         this.scene.getRoot().getTransforms().setAll(scale);
