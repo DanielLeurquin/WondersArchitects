@@ -380,6 +380,11 @@ public class WonderController extends Controller{
 
 
     public void drawCard(CardsTypes card){
+        if(card.equals(CardsTypes.GOLD) &&
+                player.getProgress().contains(TokenTypes.ECONOMY)){
+            //handle economy token
+            player.getCards().add(CardsTypes.GOLD);
+        }
         ImageView img = loadRessources(player);
         loadPile();
         SpritePulseAnimation anim = new SpritePulseAnimation(img,1.3);
@@ -387,11 +392,7 @@ public class WonderController extends Controller{
 
         anim.setOnFinished(event -> {
 
-            if(card.equals(CardsTypes.GOLD) &&
-                    player.getProgress().contains(TokenTypes.ECONOMY)){
-                //handle economy token
-                drawCard(CardsTypes.GOLD);
-            }
+
             if(card.equals(CardsTypes.RED1) || card.equals(CardsTypes.RED2)){
                 //handle war
                 parser.getGame().evaluateWar(card);
