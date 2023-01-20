@@ -104,6 +104,16 @@ public class GuiParser implements InputParser{
         cont.checkFinish(card);
     }
 
+    @Override
+    public void loadScoreBoard() {
+        try {
+            this.controller = getApp().changeScene(
+                    "/com/isep/architects/wondersarchitects/scoreboard.fxml",this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void setGame(Game game) {
         this.game = game;

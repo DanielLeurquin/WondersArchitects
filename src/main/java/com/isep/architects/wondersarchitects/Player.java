@@ -28,6 +28,7 @@ public class Player {
         this.name = name;
     }
 
+
     public ArrayList<WonderStage> buildStage(){
         ArrayList<WonderStage> stageToBuild = new ArrayList<>();
         for(WonderStage stage : wonder.getStages()){
@@ -237,6 +238,85 @@ public class Player {
             cards.remove(CardsTypes.GOLD);
         }
     }
+
+    public boolean finish(){
+        boolean value = true;
+        for(WonderStage stage : getWonder().getStages()){
+            value = value && stage.isBuilt();
+        }
+        return value;
+    }
+
+    public int getStagePoints(){
+        int points = 0;
+        for(WonderStage stage : wonder.getStages()){
+            if(stage.isBuilt()){
+                points += stage.getVictoryPoints();
+            }
+        }
+        return points;
+    }
+
+    public int getBluePoints(){
+        int value = 0;
+        for(CardsTypes card : cards){
+            if(card.equals(CardsTypes.BLUE2)){
+                value += 2;
+            }else if(card.equals(CardsTypes.BLUE3)){
+                value += 3;
+            }
+        }
+        return value;
+    }
+
+    public int getCatPoints(){
+        if(isCat()){
+            return 2;
+        }else {
+            return 0;
+        }
+    }
+
+    public int getMilitaryPoints(){
+        int value = 0;
+        for(TokenTypes token : getConflict()){
+            value += 3;
+        }
+        return value;
+    }
+
+    public int getProgressPoints(){
+        int value = 0;
+        for(TokenTypes token : progress){
+            if(token.getIndex()>8){
+                if(token.equals(TokenTypes.DECOR)){
+                    if(finish()){
+                        value+=6;
+                    }else {
+                        value+=4;
+                    }
+                }else if(token.equals(TokenTypes.POLITICS)){
+                    for(CardsTypes card : cards){
+                        if(card.equals(CardsTypes.BLUE2)){
+                            value += 1;
+                        }
+                    }
+                }else if(token.equals(TokenTypes.STRATEGY)){
+                    value += conflict.size();
+                }else if(token.equals(TokenTypes.EDUCATION)){
+                    value += 2*progress.size();
+                }else if(token.equals(TokenTypes.CULTURE)){
+                    value += 4;
+                }
+            }
+        }
+        if(Collections.frequency(progress,TokenTypes.CULTURE)==2){
+            value += 4;
+        }
+
+        return value;
+    }
+
 
     public ArrayList<TokenTypes> getConflict() {
         return conflict;

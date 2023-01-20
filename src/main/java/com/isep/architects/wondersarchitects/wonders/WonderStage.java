@@ -2,7 +2,7 @@ package com.isep.architects.wondersarchitects.wonders;
 
 public class WonderStage {
 
-    private boolean built = false;
+    private boolean built = true;
 
     private int value;
 

@@ -30,6 +30,8 @@ public abstract class Wonder {
 
     public abstract void specialEffect();
 
+    public abstract void fillPile();
+
 
     public ArrayList<WonderStage> getStages() {
         return stages;

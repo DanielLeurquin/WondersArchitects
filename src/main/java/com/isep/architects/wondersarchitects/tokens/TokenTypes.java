@@ -2,6 +2,8 @@ package com.isep.architects.wondersarchitects.tokens;
 
 import com.isep.architects.wondersarchitects.cards.CardsTypes;
 
+import java.util.ArrayList;
+
 public enum TokenTypes {
     //progress
     URBANISM,
@@ -51,6 +53,8 @@ public enum TokenTypes {
             return false;
         }
     }
+
+
 
 
 

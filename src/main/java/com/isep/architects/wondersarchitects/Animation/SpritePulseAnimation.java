@@ -19,7 +19,6 @@ public class SpritePulseAnimation extends Transition {
     public SpritePulseAnimation(ImageView sprite, double growthRatio){
         this.sprite = sprite;
         this.growthRatio = growthRatio-1;
-
         baseWidth = sprite.getFitWidth();
         baseHeight = sprite.getFitHeight();
 
@@ -27,6 +26,7 @@ public class SpritePulseAnimation extends Transition {
         setCycleDuration(new Duration(500));
 
     }
+
 
     @Override
     protected void interpolate(double v) {

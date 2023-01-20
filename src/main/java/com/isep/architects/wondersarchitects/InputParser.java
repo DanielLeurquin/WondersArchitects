@@ -29,4 +29,6 @@ public interface InputParser {
     void setAnimation(boolean b);
 
     void checkFinish(CardsTypes card);
+
+    void loadScoreBoard();
 }

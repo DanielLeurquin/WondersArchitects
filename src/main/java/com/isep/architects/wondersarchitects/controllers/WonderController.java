@@ -218,11 +218,9 @@ public class WonderController extends Controller{
                         }
                         wonderPower = false;
 
-                        if (lastprogress.equals(TokenTypes.SCIENCE)) {
-                            checkFinish(null);
-                        }else {
-                            checkFinish(drawn);
-                        }
+                        executedProgress.add(lastprogress);
+                        checkFinish(drawn);
+
 
                     }
 
@@ -316,7 +314,14 @@ public class WonderController extends Controller{
         sp3.getStyleClass().add("stack-pane");
 
         this.leftPile = this.player.getWonder().getPile();
+        if(leftPile.getCards().size()==0){
+            this.player.getWonder().fillPile();
+        }
+
         this.centerPile = this.parser.getGame().getCenterPile();
+        if(this.centerPile.getCards().size()==0){
+            this.parser.getGame().fillCenterPile();
+        }
         int index = this.parser.getGame().getPlayerList().indexOf(this.player);
         if(index!=this.parser.getGame().getPlayerList().size()-1){
             index++;
@@ -325,12 +330,16 @@ public class WonderController extends Controller{
         }
 
         this.rightPile = this.parser.getGame().getPlayerList().get(index).getWonder().getPile();
+        if(this.rightPile.getCards().size()==0){
+            this.parser.getGame().getPlayerList().get(index).getWonder().fillPile();
+        }
 
         centerPileView.setImage(image);
         leftPileView.setImage(image);
         rightPileView.setImage(image);
 
         centerPileView.setViewport(new Rectangle2D(0,0,width,height));
+
 
 
         loadCardImage(this.leftPile, leftPileView);

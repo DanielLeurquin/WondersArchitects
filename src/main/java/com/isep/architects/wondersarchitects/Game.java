@@ -249,11 +249,17 @@ public class Game {
 
     public void endTurn(){
         System.out.println("end turn\n.\n.");
+        if(playerList.get(0).finish()){
+            inputParser.loadScoreBoard();
+        }
         for(int i = 1; i<playerList.size();i++){
+
             playerList.set(i-1,playerList.get(i));
+
         }
         playerList.set(playerList.size()-1,playerturn);
         playerturn = playerList.get(0);
+
     }
 
     public void setNumberPlayer(int numberPlayer) {
