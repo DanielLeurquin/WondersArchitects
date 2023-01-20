@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane styleClass="css\wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
+<AnchorPane style="-fx-background-color: dec6b1;" styleClass="css\wonder.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WonderController">
    <children>
       <AnchorPane fx:id="ap" layoutX="-1.0" layoutY="-1.0" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css">
          <children>

@@ -1,8 +1,5 @@
 .root{
     -fx-background-image: url('../img/homeScreen.png');
-    -fx-background-size: 100%;
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
 }
 
 .label{
@@ -28,11 +25,11 @@
 }
 
 .choice-box .context-menu{
-    -fx-background-color: #3C7EBF;
+    -fx-background-color: #3376b8;
 }
 
 .choice-box{
-    -fx-background-color: #3C7EBF;
+    -fx-background-color: #3376b8;
     -fx-border-color: #FFFFFF;
 }
 

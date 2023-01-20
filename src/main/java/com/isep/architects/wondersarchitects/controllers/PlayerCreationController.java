@@ -55,7 +55,7 @@ public class PlayerCreationController extends Controller{
     }
 
     public void numberInit(int number){
-        this.label.setText("Please chose a name for player number "+number);
+        this.label.setText("Please choose a name for player number "+number);
         String path = "/com/isep/architects/wondersarchitects/img/";
         Image image = new Image(getClass().getResourceAsStream(
                 path+list[number-1]));

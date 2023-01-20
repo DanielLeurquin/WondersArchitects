@@ -11,23 +11,27 @@
 <?import javafx.scene.control.Button?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0" stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
-
+<VBox stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0">
+      
+                     <children>
+            <VBox alignment="CENTER" layoutX="270.0" layoutY="387.0" spacing="30.0">
                <children>
-      <VBox alignment="CENTER" layoutX="270.0" layoutY="387.0" spacing="30.0">
-         <children>
-            <HBox alignment="CENTER" layoutX="270.0" layoutY="387.0" prefHeight="100.0" prefWidth="431.0" spacing="50.0">
-               <children>
-                  <Label text="Number of players">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
+                  <HBox alignment="CENTER" layoutX="270.0" layoutY="387.0" prefHeight="100.0" prefWidth="431.0" spacing="50.0">
+                     <children>
+                        <Label text="Number of players">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="button" mnemonicParsing="false" prefHeight="62.0" prefWidth="141.0" text="Play" />
                </children>
-            </HBox>
-            <Button fx:id="button" mnemonicParsing="false" prefHeight="62.0" prefWidth="141.0" text="Play" />
+            </VBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</VBox>
