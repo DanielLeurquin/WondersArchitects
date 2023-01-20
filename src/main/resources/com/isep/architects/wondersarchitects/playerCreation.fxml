@@ -17,7 +17,7 @@
             <Image url="@img/tablette.png" />
          </image>
       </ImageView>
-      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="153.0" prefHeight="43.0" prefWidth="560.0" text="Please chose a name for player number">
+      <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="153.0" prefHeight="43.0" prefWidth="560.0" text="Please choose a name for player number">
          <font>
             <Font size="25.0" />
          </font>

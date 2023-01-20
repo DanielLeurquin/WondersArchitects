@@ -111,7 +111,7 @@
          <children>
             <VBox fx:id="progressOverlay" alignment="CENTER" disable="true" layoutX="107.0" layoutY="59.0" prefHeight="292.0" prefWidth="529.0" visible="false">
                <children>
-                  <Label text="Please chose a progress Token" />
+                  <Label text="Please choose a progress Token" />
                   <HBox alignment="CENTER" fillHeight="false" layoutX="107.0" layoutY="78.0" prefHeight="246.0" prefWidth="529.0" spacing="20.0" VBox.vgrow="NEVER">
                      <children>
                         <StackPane fx:id="ptSp1" styleClass="stack-pane">
