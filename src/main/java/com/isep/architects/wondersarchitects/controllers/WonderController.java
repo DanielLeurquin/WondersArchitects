@@ -758,7 +758,10 @@ public class WonderController extends Controller{
                 eyeSp.setVisible(false);
                 parser.getGame().endTurn();
                 Timeline tl = new Timeline(new KeyFrame(Duration.millis(400),event -> {
-                    parser.loadPlayerScene(parser.getGame().getPlayerturn());
+                    if(!parser.getGame().getPlayerturn().finish()){
+                        parser.loadPlayerScene(parser.getGame().getPlayerturn());
+                    }
+
                 }));
 
                 tl.play();

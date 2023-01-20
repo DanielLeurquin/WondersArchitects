@@ -252,6 +252,7 @@ public class Game {
         System.out.println("end turn\n.\n.");
         if(playerList.get(0).finish()){
             inputParser.loadScoreBoard();
+            return;
         }
         for(int i = 1; i<playerList.size();i++){
 
