@@ -10,6 +10,9 @@ import com.isep.architects.wondersarchitects.tokens.TokenTypes;
 import com.isep.architects.wondersarchitects.wonders.Wonder;
 import com.isep.architects.wondersarchitects.wonders.WonderStage;
 import com.isep.architects.wondersarchitects.wonders.WonderType;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -26,10 +29,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 public class WonderController extends Controller{
 
@@ -362,7 +364,7 @@ public class WonderController extends Controller{
                 public void handle(MouseEvent mouseEvent) {
 
                     if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                        if(player.equals(parser.getGame().getPlayerturn())){
+                        if(player.equals(parser.getGame().getPlayerturn()) && !animation){
                             CardsTypes card = piles[finalI].drawCard(player);
                             drawCard(card);
 
@@ -381,9 +383,11 @@ public class WonderController extends Controller{
 
     public void drawCard(CardsTypes card){
         if(card.equals(CardsTypes.GOLD) &&
-                player.getProgress().contains(TokenTypes.ECONOMY)){
+                player.getProgress().contains(TokenTypes.ECONOMY) &&
+                !executedProgress.contains(TokenTypes.ECONOMY)){
             //handle economy token
             player.getCards().add(CardsTypes.GOLD);
+            executedProgress.add(TokenTypes.ECONOMY);
         }
         ImageView img = loadRessources(player);
         loadPile();
@@ -751,6 +755,11 @@ public class WonderController extends Controller{
             eyeSp.setDisable(true);
             eyeSp.setVisible(false);
             parser.getGame().endTurn();
+            Timeline tl = new Timeline(new KeyFrame(Duration.millis(400),event -> {
+                parser.loadPlayerScene(parser.getGame().getPlayerturn());
+            }));
+
+            tl.play();
 
         }
 

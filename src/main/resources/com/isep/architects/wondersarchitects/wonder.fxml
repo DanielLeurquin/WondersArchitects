@@ -61,12 +61,12 @@
                   <Label text="Military" />
                </children>
             </VBox>
-            <ScrollPane layoutX="781.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0" vbarPolicy="NEVER">
+            <ScrollPane layoutX="781.0" layoutY="30.0" prefHeight="66.0" prefWidth="175.0" vbarPolicy="NEVER">
                <content>
                   <HBox fx:id="hBoxPoints" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
                </content>
             </ScrollPane>
-            <ScrollPane layoutX="435.0" layoutY="30.0" prefHeight="57.0" prefWidth="175.0">
+            <ScrollPane layoutX="435.0" layoutY="30.0" prefHeight="66.0" prefWidth="175.0" vbarPolicy="NEVER">
                <content>
                   <HBox fx:id="hBoxToken" maxHeight="78.0" prefHeight="48.0" prefWidth="1.0" HBox.Hgrow="ALWAYS" />
                </content>

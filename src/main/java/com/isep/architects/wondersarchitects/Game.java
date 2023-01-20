@@ -260,6 +260,7 @@ public class Game {
         playerList.set(playerList.size()-1,playerturn);
         playerturn = playerList.get(0);
 
+
     }
 
     public void setNumberPlayer(int numberPlayer) {
