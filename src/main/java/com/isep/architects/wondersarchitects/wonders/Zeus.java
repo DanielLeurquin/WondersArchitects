@@ -22,10 +22,6 @@ public class Zeus extends Wonder{
 
     }
 
-    @Override
-    public void specialEffect() {
-
-    }
 
     @Override
     public void fillPile(){

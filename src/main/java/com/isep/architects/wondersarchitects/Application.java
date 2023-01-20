@@ -8,15 +8,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -36,10 +36,18 @@ public class Application extends javafx.application.Application {
     private double scHeight;
 
     private Scale scale;
+    private MediaPlayer player;
 
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        Media mainTheme = new Media(getClass().getResource(
+                "/com/isep/architects/wondersarchitects/sound/main_Theme.mp3").toExternalForm());
+        player = new MediaPlayer(mainTheme);
+
+        player.play();
+
         this.stage = stage;
         stage.setX(0);
         stage.setY(0);

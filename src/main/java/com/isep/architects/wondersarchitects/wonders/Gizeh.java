@@ -22,11 +22,6 @@ public class Gizeh extends Wonder{
     }
 
     @Override
-    public void specialEffect() {
-
-    }
-
-    @Override
     public void fillPile(){
         pile.addMultiple(CardsTypes.GOLD,3);
         pile.addMultiple(CardsTypes.STONE,2);

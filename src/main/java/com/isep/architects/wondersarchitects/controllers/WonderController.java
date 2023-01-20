@@ -29,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 
 import java.util.*;
@@ -881,6 +882,12 @@ public class WonderController extends Controller{
         }
         alexOverlay.getChildren().add(box);
 
+    }
+
+    public void playHornSound(){
+        AudioClip horn = new AudioClip(getClass().getResource(
+                "/com/isep/architects/wondersarchitects/sound/warSound.mp3").toExternalForm());
+        horn.play();
     }
 
     public void setAnimation(boolean animation){

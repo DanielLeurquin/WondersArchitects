@@ -31,4 +31,6 @@ public interface InputParser {
     void checkFinish(CardsTypes card);
 
     void loadScoreBoard();
+
+    void playHornSound();
 }

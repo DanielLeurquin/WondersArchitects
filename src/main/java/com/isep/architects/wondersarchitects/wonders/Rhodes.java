@@ -24,11 +24,6 @@ public class Rhodes extends Wonder{
     }
 
     @Override
-    public void specialEffect() {
-        player.getCards().add(CardsTypes.RED0);
-    }
-
-    @Override
     public void fillPile(){
         pile.addMultiple(CardsTypes.GOLD,2);
         pile.addMultiple(CardsTypes.STONE,2);

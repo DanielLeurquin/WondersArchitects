@@ -22,12 +22,6 @@ public class Babylon extends Wonder{
         this.stages.add(new WonderStage(4,false,5, new int[]{2,3},7,this,307,false));
 
     }
-
-    @Override
-    public void specialEffect() {
-
-    }
-
     @Override
     public void fillPile(){
         pile.addMultiple(CardsTypes.GOLD,3);

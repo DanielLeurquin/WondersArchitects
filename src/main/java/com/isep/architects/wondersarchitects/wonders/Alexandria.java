@@ -23,11 +23,6 @@ public class Alexandria extends Wonder{
     }
 
     @Override
-    public void specialEffect() {
-
-    }
-
-    @Override
     public void fillPile(){
         pile.addMultiple(CardsTypes.GOLD,4);
         pile.addMultiple(CardsTypes.STONE,2);

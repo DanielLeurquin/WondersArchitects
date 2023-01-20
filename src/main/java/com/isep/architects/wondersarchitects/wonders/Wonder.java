@@ -28,7 +28,6 @@ public abstract class Wonder {
         return null;
     }
 
-    public abstract void specialEffect();
 
     public abstract void fillPile();
 

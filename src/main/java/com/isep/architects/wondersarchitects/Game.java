@@ -90,6 +90,7 @@ public class Game {
             }
         }
         if(allWar()){
+            inputParser.playHornSound();
             executeWar();
         }
     }
@@ -196,10 +197,6 @@ public class Game {
 
     }
 
-    public void startTurn(){
-        int value = 0;
-    }
-
 
     public void buildStage(){
         ArrayList<WonderStage> stages = playerturn.buildStage();
@@ -249,7 +246,7 @@ public class Game {
 
 
     public void endTurn(){
-        System.out.println("end turn\n.\n.");
+        //System.out.println("end turn\n.\n.");
         if(playerList.get(0).finish()){
             inputParser.loadScoreBoard();
             return;

@@ -1,6 +1,7 @@
 module com.isep.architects.wondersarchitects {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
 
     opens com.isep.architects.wondersarchitects to javafx.fxml;

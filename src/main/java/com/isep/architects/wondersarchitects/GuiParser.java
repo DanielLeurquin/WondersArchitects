@@ -114,6 +114,12 @@ public class GuiParser implements InputParser{
         }
     }
 
+    @Override
+    public void playHornSound() {
+        WonderController cont = (WonderController) this.controller;
+        cont.playHornSound();
+    }
+
 
     public void setGame(Game game) {
         this.game = game;
