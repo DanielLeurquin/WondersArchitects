@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -17,10 +19,19 @@ public class WelcomeMenuController extends Controller{
     private Button button;
 
     @FXML
+    private AnchorPane ap;
+
+    @FXML
+    private VBox rootBox;
+
+    @FXML
     private ChoiceBox<Integer> choiceBox;
 
     @Override
     public void init(GuiParser parser) {
+        //rootBox.getTransforms().setAll(parser.getApp().getScale());
+        ap.getTransforms().setAll(parser.getApp().getScale());
+
         ObservableList<Integer> list = FXCollections.observableArrayList(2,3,4,5,6,7);
         choiceBox.setItems(list);
         choiceBox.setValue(2);

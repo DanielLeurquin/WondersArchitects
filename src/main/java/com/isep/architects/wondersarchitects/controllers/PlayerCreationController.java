@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class PlayerCreationController extends Controller{
 
@@ -24,11 +25,16 @@ public class PlayerCreationController extends Controller{
     @FXML
     private Button button;
 
+    @FXML
+    private AnchorPane parentAp;
+
     private String[] list = {"chat.png","gold.png","lance.png","papyrus.png",
             "pierre.png","roue.png","tablette.png"};
 
     @Override
     public void init(GuiParser parser) {
+        parentAp.getTransforms().setAll(parser.getApp().getScale());
+
         button.setOnAction(event -> {
             if(!textField.getText().equals("")){
                 String name = textField.getText();

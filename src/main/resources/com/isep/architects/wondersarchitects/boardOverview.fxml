@@ -10,20 +10,24 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/boardOverview.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.BoardOverviewController">
+<VBox style="-fx-background-color: #dec6b1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.BoardOverviewController">
    <children>
-      <ImageView fitHeight="66.0" fitWidth="216.0" layoutX="377.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
-         <image>
-            <Image url="@img/arrow.png" />
-         </image>
-         <viewport>
-            <Rectangle2D height="250.0" minY="130.0" width="960.0" />
-         </viewport>
-      </ImageView>
-      <Label layoutX="502.0" layoutY="284.0" text="Turn">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
+      <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/boardOverview.css">
+         <children>
+            <ImageView fitHeight="66.0" fitWidth="216.0" layoutX="377.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@img/arrow.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D height="250.0" minY="130.0" width="960.0" />
+               </viewport>
+            </ImageView>
+            <Label layoutX="502.0" layoutY="284.0" text="Turn">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</VBox>

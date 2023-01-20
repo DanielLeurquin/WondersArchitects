@@ -53,13 +53,14 @@ public class WonderController extends Controller{
     @FXML
     private VBox progressOverlay, overlayPile, alexOverlay, haliOverlay;
 
+
     @FXML
     private ImageView pt1,pt2,pt3,pt4, progress1Img,progress2Img,progress3Img,progress4Img,
             catView, overlayPilel,overlayPilec,overlayPiler,
             haliImg1,haliImg2,haliImg3,haliImg4,haliImg5;
 
     @FXML
-    private AnchorPane ap, overlayAp;
+    private AnchorPane ap, overlayAp, parentAp;
     private GuiParser parser;
     private Player player;
     private Pile centerPile,leftPile,rightPile;
@@ -143,6 +144,7 @@ public class WonderController extends Controller{
     public void init(GuiParser parser) {
         this.parser = parser;
         this.multiplier = parser.getGame().getMultiplier();
+        parentAp.getTransforms().setAll(parser.getApp().getScale());
         back.setOnAction(event -> {
             if(!ap.isDisable() && !animation){
                 parser.chargeOverview();

@@ -1,6 +1,12 @@
-.root{
+.color-back{
+    -fx-background-color: #3376b8;
+}
+
+.image{
+
     -fx-background-image: url('../img/homeScreen.png');
 }
+
 
 .label{
     -fx-text-fill: #FFFFFF;

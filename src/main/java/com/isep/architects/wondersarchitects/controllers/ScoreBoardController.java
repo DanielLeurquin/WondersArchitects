@@ -16,8 +16,14 @@ public class ScoreBoardController extends Controller{
 
     @FXML
     private GridPane gridPane;
+
+    @FXML
+    private AnchorPane parentAp;
+
     @Override
     public void init(GuiParser parser) {
+
+        parentAp.getTransforms().setAll(parser.getApp().getScale());
         double width = gridPane.getPrefWidth();
         System.out.println(width);
         width -= gridPane.getColumnConstraints().get(0).getPrefWidth();

@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Scale;
 import javafx.stage.Screen;
@@ -42,6 +44,7 @@ public class Application extends javafx.application.Application {
         stage.setX(0);
         stage.setY(0);
         stage.setResizable(false);
+
         this.stage.setMaximized(true);
         Font.loadFont(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/font/PossumSaltareNF.otf"), 10);
@@ -49,24 +52,21 @@ public class Application extends javafx.application.Application {
                 "/com/isep/architects/wondersarchitects/welcomeMenu.fxml"));
 
 
-
         scWidth = Screen.getPrimary().getBounds().getWidth();
         scHeight = Screen.getPrimary().getBounds().getHeight();
-        ratio = 1;
+
         if(scWidth/970 < scHeight/600){
             ratio = scWidth/970;
         }else {
             ratio = scHeight/600;
         }
-        System.out.println(ratio);
 
         scale = new Scale(ratio,ratio);
-        scale.setPivotX((scWidth-970*ratio)/2);
-        scale.setPivotY((scHeight-600*ratio)/2);
+        scale.setPivotX(-(scWidth-970*ratio)/2);
+        scale.setPivotY(-(scHeight-600*ratio)/2);
+
 
         this.scene = new Scene(this.fxmlLoader.load(),scWidth,scHeight);
-        this.scene.getRoot().getTransforms().setAll(scale);
-
 
         GuiParser parser = new GuiParser();
 
@@ -78,7 +78,6 @@ public class Application extends javafx.application.Application {
 
         this.stage.setTitle("7 Wonders Architects");
         this.stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/isep/architects/wondersarchitects/img/GameIcon.png")));
-        //this.stage.setResizable(false);
         this.stage.setScene(this.scene);
         this.stage.show();
 
@@ -92,12 +91,7 @@ public class Application extends javafx.application.Application {
         Parent root = this.fxmlLoader.load();
         Controller controller = this.fxmlLoader.getController();
 
-
-
-
         this.scene = new Scene(root,scWidth,scHeight);
-        this.scene.getRoot().getTransforms().setAll(scale);
-
 
         controller.init(parser);
 
@@ -116,9 +110,11 @@ public class Application extends javafx.application.Application {
         return scene;
     }
 
+    public Scale getScale() {
+        return scale;
+    }
+
     public static void main(String[] args) {
-
-
         launch();
     }
 }
