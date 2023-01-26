@@ -10,11 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<VBox fx:id="rootBox" styleClass="color-back" stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
+
+<AnchorPane style="-fx-background-color: #3376b8;" stylesheets="@css/homeScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.WelcomeMenuController">
    <children>
       <AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0" styleClass="image">
       
-                     <children>
+                           <children>
             <VBox alignment="CENTER" layoutX="270.0" layoutY="387.0" spacing="30.0">
                <children>
                   <HBox alignment="CENTER" layoutX="270.0" layoutY="387.0" prefHeight="100.0" prefWidth="431.0" spacing="50.0">
@@ -33,4 +34,4 @@
          </children>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

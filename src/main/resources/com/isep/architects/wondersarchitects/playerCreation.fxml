@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" style="-fx-background-color: #dec6b1;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.PlayerCreationController">
+<AnchorPane style="-fx-background-color: dec6b1;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.PlayerCreationController">
    <children>
       <AnchorPane fx:id="parentAp" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: #dec6b1;" stylesheets="@css/playerCreation.css">
       
@@ -26,4 +26,4 @@
          </children>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

@@ -28,6 +28,9 @@ public class BoardOverviewController extends Controller{
     @Override
     public void init(GuiParser parser) {
         anchorPane.getTransforms().setAll(parser.getApp().getScale());
+        anchorPane.setLayoutX(parser.getApp().getX());
+        anchorPane.setLayoutY(parser.getApp().getY());
+
         Image img = new Image(getClass().getResourceAsStream(
                 "/com/isep/architects/wondersarchitects/img/logos.png"));
         double size = img.getHeight();

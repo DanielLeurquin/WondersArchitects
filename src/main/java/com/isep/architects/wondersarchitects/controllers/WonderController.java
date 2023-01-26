@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -146,6 +147,9 @@ public class WonderController extends Controller{
         this.parser = parser;
         this.multiplier = parser.getGame().getMultiplier();
         parentAp.getTransforms().setAll(parser.getApp().getScale());
+        parentAp.setLayoutX(parser.getApp().getX());
+        parentAp.setLayoutY(parser.getApp().getY());
+
         back.setOnAction(event -> {
             if(!ap.isDisable() && !animation){
                 parser.chargeOverview();

@@ -31,6 +31,9 @@ public class WelcomeMenuController extends Controller{
     public void init(GuiParser parser) {
         //rootBox.getTransforms().setAll(parser.getApp().getScale());
         ap.getTransforms().setAll(parser.getApp().getScale());
+        ap.setLayoutX(parser.getApp().getX());
+        ap.setLayoutY(parser.getApp().getY());
+
 
         ObservableList<Integer> list = FXCollections.observableArrayList(2,3,4,5,6,7);
         choiceBox.setItems(list);

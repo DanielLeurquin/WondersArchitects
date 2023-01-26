@@ -81,12 +81,6 @@ public class GuiParser implements InputParser{
     }
 
     @Override
-    public boolean isWonderPower() {
-        WonderController cont = (WonderController) this.controller;
-        return cont.isWonderPower();
-    }
-
-    @Override
     public void enableHaliOverlay() {
         WonderController cont = (WonderController) this.controller;
         cont.loadHaliOverlay();

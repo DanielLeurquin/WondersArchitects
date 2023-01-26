@@ -24,6 +24,9 @@ public class ScoreBoardController extends Controller{
     public void init(GuiParser parser) {
 
         parentAp.getTransforms().setAll(parser.getApp().getScale());
+        parentAp.setLayoutX(parser.getApp().getX());
+        parentAp.setLayoutY(parser.getApp().getY());
+
         double width = gridPane.getPrefWidth();
         System.out.println(width);
         width -= gridPane.getColumnConstraints().get(0).getPrefWidth();
@@ -64,8 +67,6 @@ public class ScoreBoardController extends Controller{
 
         }
 
-
-
-
     }
+
 }

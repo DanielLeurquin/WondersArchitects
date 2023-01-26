@@ -2,7 +2,7 @@ package com.isep.architects.wondersarchitects.wonders;
 
 import com.isep.architects.wondersarchitects.Player;
 import com.isep.architects.wondersarchitects.pile.Pile;
-import com.isep.architects.wondersarchitects.pile.SidePile;
+
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public abstract class Wonder {
 
     protected WonderType type;
 
-    protected Pile pile = new SidePile();
+    protected Pile pile = new Pile();
 
     protected Player player;
 

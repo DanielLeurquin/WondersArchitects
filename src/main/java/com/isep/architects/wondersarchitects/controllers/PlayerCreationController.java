@@ -34,6 +34,8 @@ public class PlayerCreationController extends Controller{
     @Override
     public void init(GuiParser parser) {
         parentAp.getTransforms().setAll(parser.getApp().getScale());
+        parentAp.setLayoutX(parser.getApp().getX());
+        parentAp.setLayoutY(parser.getApp().getY());
 
         button.setOnAction(event -> {
             if(!textField.getText().equals("")){

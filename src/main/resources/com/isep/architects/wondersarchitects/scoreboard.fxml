@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox style="-fx-background-color: #d4bda9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.ScoreBoardController">
+<AnchorPane style="-fx-background-color: dec6b1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.isep.architects.wondersarchitects.controllers.ScoreBoardController">
    <children>
       <AnchorPane fx:id="parentAp" prefHeight="600.0" prefWidth="970.0" style="-fx-background-color: dec6b1;" stylesheets="@css/wonder.css">
          <children>
@@ -99,4 +99,4 @@
          </children>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

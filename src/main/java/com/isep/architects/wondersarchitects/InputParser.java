@@ -22,8 +22,6 @@ public interface InputParser {
 
     void setWonderPower(boolean value);
 
-    boolean isWonderPower();
-
     void enableHaliOverlay();
 
     void setAnimation(boolean b);

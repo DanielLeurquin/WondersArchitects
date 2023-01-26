@@ -38,6 +38,8 @@ public class Application extends javafx.application.Application {
     private Scale scale;
     private MediaPlayer player;
 
+    private double x,y;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -70,9 +72,8 @@ public class Application extends javafx.application.Application {
         }
 
         scale = new Scale(ratio,ratio);
-        scale.setPivotX(-(scWidth-970*ratio)/2);
-        scale.setPivotY(-(scHeight-600*ratio)/2);
-
+        x = (scWidth-970*ratio)/2;
+        y = (scHeight-600*ratio)/2;
 
         this.scene = new Scene(this.fxmlLoader.load(),scWidth,scHeight);
 
@@ -120,6 +121,14 @@ public class Application extends javafx.application.Application {
 
     public Scale getScale() {
         return scale;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     public static void main(String[] args) {
