@@ -1,0 +1,389 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": true,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": true,
+    "hideDataStructures": true,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "No" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "None", // ByClass, GroupByClass, None
+    "showClassGenericTypes": false,
+    "showMethods": false,
+    "showMethodParameterNames": false,
+    "showMethodParameterTypes": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "com.isep.architects.wondersarchitects.Application",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+Alexandria1300909916[
+	label="(C)Alexandria"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Application644153038[
+	label="(C)Application"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Artemis1300909916[
+	label="(C)Artemis"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Babylon1300909916[
+	label="(C)Babylon"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+BlueCards2001885273[
+	label="(C)BlueCards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+BoardOverviewController1567788443[
+	label="(C)BoardOverviewController"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Cards2001885273[
+	label="(C)Cards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Cat1429484074[
+	label="(C)Cat"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Conflict1429484074[
+	label="(C)Conflict"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Controller1567788443[
+	label="(C)Controller"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Game644153038[
+	label="(C)Game"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Gizeh1300909916[
+	label="(C)Gizeh"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+GreenCards2001885273[
+	label="(C)GreenCards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+GreyCards2001885273[
+	label="(C)GreyCards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+GuiParser644153038[
+	label="(C)GuiParser"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Hallicarnas1300909916[
+	label="(C)Hallicarnas"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+MilitaryToken1429484074[
+	label="(C)MilitaryToken"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Pile64182162[
+	label="(C)Pile"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Player644153038[
+	label="(C)Player"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+PlayerCreationController1567788443[
+	label="(C)PlayerCreationController"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Progress1429484074[
+	label="(C)Progress"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+RedCards2001885273[
+	label="(C)RedCards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Rhodes1300909916[
+	label="(C)Rhodes"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+SidePile64182162[
+	label="(C)SidePile"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Token1429484074[
+	label="(C)Token"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+WelcomeMenuController1567788443[
+	label="(C)WelcomeMenuController"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Wonder1300909916[
+	label="(C)Wonder"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+WonderController1567788443[
+	label="(C)WonderController"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+WonderStage1300909916[
+	label="(C)WonderStage"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+WonderStageAnimation1820866984[
+	label="(C)WonderStageAnimation"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+YellowCards2001885273[
+	label="(C)YellowCards"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+Zeus1300909916[
+	label="(C)Zeus"
+	style=filled
+	shape=rect
+	fillcolor="#FFFFFF"
+];
+
+'edges    
+Application644153038 -> Game644153038[label="game
+[0..1]"];
+Cards2001885273 -> BlueCards2001885273[arrowhead=none, arrowtail=empty, dir=both];
+Cards2001885273 -> GreenCards2001885273[arrowhead=none, arrowtail=empty, dir=both];
+Cards2001885273 -> GreyCards2001885273[arrowhead=none, arrowtail=empty, dir=both];
+Cards2001885273 -> RedCards2001885273[arrowhead=none, arrowtail=empty, dir=both];
+Cards2001885273 -> YellowCards2001885273[arrowhead=none, arrowtail=empty, dir=both];
+Controller1567788443 -> BoardOverviewController1567788443[arrowhead=none, arrowtail=empty, dir=both];
+Controller1567788443 -> PlayerCreationController1567788443[arrowhead=none, arrowtail=empty, dir=both];
+Controller1567788443 -> WelcomeMenuController1567788443[arrowhead=none, arrowtail=empty, dir=both];
+Controller1567788443 -> WonderController1567788443[arrowhead=none, arrowtail=empty, dir=both];
+Game644153038 -> Application644153038[label="app
+[0..1]"];
+Game644153038 -> GuiParser644153038[arrowhead=none];
+Game644153038 -> GuiParser644153038[label="inputParser
+[0..1]", arrowhead=none];
+Game644153038 -> MilitaryToken1429484074[label="militaryTokens
+[0..*]"];
+Game644153038 -> Pile64182162[label="centerPile
+[0..1]"];
+Game644153038 -> Player644153038[label="playerList
+[0..*]"];
+Game644153038 -> Player644153038[label="playerturn
+[0..1]"];
+Game644153038 -> Wonder1300909916[label="availableWonders
+[0..*]"];
+GuiParser644153038 -> Controller1567788443[label="controller
+[0..1]"];
+GuiParser644153038 -> Game644153038[label="game
+[0..1]"];
+Pile64182162 -> Cards2001885273[label="cards
+[0..*]"];
+Pile64182162 -> SidePile64182162[arrowhead=none, arrowtail=empty, dir=both];
+Player644153038 -> BlueCards2001885273[label="blue
+[0..*]"];
+Player644153038 -> GreenCards2001885273[label="green
+[0..*]"];
+Player644153038 -> GreyCards2001885273[label="ressources
+[0..*]"];
+Player644153038 -> RedCards2001885273[label="red
+[0..*]"];
+Player644153038 -> Wonder1300909916[label="wonder
+[0..1]"];
+Player644153038 -> YellowCards2001885273[label="gold
+[0..*]"];
+Token1429484074 -> Cat1429484074[arrowhead=none, arrowtail=empty, dir=both];
+Token1429484074 -> Conflict1429484074[arrowhead=none, arrowtail=empty, dir=both];
+Token1429484074 -> MilitaryToken1429484074[arrowhead=none, arrowtail=empty, dir=both];
+Token1429484074 -> Progress1429484074[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Alexandria1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Artemis1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Babylon1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Gizeh1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Hallicarnas1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> Pile64182162[label="pile
+[0..1]"];
+Wonder1300909916 -> Rhodes1300909916[arrowhead=none, arrowtail=empty, dir=both];
+Wonder1300909916 -> WonderStage1300909916[label="stages
+[0..*]"];
+Wonder1300909916 -> Zeus1300909916[arrowhead=none, arrowtail=empty, dir=both];
+WonderController1567788443 -> GuiParser644153038[label="parser
+[0..1]"];
+WonderController1567788443 -> Pile64182162[label="centerPile
+[0..1]"];
+WonderController1567788443 -> Pile64182162[label="leftPile
+[0..1]"];
+WonderController1567788443 -> Pile64182162[label="rightPile
+[0..1]"];
+WonderController1567788443 -> Player644153038[label="player
+[0..1]"];
+WonderController1567788443 -> WonderStageAnimation1820866984[label="anim
+[0..1]"];
+WonderStage1300909916 -> Wonder1300909916[label="wonder
+[0..1]"];
+WonderStageAnimation1820866984 -> WonderStage1300909916[label="stage
+[0..1]"];
+    
+}
+@enduml

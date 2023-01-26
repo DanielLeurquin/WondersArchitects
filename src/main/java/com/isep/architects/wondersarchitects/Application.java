@@ -70,7 +70,7 @@ public class Application extends javafx.application.Application {
         }else {
             ratio = scHeight/600;
         }
-
+        ratio = 0.9*ratio;
         scale = new Scale(ratio,ratio);
         x = (scWidth-970*ratio)/2;
         y = (scHeight-600*ratio)/2;
